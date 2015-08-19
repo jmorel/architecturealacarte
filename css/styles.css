@@ -1,0 +1,48 @@
+html {
+	width: 100%;
+	height: 100%;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	background-color: #00EBBE;
+	color: white;
+	font-size: 14px;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
+}
+
+.archi-header {
+	padding: 5rem 5rem 2rem 5rem;
+}
+
+.archi-header__breadcrumbs {
+	font-family: georgia, palatino, serif;
+	font-style: italic;
+	font-size: 2rem
+}
+
+.archi-header__title {
+	font-family: 'Ostrich Sans', sans-serif;
+	font-style: italic;
+	font-size: 7rem;
+}
+
+.archi-map {
+	width: 100%;
+	height: 100%;
+}
+.archi-map .odswidget-map {
+	width: 100%;
+	height: 100%;
+}
