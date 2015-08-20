@@ -1,0 +1,79 @@
+* {
+  box-sizing: border-box;
+}
+html {
+  width: 100%;
+  height: 100%;
+  font-size: 16px;
+}
+body {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: #00ebbe;
+  color: white;
+}
+a {
+  color: inherit;
+}
+.archi-header {
+  padding: 5rem 5rem 2rem 5rem;
+}
+.archi-header__breadcrumbs {
+  font-family: Georgia, palatino, serif;
+  font-style: italic;
+  font-size: 2rem;
+  text-decoration: none;
+}
+.archi-header__breadcrumbs:hover {
+  text-decoration: underline;
+}
+.archi-header__title {
+  font-family: 'Ostrich Sans';
+  font-style: italic;
+  font-size: 7rem;
+  margin-bottom: 0;
+}
+.archi-header__century {
+  vertical-align: text-top;
+  font-size: 3rem;
+  margin-left: 1rem;
+}
+.archi-map {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.archi-map__filters {
+  position: absolute;
+  top: 0;
+  bottom: 5rem;
+  left: 5rem;
+  padding: 2rem;
+  z-index: 10;
+  overflow-y: scroll;
+  width: 400px;
+  background-color: white;
+  font-family: sans-serif;
+}
+.archi-map__feedback {
+  position: relative;
+  margin-left: 407px;
+  font-family: Georgia, palatino, serif;
+}
+.archi-map__map {
+  width: 100%;
+  position: absolute;
+  top: 5rem;
+  bottom: 0;
+}
+.archi-map__map .odswidget-map {
+  width: 100%;
+  height: 100%;
+}
+.archi-footer {
+  padding: 5rem;
+  font-size: 1.33rem;
+}

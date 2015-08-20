@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Architecture à la carte</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/infra.css">
+    <link rel="stylesheet" href="fonts/ostrich-sans/ostrich-sans.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://opendatasoft.github.io/ods-widgets/dist/ods-widgets.css">
+</head>
+<body>
+
+<div class="archi-header">
+    <a class="archi-header__breadcrumbs" href="index.html">
+        <i class="fa fa-arrow-circle-o-left"></i>
+        Architecture à la carte
+    </a>
+
+    <h1 class="archi-header__title">
+        Architecture remarquable des XX<span class="archi-header__century">eme</span> et
+        XXI<span class="archi-header__century">eme</span> siecles en Ile de
+        France</h1>
+</div>
+
+<div class="archi-map" ng-app="ods-widgets">
+    <ods-dataset-context context="stations" stations-domain="public.opendatasoft.com"
+                         stations-dataset="jcdecaux_bike_data">
+        <div class="archi-map__filters">
+            <ods-filter-summary context="stations"></ods-filter-summary>
+        </div>
+        <div class="archi-map__feedback">
+            Des questions, remarques ou suggestions ? <a href="mailto:contact@architecturealacarte.fr">Ecrivez-nous !</a>
+        </div>
+        <div class="archi-map__map">
+            <ods-map context="stations"></ods-map>
+        </div>
+    </ods-dataset-context>
+</div>
+
+<div class="archi-footer">
+    <p>
+        <a href="ile-de-france.html">Architecture à la carte</a> est un projet de
+        <a href="http://gabrielledesnoyers.com">Gabrielle Desnoyers</a> et
+        <a href="http://hexagonal.io">Jérémy Morel</a>
+        <sup><a href="http://twitter.com"><i class="fa fa-twitter"></i></a></sup>
+        rendu possible par la plateforme <a href="http://opendatasoft.com">OpenDataSoft</a>.
+    </p>
+
+    <p>
+        La conception du projet et sa réalisation sont détaillées dans un <a href="">article de blog</a>. <br>
+        L'intégralité du code est open source et disponible sur
+        <a href="http://github.com/jmorel/architecturealacarte">
+            <i class="fa fa-github"></i>
+            Github
+        </a>
+    </p>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.18/angular.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.18/angular-sanitize.min.js"></script>
+<script type="text/javascript" src="https://opendatasoft.github.io/ods-widgets/dist/ods-widgets.js"></script>
+</body>
+</html>
