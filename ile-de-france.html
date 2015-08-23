@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/infra.css">
     <link rel="stylesheet" href="fonts/ostrich-sans/ostrich-sans.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://opendatasoft.github.io/ods-widgets/dist/ods-widgets.css">
+    <link rel="stylesheet" href="vendor/ods-widgets/ods-widgets.min.css">
 </head>
 <body>
 
@@ -23,17 +23,39 @@
         France</h1>
 </div>
 
+<div class="archi-feedback">
+    Des questions, remarques ou suggestions ? <a href="mailto:contact@architecturealacarte.fr">Ecrivez-nous
+    !</a>
+</div>
 <div class="archi-map" ng-app="ods-widgets">
-    <ods-dataset-context context="stations" stations-domain="public.opendatasoft.com"
-                         stations-dataset="jcdecaux_bike_data">
+    <ods-dataset-context context="archi"
+                         archi-domain="jmorel.opendatasoft.com"
+                         archi-apikey="5c907191ee9d7359a429b2c73b095042899dc931d66723b39cb7ba58"
+                         archi-dataset="architecture-a-voir">
         <div class="archi-map__filters">
-            <ods-filter-summary context="stations"></ods-filter-summary>
-        </div>
-        <div class="archi-map__feedback">
-            Des questions, remarques ou suggestions ? <a href="mailto:contact@architecturealacarte.fr">Ecrivez-nous !</a>
+            <ods-text-search placeholder="Rechercher..."
+                             context="archi"></ods-text-search>
+            <ods-facets context="archi">
+                <div class="archi-map__facet">
+                    <h3 class="archi-map__facet-title">
+                        Visitable ?
+                    </h3>
+                    <ods-facet name="visitable"></ods-facet>
+                </div>
+                <div class="archi-map__facet">
+                    <h3 class="archi-map__facet-title">
+                        Architecte(s)
+                    </h3>
+                    <ods-facet name="architectes"></ods-facet>
+                </div>
+            </ods-facets>
         </div>
         <div class="archi-map__map">
-            <ods-map context="stations"></ods-map>
+            <ods-map context="archi"
+                     basemap="mapbox.high-contrast"
+                     toolbar-drawing="false"
+                     toolbar-geolocation="false"
+                     toolbar-fullscreen="false"></ods-map>
         </div>
     </ods-dataset-context>
 </div>
@@ -56,9 +78,23 @@
         </a>
     </p>
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.18/angular.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.18/angular-sanitize.min.js"></script>
-<script type="text/javascript" src="https://opendatasoft.github.io/ods-widgets/dist/ods-widgets.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.4/angular.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.4/angular-sanitize.min.js"></script>
+<script type="text/javascript" src="vendor/ods-widgets/ods-widgets.js"></script>
+
+<script type="text/javascript">
+    var ods = angular.module('ods-widgets');
+    ods.config(function (ODSWidgetsConfigProvider, ModuleLazyLoaderProvider) {
+        ODSWidgetsConfigProvider.setConfig({
+            basemaps: [{
+                "provider": "mapbox.high-contrast",
+                "mapbox_access_token": "pk.eyJ1IjoiamVyZW15bW9yZWwiLCJhIjoiZmZjZGMxNzUwZTJjYmQ5YmIwYjAzOTFjYWNlY2ExYTAifQ.wEKnZyKpqqSzWew8QEzCtg",
+                "id": "mapbox.high-contrast",
+                "label": "MapQuest"
+            }]
+        })
+    });
+</script>
 </body>
 </html>

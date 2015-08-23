@@ -4,7 +4,7 @@
 html {
   width: 100%;
   height: 100%;
-  font-size: 16px;
+  font-size: 26px;
 }
 body {
   margin: 0;
@@ -14,18 +14,29 @@ body {
   height: 100%;
   background-color: #00ebbe;
   color: white;
+  font-style: italic;
 }
 a {
   color: inherit;
 }
+p {
+  margin: 0 0 1em 0;
+}
+p:last-child {
+  margin: 0;
+}
 .archi-header {
-  padding: 5rem 5rem 2rem 5rem;
+  margin: 3rem 4rem 2rem 0;
+  border-bottom: 0.67rem solid white;
+  padding-bottom: 2rem;
 }
 .archi-header__breadcrumbs {
   font-family: Georgia, palatino, serif;
   font-style: italic;
-  font-size: 2rem;
   text-decoration: none;
+  display: block;
+  margin: 0 0 2rem 4rem;
+  font-size: 1.67rem;
 }
 .archi-header__breadcrumbs:hover {
   text-decoration: underline;
@@ -33,47 +44,167 @@ a {
 .archi-header__title {
   font-family: 'Ostrich Sans';
   font-style: italic;
-  font-size: 7rem;
-  margin-bottom: 0;
+  font-size: 4rem;
+  margin: 0 0 0 4rem;
+}
+.archi-header__subtitle {
+  font-weight: 400;
+  font-style: italic;
+  font-size: 1.67rem;
+  margin: 0 4rem 0 4rem;
+  line-height: 1em;
 }
 .archi-header__century {
   vertical-align: text-top;
   font-size: 3rem;
   margin-left: 1rem;
 }
+.archi-feedback {
+  font-family: Georgia, palatino, serif;
+  margin: 2rem 4rem;
+}
 .archi-map {
   width: 100%;
   height: 100%;
   position: relative;
+  color: #666666;
 }
 .archi-map__filters {
   position: absolute;
-  top: 0;
-  bottom: 5rem;
-  left: 5rem;
-  padding: 2rem;
+  top: 3rem;
+  bottom: 1rem;
+  right: 5rem;
   z-index: 10;
-  overflow-y: scroll;
-  width: 400px;
-  background-color: white;
+  width: 320px;
   font-family: sans-serif;
-}
-.archi-map__feedback {
-  position: relative;
-  margin-left: 407px;
-  font-family: Georgia, palatino, serif;
+  font-size: 0.7rem;
+  font-style: normal;
 }
 .archi-map__map {
-  width: 100%;
   position: absolute;
-  top: 5rem;
+  top: 0;
   bottom: 0;
+  left: 0;
+  right: 0;
 }
 .archi-map__map .odswidget-map {
   width: 100%;
   height: 100%;
 }
+.archi-map__facet {
+  background-color: #00ebbe;
+  border-radius: 3px;
+  color: white;
+  margin: 0 0 1em 0;
+  padding: 0.5rem 0;
+}
+.archi-map__facet-title {
+  padding: 0 1rem 0.5rem 1rem;
+  margin: 0 0 0.5rem 0;
+  text-align: center;
+  border-bottom: 1px solid white;
+}
+.archi-map__filters .odswidget-text-search {
+  margin-bottom: 1em;
+  padding: 0.5rem;
+  background-color: #00EBBE;
+}
+.archi-map__filters .odswidget-text-search__search-box {
+  background-color: inherit;
+  color: inherit;
+  border-radius: 3px;
+  border: none;
+  font-size: inherit;
+  padding: 0;
+  border-bottom: 1px solid white;
+  width: 94%;
+}
+.archi-map__filters .odswidget-text-search__form:after {
+  color: white;
+  line-height: normal;
+  font-size: 1rem;
+  top: 0;
+  right: 0;
+}
+.archi-map__filters .odswidget-facet {
+  margin: 0;
+  max-height: 200px;
+  overflow-y: auto;
+}
+.archi-map__filters .odswidget-facet__category-list {
+  border: 0;
+}
+.archi-map__filters .odswidget-facet__category {
+  color: white;
+  margin: 0;
+  text-decoration: none;
+  padding: 0 1rem;
+  border: none;
+}
+.archi-map__filters .odswidget-facet__category--refined,
+.archi-map__filters .odswidget-facet__category:hover {
+  color: #666666;
+}
+.archi-map__filters .odswidget-facet__category--refined:before,
+.archi-map__filters .odswidget-facet__category:hover:before {
+  left: 0.2rem;
+  line-height: normal;
+}
+.archi-map__filters .odswidget-facet__category-name,
+.archi-map__filters .odswidget-facet__category-count {
+  font-size: inherit;
+  color: inherit;
+}
+.archi-map__filters .odswidget-facet__expansion-control {
+  margin: 0;
+  padding: 0.33rem 1rem 0 1rem;
+  text-align: left;
+}
+.archi-home__intro-container {
+  margin: 2rem 4rem 3rem 4rem;
+  display: flex;
+  align-content: space-between;
+}
+.archi-home__presentation {
+  text-align: justify;
+}
+.archi-presentation__call-to-action {
+  font-size: 1.3rem;
+  font-style: italic;
+  padding: 2rem 5rem;
+}
+.archi-home__regions {
+  flex: 0 1 auto;
+  min-width: 320px;
+  background-color: #00cba4;
+  border-radius: 3px;
+  margin-left: 3rem;
+}
+.archi-home__regions-title {
+  font-family: 'Ostrich Sans';
+  font-size: 2rem;
+  font-style: italic;
+  padding: 1.33rem 2rem 1rem 2rem;
+  border-bottom: 1px solid white;
+  margin: 0;
+}
+.archi-home__regions-list {
+  margin: 0;
+  list-style: none;
+  padding: 1rem 2rem;
+  font-style: italic;
+}
+.archi-home__region {
+  text-decoration: none;
+}
+.archi-home__region:hover {
+  text-decoration: underline;
+}
+.archi-home__regions-call-to-action {
+  margin-top: 1rem;
+}
 .archi-footer {
-  padding: 5rem;
-  font-size: 1.33rem;
+  font-size: 0.8rem;
+  padding: 3em 4rem;
+  background-color: #666666;
 }
