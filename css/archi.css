@@ -71,9 +71,9 @@ p:last-child {
 }
 .archi-map__filters {
   position: absolute;
-  top: 3rem;
+  top: 2rem;
   bottom: 1rem;
-  right: 5rem;
+  left: 4rem;
   z-index: 10;
   width: 320px;
   font-family: sans-serif;
@@ -104,12 +104,12 @@ p:last-child {
   text-align: center;
   border-bottom: 1px solid white;
 }
-.archi-map__filters .odswidget-text-search {
+.archi-map .odswidget-text-search {
   margin-bottom: 1em;
   padding: 0.5rem;
   background-color: #00EBBE;
 }
-.archi-map__filters .odswidget-text-search__search-box {
+.archi-map .odswidget-text-search__search-box {
   background-color: inherit;
   color: inherit;
   border-radius: 3px;
@@ -119,46 +119,53 @@ p:last-child {
   border-bottom: 1px solid white;
   width: 94%;
 }
-.archi-map__filters .odswidget-text-search__form:after {
+.archi-map .odswidget-text-search__form:after {
   color: white;
   line-height: normal;
   font-size: 1rem;
   top: 0;
   right: 0;
 }
-.archi-map__filters .odswidget-facet {
+.archi-map .odswidget-facet {
   margin: 0;
   max-height: 200px;
   overflow-y: auto;
 }
-.archi-map__filters .odswidget-facet__category-list {
+.archi-map .odswidget-facet__category-list {
   border: 0;
 }
-.archi-map__filters .odswidget-facet__category {
+.archi-map .odswidget-facet__category {
   color: white;
   margin: 0;
   text-decoration: none;
   padding: 0 1rem;
   border: none;
 }
-.archi-map__filters .odswidget-facet__category--refined,
-.archi-map__filters .odswidget-facet__category:hover {
+.archi-map .odswidget-facet__category--refined,
+.archi-map .odswidget-facet__category:hover {
   color: #666666;
 }
-.archi-map__filters .odswidget-facet__category--refined:before,
-.archi-map__filters .odswidget-facet__category:hover:before {
+.archi-map .odswidget-facet__category--refined:before,
+.archi-map .odswidget-facet__category:hover:before {
   left: 0.2rem;
   line-height: normal;
 }
-.archi-map__filters .odswidget-facet__category-name,
-.archi-map__filters .odswidget-facet__category-count {
+.archi-map .odswidget-facet__category-name,
+.archi-map .odswidget-facet__category-count {
   font-size: inherit;
   color: inherit;
 }
-.archi-map__filters .odswidget-facet__expansion-control {
+.archi-map .odswidget-facet__expansion-control {
   margin: 0;
   padding: 0.33rem 1rem 0 1rem;
   text-align: left;
+}
+.archi-map .leaflet-top.leaflet-left {
+  top: 2rem;
+  left: 2rem;
+}
+.archi-map .leaflet-control-zoom.leaflet-bar.leaflet-control {
+  margin: 0;
 }
 .archi-home__intro-container {
   margin: 2rem 4rem 3rem 4rem;
