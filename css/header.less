@@ -1,7 +1,15 @@
 .archi-header {
-    margin: 3rem 4rem 2rem 0;
-    border-bottom: 0.67rem solid @color-white;
-    padding-bottom: 2rem;
+    @media (max-width: @screen-small-max) {
+        margin: 1rem 2rem 1rem 0;
+        padding-bottom: 1rem;
+        border-bottom: 0.67rem solid @color-white;
+
+    }
+    @media (min-width: @screen-medium-min) {
+        margin: 3rem 4rem 2rem 0;
+        padding-bottom: 2rem;
+        border-bottom: 0.67rem solid @color-white;
+    }
 }
 
 .archi-header__breadcrumbs {
@@ -9,8 +17,14 @@
     font-style: italic;
     text-decoration: none;
     display: block;
-    margin: 0 0 2rem 4rem;
-    font-size: 1.67rem;
+    @media (max-width: @screen-small-max) {
+        font-size: 1.33rem;
+        margin: 0 0 1rem 2rem;
+    }
+    @media (min-width: @screen-medium-min) {
+        font-size: 1.67rem;
+        margin: 0 0 2rem 4rem;
+    }
 }
 
 .archi-header__breadcrumbs:hover {
@@ -20,20 +34,38 @@
 .archi-header__title {
     font-family: @font-family-slab;
     font-style: italic;
-    font-size: 4rem;
-    margin: 0 0 0 4rem;
+    @media (max-width: @screen-small-max) {
+        font-size: 2.33rem;
+        margin: 0 0 0 2rem;
+    }
+    @media (min-width: @screen-medium-min) {
+        font-size: 4rem;
+        margin: 0 0 0 4rem;
+    }
 }
 
 .archi-header__subtitle {
     font-weight: 400;
     font-style: italic;
-    font-size: 1.67rem;
-    margin: 0 4rem 0 4rem;
     line-height: 1em;
+    @media (max-width: @screen-small-max) {
+        font-size: 1.33rem;
+        margin: 1rem 0 0 2rem;
+    }
+    @media (min-width: @screen-medium-min) {
+        font-size: 1.67rem;
+        margin: 0 0 0 4rem;
+    }
 }
 
 .archi-header__century {
     vertical-align: text-top;
-    font-size: 3rem;
-    margin-left: 1rem;
+    @media (max-width: @screen-small-max) {
+        font-size: 1rem;
+        margin-left: 0.33rem;
+    }
+    @media (min-width: @screen-medium-min) {
+        font-size: 3rem;
+        margin-left: 1rem;
+    }
 }

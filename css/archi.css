@@ -4,7 +4,16 @@
 html {
   width: 100%;
   height: 100%;
-  font-size: 26px;
+}
+@media (max-width: 699px) {
+  html {
+    font-size: 18px;
+  }
+}
+@media (min-width: 699px + 1) {
+  html {
+    font-size: 26px;
+  }
 }
 body {
   margin: 0;
@@ -25,18 +34,37 @@ p {
 p:last-child {
   margin: 0;
 }
-.archi-header {
-  margin: 3rem 4rem 2rem 0;
-  border-bottom: 0.67rem solid white;
-  padding-bottom: 2rem;
+@media (max-width: 699px) {
+  .archi-header {
+    margin: 1rem 2rem 1rem 0;
+    padding-bottom: 1rem;
+    border-bottom: 0.67rem solid white;
+  }
+}
+@media (min-width: 699px + 1) {
+  .archi-header {
+    margin: 3rem 4rem 2rem 0;
+    padding-bottom: 2rem;
+    border-bottom: 0.67rem solid white;
+  }
 }
 .archi-header__breadcrumbs {
   font-family: Georgia, palatino, serif;
   font-style: italic;
   text-decoration: none;
   display: block;
-  margin: 0 0 2rem 4rem;
-  font-size: 1.67rem;
+}
+@media (max-width: 699px) {
+  .archi-header__breadcrumbs {
+    font-size: 1.33rem;
+    margin: 0 0 1rem 2rem;
+  }
+}
+@media (min-width: 699px + 1) {
+  .archi-header__breadcrumbs {
+    font-size: 1.67rem;
+    margin: 0 0 2rem 4rem;
+  }
 }
 .archi-header__breadcrumbs:hover {
   text-decoration: underline;
@@ -44,24 +72,63 @@ p:last-child {
 .archi-header__title {
   font-family: 'Ostrich Sans';
   font-style: italic;
-  font-size: 4rem;
-  margin: 0 0 0 4rem;
+}
+@media (max-width: 699px) {
+  .archi-header__title {
+    font-size: 2.33rem;
+    margin: 0 0 0 2rem;
+  }
+}
+@media (min-width: 699px + 1) {
+  .archi-header__title {
+    font-size: 4rem;
+    margin: 0 0 0 4rem;
+  }
 }
 .archi-header__subtitle {
   font-weight: 400;
   font-style: italic;
-  font-size: 1.67rem;
-  margin: 0 4rem 0 4rem;
   line-height: 1em;
+}
+@media (max-width: 699px) {
+  .archi-header__subtitle {
+    font-size: 1.33rem;
+    margin: 1rem 0 0 2rem;
+  }
+}
+@media (min-width: 699px + 1) {
+  .archi-header__subtitle {
+    font-size: 1.67rem;
+    margin: 0 0 0 4rem;
+  }
 }
 .archi-header__century {
   vertical-align: text-top;
-  font-size: 3rem;
-  margin-left: 1rem;
+}
+@media (max-width: 699px) {
+  .archi-header__century {
+    font-size: 1rem;
+    margin-left: 0.33rem;
+  }
+}
+@media (min-width: 699px + 1) {
+  .archi-header__century {
+    font-size: 3rem;
+    margin-left: 1rem;
+  }
 }
 .archi-feedback {
   font-family: Georgia, palatino, serif;
-  margin: 2rem 4rem;
+}
+@media (max-width: 699px) {
+  .archi-feedback {
+    margin: 1rem 2rem;
+  }
+}
+@media (min-width: 699px + 1) {
+  .archi-feedback {
+    margin: 2rem 4rem;
+  }
 }
 .archi-map {
   width: 100%;
@@ -79,6 +146,11 @@ p:last-child {
   font-family: sans-serif;
   font-size: 0.7rem;
   font-style: normal;
+}
+@media (max-width: 699px) {
+  .archi-map__filters {
+    display: none;
+  }
 }
 .archi-map__map {
   position: absolute;
@@ -167,13 +239,22 @@ p:last-child {
 .archi-map .leaflet-control-zoom.leaflet-bar.leaflet-control {
   margin: 0;
 }
-.archi-home__intro-container {
-  margin: 2rem 4rem 3rem 4rem;
-  display: flex;
-  align-content: space-between;
+@media (max-width: 699px) {
+  .archi-home__intro-container {
+    margin: 1rem 2rem;
+  }
 }
-.archi-home__presentation {
-  text-align: justify;
+@media (min-width: 699px + 1) {
+  .archi-home__intro-container {
+    display: flex;
+    align-content: space-between;
+    margin: 2rem 4rem 3rem 4rem;
+  }
+}
+@media (min-width: 699px + 1) {
+  .archi-home__presentation {
+    text-align: justify;
+  }
 }
 .archi-presentation__call-to-action {
   font-size: 1.3rem;
@@ -181,11 +262,20 @@ p:last-child {
   padding: 2rem 5rem;
 }
 .archi-home__regions {
-  flex: 0 1 auto;
-  min-width: 320px;
   background-color: #00cba4;
   border-radius: 3px;
-  margin-left: 3rem;
+}
+@media (max-width: 699px) {
+  .archi-home__regions {
+    margin: 1rem 0 0 0;
+  }
+}
+@media (min-width: 699px + 1) {
+  .archi-home__regions {
+    flex: 0 1 auto;
+    min-width: 320px;
+    margin-left: 3rem;
+  }
 }
 .archi-home__regions-title {
   font-family: 'Ostrich Sans';
@@ -212,6 +302,15 @@ p:last-child {
 }
 .archi-footer {
   font-size: 0.8rem;
-  padding: 3em 4rem;
   background-color: #666666;
+}
+@media (max-width: 699px) {
+  .archi-footer {
+    padding: 1rem 2rem;
+  }
+}
+@media (min-width: 699px + 1) {
+  .archi-footer {
+    padding: 3em 4rem;
+  }
 }

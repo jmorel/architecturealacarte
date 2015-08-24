@@ -11,10 +11,17 @@
     bottom: 1rem;
     left: 4rem;
     z-index: 10;
-    width: @filters-width;
+    width: 320px;
     font-family: @font-family-sansSerif;
     font-size: 0.7rem;
     font-style: normal;
+
+    @media (max-width: @screen-small-max) {
+        display: none
+    }
+    @media (min-width: @screen-medium-min) {
+        
+    }
 }
 
 .archi-map__map {
