@@ -61,7 +61,7 @@ p:last-child {
   }
 }
 .archi-header__breadcrumbs {
-  font-family: Georgia, palatino, serif;
+  font-family: Georgia, Times, Times New Roman, serif;
   font-style: italic;
   text-decoration: none;
   display: block;
@@ -154,7 +154,7 @@ p:last-child {
   }
 }
 .archi-feedback {
-  font-family: Georgia, palatino, serif;
+  font-family: Georgia, Times, Times New Roman, serif;
 }
 @media (max-width: 699px) {
   .archi-feedback {
@@ -207,6 +207,11 @@ p:last-child {
     left: 4rem;
   }
 }
+@media (max-width: 699px) {
+  .archi-map__filters.archi-map__filters--hidden {
+    display: none;
+  }
+}
 .archi-map__filters-toggle {
   position: absolute;
   top: 1rem;
@@ -219,6 +224,7 @@ p:last-child {
   font-size: 0.7rem;
   padding: 0.5rem;
   text-transform: uppercase;
+  cursor: pointer;
 }
 @media (min-width: 700px) {
   .archi-map__filters-toggle {

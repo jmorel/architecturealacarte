@@ -33,11 +33,11 @@
                          archi-apikey="5c907191ee9d7359a429b2c73b095042899dc931d66723b39cb7ba58"
                          archi-dataset="architecture-a-voir"
                          archi-parameters="{'refine.publie': 'oui'}">
-        <div class="archi-map__filters-toggle" ng-click="filtersExpanded=!filtersExpanded">
-            <span ng-hide="filtersExpanded">Filtres</span>
-            <span ng-show="filtersExpanded">Cacher les filtres</span>
+        <div class="archi-map__filters-toggle" ng-click="filtersHidden=!filtersHidden" ng-init="filtersHidden=true">
+            <span ng-show="filtersHidden">Filtres</span>
+            <span ng-hide="filtersHidden">Cacher les filtres</span>
         </div>
-        <div class="archi-map__filters" ng-show="filtersExpanded">
+        <div class="archi-map__filters" ng-class="{'archi-map__filters--hidden': filtersHidden}">
             <ods-text-search placeholder="Rechercher..."
                              context="archi"></ods-text-search>
             <ods-facets context="archi">
