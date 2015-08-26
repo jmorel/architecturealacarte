@@ -2,12 +2,19 @@
     @media (max-width: @screen-small-max) {
         margin: 1rem 2rem;
     }
-    @media (min-width: @screen-medium-min) {
+    @media (min-width: @screen-medium-min) and (max-width: @screen-medium-max) {
+        margin: 1.67rem 2.33rem;
+        display: flex;
+        align-content: space-between;
+    }
+
+    @media (min-width: @screen-large-min) {
         display: flex;
         align-content: space-between;
         margin: 2rem 4rem 3rem 4rem;
     }
 }
+
 .archi-home__presentation {
     @media (min-width: @screen-medium-min) {
         text-align: justify;
@@ -26,32 +33,60 @@
     @media (max-width: @screen-small-max) {
         margin: 1rem 0 0 0
     }
-    @media (min-width: @screen-medium-min) {
+    @media (min-width: @screen-medium-min) and (max-width: @screen-medium-max) {
+        flex: 0 1 auto;
+        min-width: 240px;
+        margin-left: 2rem;
+    }
+    @media (min-width: @screen-large-min) {
         flex: 0 1 auto;
         min-width: 320px;
         margin-left: 3rem;
     }
 }
+
 .archi-home__regions-title {
     font-family: @font-family-slab;
-    font-size: 2rem;
     font-style: italic;
-    padding: 1.33rem 2rem 1rem 2rem;
     border-bottom: 1px solid @color-white;
     margin: 0;
+    @media (max-width: @screen-small-max) {
+        padding: 1.33rem 2rem 1rem 2rem;
+        font-size: 2rem;
+    }
+    @media (min-width: @screen-medium-min) and (max-width: @screen-medium-max) {
+        font-size: 1.67rem;
+        padding: 1rem 1.67rem 0.67rem 1.67rem;
+    }
+    @media (min-width: @screen-large-min) {
+        padding: 1.33rem 2rem 1rem 2rem;
+        font-size: 2rem;
+    }
 }
+
 .archi-home__regions-list {
     margin: 0;
     list-style: none;
-    padding: 1rem 2rem;
     font-style: italic;
+    @media (max-width: @screen-small-max) {
+        padding: 1rem 2rem;
+    }
+    @media (min-width: @screen-medium-min) and (max-width: @screen-medium-max) {
+        padding: 0.67rem 1.67rem;
+    }
+    @media (min-width: @screen-large-min) {
+        padding: 1rem 2rem;
+    }
 }
+
 .archi-home__region {
     text-decoration: none;
 }
+
 .archi-home__region:hover {
     text-decoration: underline;
 }
+
 .archi-home__regions-call-to-action {
     margin-top: 1rem;
 

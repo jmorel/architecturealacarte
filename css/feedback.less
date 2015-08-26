@@ -3,7 +3,10 @@
     @media (max-width: @screen-small-max) {
         margin: 1rem 2rem;
     }
-    @media (min-width: @screen-medium-min) {
+    @media (min-width: @screen-medium-min) and (max-width: @screen-medium-max) {
+        margin: 1.67rem 2.33rem;
+    }
+    @media (min-width: @screen-large-min) {
         margin: 2rem 4rem;
     }
 }

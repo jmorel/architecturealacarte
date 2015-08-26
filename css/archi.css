@@ -10,7 +10,12 @@ html {
     font-size: 18px;
   }
 }
-@media (min-width: 699px + 1) {
+@media (min-width: 700px) and (max-width: 1299px) {
+  html {
+    font-size: 22px;
+  }
+}
+@media (min-width: 1300px) {
   html {
     font-size: 26px;
   }
@@ -41,7 +46,14 @@ p:last-child {
     border-bottom: 0.67rem solid white;
   }
 }
-@media (min-width: 699px + 1) {
+@media (min-width: 700px) and (max-width: 1299px) {
+  .archi-header {
+    margin: 1.67rem 2.33rem 1.67rem 0;
+    padding-bottom: 1.67rem;
+    border-bottom: 0.67rem solid white;
+  }
+}
+@media (min-width: 1300px) {
   .archi-header {
     margin: 3rem 4rem 2rem 0;
     padding-bottom: 2rem;
@@ -60,7 +72,13 @@ p:last-child {
     margin: 0 0 1rem 2rem;
   }
 }
-@media (min-width: 699px + 1) {
+@media (min-width: 700px) and (max-width: 1299px) {
+  .archi-header__breadcrumbs {
+    font-size: 1.33rem;
+    margin: 0 0 1.67rem 2.33rem;
+  }
+}
+@media (min-width: 1300px) {
   .archi-header__breadcrumbs {
     font-size: 1.67rem;
     margin: 0 0 2rem 4rem;
@@ -79,7 +97,13 @@ p:last-child {
     margin: 0 0 0 2rem;
   }
 }
-@media (min-width: 699px + 1) {
+@media (min-width: 700px) and (max-width: 1299px) {
+  .archi-header__title {
+    font-size: 3rem;
+    margin: 0 0 0 2.33rem;
+  }
+}
+@media (min-width: 1300px) {
   .archi-header__title {
     font-size: 4rem;
     margin: 0 0 0 4rem;
@@ -96,7 +120,13 @@ p:last-child {
     margin: 1rem 0 0 2rem;
   }
 }
-@media (min-width: 699px + 1) {
+@media (min-width: 700px) and (max-width: 1299px) {
+  .archi-header__subtitle {
+    font-size: 1.33rem;
+    margin: 1rem 0 0 2.33rem;
+  }
+}
+@media (min-width: 1300px) {
   .archi-header__subtitle {
     font-size: 1.67rem;
     margin: 0 0 0 4rem;
@@ -111,7 +141,13 @@ p:last-child {
     margin-left: 0.33rem;
   }
 }
-@media (min-width: 699px + 1) {
+@media (min-width: 700px) and (max-width: 1299px) {
+  .archi-header__century {
+    font-size: 1.33rem;
+    margin-left: 0.67rem;
+  }
+}
+@media (min-width: 1300px) {
   .archi-header__century {
     font-size: 3rem;
     margin-left: 1rem;
@@ -125,7 +161,12 @@ p:last-child {
     margin: 1rem 2rem;
   }
 }
-@media (min-width: 699px + 1) {
+@media (min-width: 700px) and (max-width: 1299px) {
+  .archi-feedback {
+    margin: 1.67rem 2.33rem;
+  }
+}
+@media (min-width: 1300px) {
   .archi-feedback {
     margin: 2rem 4rem;
   }
@@ -138,11 +179,7 @@ p:last-child {
 }
 .archi-map__filters {
   position: absolute;
-  top: 2rem;
-  bottom: 1rem;
-  left: 4rem;
   z-index: 10;
-  width: 320px;
   font-family: sans-serif;
   font-size: 0.7rem;
   font-style: normal;
@@ -150,6 +187,21 @@ p:last-child {
 @media (max-width: 699px) {
   .archi-map__filters {
     display: none;
+  }
+}
+@media (min-width: 700px) and (max-width: 1299px) {
+  .archi-map__filters {
+    width: 250px;
+    top: 1.67rem;
+    left: 2.33rem;
+  }
+}
+@media (min-width: 1300px) {
+  .archi-map__filters {
+    width: 320px;
+    top: 2rem;
+    bottom: 1rem;
+    left: 4rem;
   }
 }
 .archi-map__map {
@@ -189,7 +241,16 @@ p:last-child {
   font-size: inherit;
   padding: 0;
   border-bottom: 1px solid white;
-  width: 94%;
+}
+@media (min-width: 700px) and (max-width: 1299px) {
+  .archi-map .odswidget-text-search__search-box {
+    width: 205px;
+  }
+}
+@media (min-width: 1300px) {
+  .archi-map .odswidget-text-search__search-box {
+    width: 270px;
+  }
 }
 .archi-map .odswidget-text-search__form:after {
   color: white;
@@ -232,9 +293,17 @@ p:last-child {
   padding: 0.33rem 1rem 0 1rem;
   text-align: left;
 }
-.archi-map .leaflet-top.leaflet-left {
-  top: 2rem;
-  left: 2rem;
+@media (min-width: 700px) and (max-width: 1299px) {
+  .archi-map .leaflet-top.leaflet-left {
+    top: 1.67rem;
+    left: 0.67rem;
+  }
+}
+@media (min-width: 1300px) {
+  .archi-map .leaflet-top.leaflet-left {
+    top: 2rem;
+    left: 2rem;
+  }
 }
 .archi-map .leaflet-control-zoom.leaflet-bar.leaflet-control {
   margin: 0;
@@ -244,14 +313,21 @@ p:last-child {
     margin: 1rem 2rem;
   }
 }
-@media (min-width: 699px + 1) {
+@media (min-width: 700px) and (max-width: 1299px) {
+  .archi-home__intro-container {
+    margin: 1.67rem 2.33rem;
+    display: flex;
+    align-content: space-between;
+  }
+}
+@media (min-width: 1300px) {
   .archi-home__intro-container {
     display: flex;
     align-content: space-between;
     margin: 2rem 4rem 3rem 4rem;
   }
 }
-@media (min-width: 699px + 1) {
+@media (min-width: 700px) {
   .archi-home__presentation {
     text-align: justify;
   }
@@ -270,7 +346,14 @@ p:last-child {
     margin: 1rem 0 0 0;
   }
 }
-@media (min-width: 699px + 1) {
+@media (min-width: 700px) and (max-width: 1299px) {
+  .archi-home__regions {
+    flex: 0 1 auto;
+    min-width: 240px;
+    margin-left: 2rem;
+  }
+}
+@media (min-width: 1300px) {
   .archi-home__regions {
     flex: 0 1 auto;
     min-width: 320px;
@@ -279,17 +362,47 @@ p:last-child {
 }
 .archi-home__regions-title {
   font-family: 'Ostrich Sans';
-  font-size: 2rem;
   font-style: italic;
-  padding: 1.33rem 2rem 1rem 2rem;
   border-bottom: 1px solid white;
   margin: 0;
+}
+@media (max-width: 699px) {
+  .archi-home__regions-title {
+    padding: 1.33rem 2rem 1rem 2rem;
+    font-size: 2rem;
+  }
+}
+@media (min-width: 700px) and (max-width: 1299px) {
+  .archi-home__regions-title {
+    font-size: 1.67rem;
+    padding: 1rem 1.67rem 0.67rem 1.67rem;
+  }
+}
+@media (min-width: 1300px) {
+  .archi-home__regions-title {
+    padding: 1.33rem 2rem 1rem 2rem;
+    font-size: 2rem;
+  }
 }
 .archi-home__regions-list {
   margin: 0;
   list-style: none;
-  padding: 1rem 2rem;
   font-style: italic;
+}
+@media (max-width: 699px) {
+  .archi-home__regions-list {
+    padding: 1rem 2rem;
+  }
+}
+@media (min-width: 700px) and (max-width: 1299px) {
+  .archi-home__regions-list {
+    padding: 0.67rem 1.67rem;
+  }
+}
+@media (min-width: 1300px) {
+  .archi-home__regions-list {
+    padding: 1rem 2rem;
+  }
 }
 .archi-home__region {
   text-decoration: none;
@@ -309,7 +422,12 @@ p:last-child {
     padding: 1rem 2rem;
   }
 }
-@media (min-width: 699px + 1) {
+@media (min-width: 700px) and (max-width: 1299px) {
+  .archi-footer {
+    padding: 1.67rem 2.33rem;
+  }
+}
+@media (min-width: 1300px) {
   .archi-footer {
     padding: 3em 4rem;
   }

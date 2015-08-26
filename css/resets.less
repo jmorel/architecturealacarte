@@ -1,3 +1,4 @@
+@import "variables";
 * {
     box-sizing: border-box;
 }
@@ -7,9 +8,11 @@ html {
 
     @media (max-width: @screen-small-max) {
         font-size: 18px;
-
     }
-    @media (min-width: @screen-medium-min) {
+    @media (min-width: @screen-medium-min) and (max-width: @screen-medium-max) {
+        font-size: 22px;
+    }
+    @media (min-width: @screen-large-min) {
         font-size: @font-baseSize;
     }
 }
