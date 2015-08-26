@@ -186,7 +186,10 @@ p:last-child {
 }
 @media (max-width: 699px) {
   .archi-map__filters {
-    display: none;
+    top: 3.67rem;
+    left: 2rem;
+    background-color: #00ebbe;
+    padding: 0.33rem 0.67rem;
   }
 }
 @media (min-width: 700px) and (max-width: 1299px) {
@@ -204,6 +207,24 @@ p:last-child {
     left: 4rem;
   }
 }
+.archi-map__filters-toggle {
+  position: absolute;
+  top: 1rem;
+  left: 2rem;
+  z-index: 10;
+  background-color: #00ebbe;
+  font-family: sans-serif;
+  font-style: normal;
+  color: white;
+  font-size: 0.7rem;
+  padding: 0.5rem;
+  text-transform: uppercase;
+}
+@media (min-width: 700px) {
+  .archi-map__filters-toggle {
+    display: none;
+  }
+}
 .archi-map__map {
   position: absolute;
   top: 0;
@@ -219,8 +240,17 @@ p:last-child {
   background-color: #00ebbe;
   border-radius: 3px;
   color: white;
-  margin: 0 0 1em 0;
   padding: 0.5rem 0;
+}
+@media (max-width: 699px) {
+  .archi-map__facet {
+    margin: 0;
+  }
+}
+@media (min-width: 700px) {
+  .archi-map__facet {
+    margin: 0 0 1em 0;
+  }
 }
 .archi-map__facet-title {
   padding: 0 1rem 0.5rem 1rem;
@@ -292,6 +322,11 @@ p:last-child {
   margin: 0;
   padding: 0.33rem 1rem 0 1rem;
   text-align: left;
+}
+@media (max-width: 699px) {
+  .archi-map .leaflet-top.leaflet-left {
+    display: none;
+  }
 }
 @media (min-width: 700px) and (max-width: 1299px) {
   .archi-map .leaflet-top.leaflet-left {

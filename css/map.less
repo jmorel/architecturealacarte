@@ -13,7 +13,10 @@
     font-style: normal;
 
     @media (max-width: @screen-small-max) {
-        display: none
+        top: 3.67rem;
+        left: 2rem;
+         background-color: @color-primary;
+        padding: 0.33rem 0.67rem;
     }
     @media (min-width: @screen-medium-min) and (max-width: @screen-medium-max) {
         width: 250px;
@@ -26,6 +29,24 @@
         top: 2rem;
         bottom: 1rem;
         left: 4rem;
+    }
+}
+
+.archi-map__filters-toggle {
+    position: absolute;
+    top: 1rem;
+    left: 2rem;
+    z-index: 10;
+    background-color: @color-primary;
+    font-family: @font-family-sansSerif;
+    font-style: normal;
+    color: @color-white;
+    font-size: 0.7rem;
+    padding: 0.5rem;
+    text-transform: uppercase;
+
+    @media (min-width: @screen-medium-min) {
+        display: none;
     }
 }
 
@@ -48,8 +69,13 @@
     background-color: @color-primary;
     border-radius: 3px;
     color: @color-white;
-    margin: 0 0 1em 0;
     padding: 0.5rem 0;
+    @media (max-width: @screen-small-max) {
+        margin: 0;
+    }
+    @media (min-width: @screen-medium-min) {
+        margin: 0 0 1em 0;
+    }
 }
 .archi-map__facet-title {
     padding: 0 1rem 0.5rem 1rem;
@@ -123,6 +149,7 @@
     }
     .leaflet-top.leaflet-left {
         @media (max-width: @screen-small-max) {
+            display: none;
         }
         @media (min-width: @screen-medium-min) and (max-width: @screen-medium-max) {
             top: 1.67rem;
