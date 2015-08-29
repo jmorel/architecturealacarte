@@ -1,23 +1,24 @@
 .archi-home__intro-container {
     @media (max-width: @screen-small-max) {
-        margin: 1rem 2rem;
+        padding: 1rem 2rem;
     }
     @media (min-width: @screen-medium-min) and (max-width: @screen-medium-max) {
-        margin: 1.67rem 2.33rem;
-        display: flex;
-        align-content: space-between;
+        padding: 1.67rem 2.33rem;
     }
 
     @media (min-width: @screen-large-min) {
-        display: flex;
-        align-content: space-between;
-        margin: 2rem 4rem 3rem 4rem;
+        padding: 2rem 4rem 3rem 4rem;
     }
 }
 
 .archi-home__presentation {
-    @media (min-width: @screen-medium-min) {
+    @media (min-width: @screen-medium-min) and (max-width: @screen-medium-max) {
         text-align: justify;
+        margin-right: 270px + 2*@font-baseSize-medium;
+    }
+    @media (min-width: @screen-large-min) {
+        text-align: justify;
+        margin-right: 330px + 3 * @font-baseSize-large;
     }
 }
 
@@ -31,17 +32,15 @@
     background-color: @color-primary-dark;
     border-radius: 3px;
     @media (max-width: @screen-small-max) {
-        margin: 1rem 0 0 0
+        margin: 0 0 1rem 0
     }
     @media (min-width: @screen-medium-min) and (max-width: @screen-medium-max) {
-        flex: 0 1 auto;
-        min-width: 240px;
-        margin-left: 2rem;
+        float: right;
+        width: 270px;
     }
     @media (min-width: @screen-large-min) {
-        flex: 0 1 auto;
-        min-width: 320px;
-        margin-left: 3rem;
+        float: right;
+        width: 330px;
     }
 }
 

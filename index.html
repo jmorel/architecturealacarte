@@ -2,75 +2,83 @@
 <html>
 <head>
     <title>Architecture à la carte</title>
-    <meta name="description" content="Un catalogue interactif de l'architecture remarquable des 20ème et 21ème siècles en France." />
-    <meta name="keywords" conten="architecture, moderne, contemporaine, france, architectes, le corbusier, jeannouvel, jean prouvé" />
+    <meta name="description"
+          content="Un catalogue interactif de l'architecture remarquable des 20ème et 21ème siècles en France."/>
+    <meta name="keywords"
+          conten="architecture, moderne, contemporaine, france, architectes, le corbusier, jeannouvel, jean prouvé"/>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/archi.css">
     <link rel="stylesheet" href="fonts/ostrich-sans/ostrich-sans.css">
+    <link rel="stylesheet" href="fonts/droid-serif/droid-serif.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+
 </head>
 <body>
+<div class="archi-non-footer">
+    <div class="archi-header">
+        <h1 class="archi-header__title">
+            Architecture a la carte
+        </h1>
 
-<div class="archi-header">
-    <h1 class="archi-header__title">
-        Architecture a la carte
-    </h1>
+        <h2 class="archi-header__subtitle">
+            Architecture remarquable des XX<sup>ème</sup> et XXI<sup>ème</sup> siecles en France
+        </h2>
 
-    <h2 class="archi-header__subtitle">
-        Architecture remarquable des XX<sup>ème</sup> et XXI<sup>ème</sup> siecles en France
-    </h2>
-
-</div>
-
-<div class="archi-home__intro-container">
-    <div class="archi-home__presentation">
-        <p>
-            <a href="#">Architecture à la Carte</a> est un catalogue interactif, un outil de découverte du
-            patrimoine architectural français.
-            Convivial et ludique, ce n'est pas une alternative aux listes exhaustives des Monuments Nationaux et
-            Monuments historiques mais plutôt un companion à ces bases de données austères.
-        </p>
-
-        <p>
-            Ce site est compatible avec tous les appareils mobiles, n'hésitez pas à l'utiliser pendant vos balades !
-        </p>
-
-        <p>
-            Le projet vous plait ? Vous voulez y participer ? Vous voulez documenter l'architecture moderne et
-            contemporaine
-            dans votre région ? <br>
-            <i class="fa fa-arrow-circle-o-right"></i>
-            <a href="mailto:contact@architecturealacarte.fr">
-                Envoyez-nous un email
-            </a> !
-        </p>
     </div>
 
-    <div class="archi-home__regions">
-        <h3 class="archi-home__regions-title">Les regions</h3>
-        <ul class="archi-home__regions-list">
-            <li>
+    <div class="archi-home__intro-container">
+        <div class="archi-home__regions">
+            <h3 class="archi-home__regions-title">Les regions</h3>
+            <ul class="archi-home__regions-list">
+                <li>
+                    <i class="fa fa-arrow-circle-o-right"></i>
+                    <a href="ile-de-france.html" class="archi-region">
+                        Île de France
+                    </a>
+                </li>
+                <li class="archi-home__regions-call-to-action">
+                    <i class="fa fa-arrow-circle-o-right"></i>
+                    <a href="mailto:contact@architecturealacarte.fr" class="archi-region">Ajoutez la votre</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="archi-home__presentation">
+            <p>
+                <a href="#">Architecture à la Carte</a> est un catalogue interactif, un outil de découverte du
+                patrimoine architectural français.
+                Convivial et ludique, ce n'est pas une alternative aux listes exhaustives des Monuments Nationaux et
+                Monuments historiques mais plutôt un companion à ces bases de données austères.
+            </p>
+
+            <p>
+                Ce site est compatible avec tous les appareils mobiles, n'hésitez pas à l'utiliser pendant vos balades !
+            </p>
+
+            <p>
+                Le projet vous plait ? Vous voulez y participer ? Vous voulez documenter l'architecture moderne et
+                contemporaine
+                dans votre région ?
+            </p>
+
+            <p>
                 <i class="fa fa-arrow-circle-o-right"></i>
-                <a href="ile-de-france.html" class="archi-region">
-                    Île de France
-                </a>
-            </li>
-            <li class="archi-home__regions-call-to-action">
-                <i class="fa fa-arrow-circle-o-right"></i>
-                <a href="mailto:contact@architecturealacarte.fr" class="archi-region">Ajoutez la votre</a>
-            </li>
-        </ul>
+                <a href="mailto:contact@architecturealacarte.fr">
+                    Envoyez-nous un email
+                </a> !
+            </p>
+        </div>
     </div>
 </div>
+
 
 <div class="archi-footer">
     <p>
         <a href="ile-de-france.html">Architecture à la carte</a> est un projet de
         <a href="http://gabrielledesnoyers.com">Gabrielle Desnoyers</a> et
-        <a href="http://hexagonal.io">Jérémy Morel</a>
-        <sup><a href="http://twitter.com"><i class="fa fa-twitter"></i></a></sup>
+        <a href="http://hexagonal.io">Jérémy Morel</a><sup><a href="http://twitter.com/jmorel_fr"><i class="fa fa-twitter"></i></a></sup>
         rendu possible par la plateforme <a href="http://opendatasoft.com">OpenDataSoft</a>.
     </p>
 
