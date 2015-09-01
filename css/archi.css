@@ -175,16 +175,7 @@ p:last-child {
   width: 100%;
   position: relative;
   color: #666666;
-}
-@media (max-width: 699px) {
-  .archi-map {
-    height: 85%;
-  }
-}
-@media (min-width: 700px) {
-  .archi-map {
-    height: 100%;
-  }
+  height: 70%;
 }
 .archi-map__filters {
   position: absolute;
