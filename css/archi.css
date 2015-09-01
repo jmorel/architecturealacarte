@@ -308,6 +308,7 @@ p:last-child {
   text-decoration: none;
   padding: 0 1rem;
   border: none;
+  display: block;
 }
 .archi-map .odswidget-facet__category--refined,
 .archi-map .odswidget-facet__category:hover {
@@ -322,6 +323,9 @@ p:last-child {
 .archi-map .odswidget-facet__category-count {
   font-size: inherit;
   color: inherit;
+}
+.archi-map .odswidget-facet__category-count {
+  float: right;
 }
 .archi-map .odswidget-facet__expansion-control {
   margin: 0;
