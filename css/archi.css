@@ -352,6 +352,10 @@ p:last-child {
 .archi-map .leaflet-control-zoom.leaflet-bar.leaflet-control {
   margin: 0;
 }
+.archi-map .leaflet-control-locate.leaflet-bar.leaflet-control,
+.archi-map .leaflet-draw.leaflet-control {
+  margin: 1rem 0 0 0;
+}
 @media (max-width: 699px) {
   .archi-home__intro-container {
     padding: 1rem 2rem;
