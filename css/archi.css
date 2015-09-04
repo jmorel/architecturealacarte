@@ -55,7 +55,7 @@ p:last-child {
 }
 @media (min-width: 1300px) {
   .archi-header {
-    margin: 0 4rem 2rem 0;
+    margin: 0 4rem 0 0;
     padding: 3rem 0 2rem 0;
     border-bottom: 0.67rem solid white;
   }
