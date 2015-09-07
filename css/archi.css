@@ -332,6 +332,19 @@ p:last-child {
   padding: 0.33rem 1rem 0 1rem;
   text-align: left;
 }
+.archi-map .odswidget-facet__value-search {
+  padding: 0 1rem 0.33rem 1rem;
+}
+.archi-map .odswidget-facet__value-search:before {
+  color: #666666;
+  right: 1.2rem;
+  top: 0.1rem;
+  left: auto;
+}
+.archi-map .odswidget-facet__value-search-input {
+  padding: 0.2rem 0.33rem;
+  border: none;
+}
 @media (max-width: 699px) {
   .archi-map .leaflet-top.leaflet-left {
     display: none;

@@ -49,10 +49,15 @@
             <ods-text-search placeholder="Rechercher..."
                              context="archi"></ods-text-search>
 
-            <h3 class="archi-map__facet-title">
-                Informations
-            </h3>
-            <ods-facet name="keywords"></ods-facet>
+            <div class="archi-map__facet">
+                <h3 class="archi-map__facet-title">
+                    Informations
+                </h3>
+                <ods-facets context="archi">
+                    <ods-facet name="keywords" value-search="true"></ods-facet>
+                </ods-facets>
+            </div>
+
         </div>
         <div class="archi-map__map">
             <ods-map basemap="mapbox.high-contrast"
