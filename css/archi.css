@@ -475,6 +475,9 @@ p:last-child {
 .archi-home__regions-call-to-action {
   margin-top: 1rem;
 }
+.clear {
+  clear: both;
+}
 .archi-non-footer {
   background-color: #00ebbe;
   margin: 0;
