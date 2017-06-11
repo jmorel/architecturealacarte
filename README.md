@@ -8,3 +8,14 @@ Les données sources sont disponibles sur opendatasoft.com:
 
 * [Journées du patrimoine 2015](http://public.opendatasoft.com/explore/dataset/jep2015/?tab=metas)
 * [Architecture moderne et contemporaine en Île de France](http://public.opendatasoft.com/explore/dataset/architecture-remarquable-idf/?tab=table&disjunctive.debut_construction&disjunctive.fin_construction&disjunctive.architectes)
+
+## Compiler les sources
+
+```shell
+gulp install --dev
+gulp build
+```
+
+## Todo
+
+* Fix dates in sitemap.xml

@@ -1,0 +1,73 @@
+{% extends 'layouts/base.html' %}
+
+{% block header %}
+    <a class="archi-header__breadcrumbs" href="index.html">
+        <i class="fa fa-arrow-circle-o-left"></i>
+        Architecture à la carte
+    </a>
+
+    <h1 class="archi-header__title">
+        {% block title %}{% endblock %}
+    </h1>
+
+    {% block intro %}{% endblock %}
+{% endblock %}
+
+{% block main %}
+    <div class="archi-map" ng-app="ods-widgets">
+        <ods-dataset-context context="archi"
+                             archi-domain="{% block ods_domain_url %}{% endblock %}"
+                             archi-dataset="{% block ods_dataset_id %}{% endblock %}">
+            {% block map_filters %}
+                <div class="archi-map__filters-toggle" ng-click="filtersHidden=!filtersHidden"
+                     ng-init="filtersHidden=true">
+                    <span ng-show="filtersHidden">Filtres</span>
+                    <span ng-hide="filtersHidden">Cacher les filtres</span>
+                </div>
+                <div class="archi-map__filters" ng-class="{'archi-map__filters--hidden': filtersHidden}">
+                    <ods-text-search placeholder="Rechercher..."
+                                     context="archi"></ods-text-search>
+
+                    <div class="archi-map__facet">
+                        <h3 class="archi-map__facet-title">
+                            Informations
+                        </h3>
+                        <ods-facets context="archi">
+                            <ods-facet name="keywords" value-search="true"></ods-facet>
+                        </ods-facets>
+                    </div>
+
+                </div>
+            {% endblock %}
+            <div class="archi-map__map">
+                <ods-map basemap="mapbox.high-contrast"
+                         toolbar-fullscreen="false">
+                    <ods-map-layer context="archi"
+                                   show-marker="false"
+                                   picto="dot"
+                                   color="#00EBBE"></ods-map-layer>
+                </ods-map>
+            </div>
+        </ods-dataset-context>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+
+    <script src="architecturealacarte.js"></script>
+
+    <script type="text/javascript">
+        var ods = angular.module('ods-widgets');
+        ods.config(function (ODSWidgetsConfigProvider, ModuleLazyLoaderProvider) {
+            ODSWidgetsConfigProvider.setConfig({
+                basemaps: [{
+                    "provider": "mapbox.high-contrast",
+                    "mapbox_access_token": "pk.eyJ1IjoiamVyZW15bW9yZWwiLCJhIjoiZmZjZGMxNzUwZTJjYmQ5YmIwYjAzOTFjYWNlY2ExYTAifQ.wEKnZyKpqqSzWew8QEzCtg",
+                    "id": "mapbox.high-contrast",
+                    "label": "MapQuest"
+                }]
+            })
+        });
+    </script>
+{% endblock %}
