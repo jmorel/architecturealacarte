@@ -7,6 +7,7 @@ var cleanCSS = require('gulp-clean-css');
 var rename = require('gulp-rename');
 var nunjucks = require('gulp-nunjucks');
 var uglify = require('gulp-uglify');
+var git = require('gulp-git');
 
 
 var sections = [
@@ -18,7 +19,7 @@ var sections = [
         ]
     },
     {
-        name: "Journées du patrimoine",
+        name: "Journees du patrimoine",
         pages: [
             {url: 'journees-du-patrimoine-2015.html', name: 'Edition 2015'},
             {url: 'journees-du-patrimoine-2016.html', name: 'Edition 2016'}
@@ -86,6 +87,14 @@ gulp.task('js', function () {
         .pipe(gulp.dest('./dist/'));
 });
 
+
+gulp.task('deploy', function () {
+    git.exec({args: 'subtree push --prefix dist origin gh-pages'}, function (err, stdout) {
+        if (err) {
+            throw err;
+        }
+    });
+});
 
 gulp.task('build', ['less', 'html', 'sitemap', 'js', 'fonts']);
 gulp.task('default', ['build']);
