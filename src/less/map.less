@@ -16,14 +16,14 @@
 
     @media (max-width: @screen-small-max) {
         top: 3.67rem;
-        left: 2rem;
-         background-color: @color-primary;
+        left: 0.67rem;
+        background-color: @color-primary;
         padding: 0.33rem 0.67rem;
     }
     @media (min-width: @screen-medium-min) and (max-width: @screen-medium-max) {
         width: 250px;
         top: 1.67rem;
-        left: 2.33rem;
+        left: 0.67rem;
 
     }
     @media (min-width: @screen-large-min) {
@@ -32,6 +32,7 @@
         left: 4rem;
     }
 }
+
 .archi-map__filters.archi-map__filters--hidden {
     @media (max-width: @screen-small-max) {
         display: none;
@@ -84,15 +85,18 @@
         margin: 0 0 1em 0;
     }
 }
+
 .archi-map__facet-title {
     padding: 0 1rem 0.5rem 1rem;
     margin: 0 0 0.5rem 0;
     text-align: center;
     border-bottom: 1px solid white
 }
+
 .archi-map {
     .odswidget-text-search {
         margin-bottom: 1em;
+        margin-top: 0;
         padding: 0.5rem;
         background-color: #00EBBE;
     }
@@ -113,12 +117,11 @@
             width: 270px;
         }
     }
-    .odswidget-text-search__form:after {
-        color: @color-white;
-        line-height: normal;
-        font-size: 1rem;
-        top: 0;
-        right: 0;
+    .odswidget-text-search__form {
+        position: static;
+    }
+    .odswidget-text-search__submit {
+        font-size: 1.2em;
     }
     .odswidget-facet {
         margin: 0;
@@ -172,24 +175,24 @@
         border: none;
 
     }
-    .leaflet-top.leaflet-left {
+    .leaflet-top.leaflet-right {
         @media (max-width: @screen-small-max) {
             display: none;
         }
         @media (min-width: @screen-medium-min) and (max-width: @screen-medium-max) {
             top: 1.67rem;
-            left: 0.67rem;
+            right: 0.67rem;
         }
         @media (min-width: @screen-large-min) {
             top: 2rem;
-            left: 2rem;
+            right: 2rem;
         }
     }
     .leaflet-control-zoom.leaflet-bar.leaflet-control {
         margin: 0;
     }
     .leaflet-control-locate.leaflet-bar.leaflet-control,
-    .leaflet-draw.leaflet-control {
+    .leaflet-draw.leaflet-control  {
         margin: 1rem 0 0 0;
     }
 }

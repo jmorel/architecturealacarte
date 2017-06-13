@@ -6,11 +6,12 @@
     <meta name="keywords" content="{% block page_keywords %}{% endblock %}"/>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="architecturealacarte.min.css">
-    <link rel="stylesheet" href="fonts/ostrich-sans/ostrich-sans.css">
-    <link rel="stylesheet" href="fonts/droid-serif/droid-serif.css">
-    <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.css">
-    <link rel="stylesheet" href="vendor/ods-widgets/ods-widgets.min.css">
+    {% block style %}
+        <link rel="stylesheet" href="architecturealacarte.min.css">
+        <link rel="stylesheet" href="fonts/ostrich-sans/ostrich-sans.css">
+        <link rel="stylesheet" href="fonts/droid-serif/droid-serif.css">
+        <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.css">
+    {% endblock %}
 </head>
 <body>
 

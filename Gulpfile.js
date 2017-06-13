@@ -63,7 +63,7 @@ gulp.task('sitemap', function () {
 
 gulp.task('fonts', function () {
     var custom = gulp.src('./src/fonts/**/*')
-        .pipe(gulp.dest('./dist/fonts/'))
+        .pipe(gulp.dest('./dist/fonts/'));
 
     var faFonts = gulp.src('./node_modules/font-awesome/fonts/*')
         .pipe(gulp.dest('./dist/fonts/font-awesome/fonts/'));
@@ -75,10 +75,9 @@ gulp.task('fonts', function () {
 
 gulp.task('js', function () {
     return gulp.src([
-        './node_modules/angular/angular.js',
-        './node_modules/angular-sanitize/angular-sanitize.js',
         './node_modules/jquery/dist/jquery.js',
-        './src/vendor/ods-widgets/ods-widgets.js'])
+        './node_modules/angular/angular.js',
+        './node_modules/angular-sanitize/angular-sanitize.js'])
         .pipe(concat('architecturealacarte.js'))
         .pipe(uglify())
         .pipe(rename({
@@ -87,6 +86,10 @@ gulp.task('js', function () {
         .pipe(gulp.dest('./dist/'));
 });
 
+gulp.task('ods-widgets', function () {
+    return gulp.src('./src/vendor/ods-widgets/**/*')
+        .pipe(gulp.dest('./dist/ods-widgets/'))
+});
 
 gulp.task('deploy', function () {
     git.exec({args: 'subtree push --prefix dist origin gh-pages'}, function (err, stdout) {
@@ -96,7 +99,7 @@ gulp.task('deploy', function () {
     });
 });
 
-gulp.task('build', ['less', 'html', 'sitemap', 'js', 'fonts']);
+gulp.task('build', ['less', 'html', 'sitemap', 'js', 'fonts', 'ods-widgets']);
 gulp.task('default', ['build']);
 
 gulp.task('watch', function () {

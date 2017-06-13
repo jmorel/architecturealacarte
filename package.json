@@ -17,9 +17,9 @@
   },
   "homepage": "https://github.com/jmorel/architecturealacarte#readme",
   "devDependencies": {
-    "angular": "^1.4.4",
-    "angular-sanitize": "^1.6.4",
-    "font-awesome": "^4.7.0",
+    "angular": "=1.4.4",
+    "angular-sanitize": "=1.4.7",
+    "font-awesome": "=4.7.0",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^4.0.0",
     "gulp-clean-css": "^3.4.1",
@@ -29,7 +29,7 @@
     "gulp-nunjucks": "^3.0.0",
     "gulp-rename": "^1.2.2",
     "gulp-uglify": "^3.0.0",
-    "jquery": "^2.1.4"
+    "jquery": "=2.1.4"
   },
   "dependencies": {}
 }
