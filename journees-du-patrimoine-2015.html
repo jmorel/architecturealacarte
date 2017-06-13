@@ -7,11 +7,15 @@
     <meta name="keywords" content="architecture, france, journées du patrimoine, visite"/>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="architecturealacarte.min.css">
-    <link rel="stylesheet" href="fonts/ostrich-sans/ostrich-sans.css">
-    <link rel="stylesheet" href="fonts/droid-serif/droid-serif.css">
-    <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.css">
-    <link rel="stylesheet" href="vendor/ods-widgets/ods-widgets.min.css">
+    
+    
+        <link rel="stylesheet" href="architecturealacarte.min.css">
+        <link rel="stylesheet" href="fonts/ostrich-sans/ostrich-sans.css">
+        <link rel="stylesheet" href="fonts/droid-serif/droid-serif.css">
+        <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.css">
+    
+    <link rel="stylesheet" href="ods-widgets/ods-widgets.min.css">
+
 </head>
 <body>
 
@@ -29,6 +33,9 @@
 
     </h1>
 
+    </div>
+
+    
     
     <div class="archi-feedback">
         <p>
@@ -43,13 +50,11 @@
     </div>
 
 
-    </div>
-
-    
     <div class="archi-map" ng-app="ods-widgets">
-        <ods-dataset-context context="archi"
-                             archi-domain="public.opendatasoft.com"
-                             archi-dataset="jep2015">
+        
+            <ods-dataset-context context="archi"
+                                 archi-domain="public.opendatasoft.com"
+                                 archi-dataset="jep2015">
             
     <div class="archi-map__filters-toggle" ng-click="filtersHidden=!filtersHidden" ng-init="filtersHidden=true">
         <span ng-show="filtersHidden">Filtres</span>
@@ -71,14 +76,22 @@
     </div>
 
             <div class="archi-map__map">
-                <ods-map basemap="mapbox.high-contrast"
-                         toolbar-fullscreen="false">
-                    <ods-map-layer context="archi"
-                                   show-marker="false"
-                                   picto="dot"
-                                   color="#00EBBE"></ods-map-layer>
-                </ods-map>
+                
+                    <ods-map basemap="mapbox.high-contrast"
+                             location="12,48.85387,2.33648"
+                             toolbar-fullscreen="false"
+                             toolbar-geolocation="false"
+                             toolbar-drawing="false">
+                        
+                            <ods-map-layer context="archi"
+                                           show-marker="false"
+                                           picto="dot"
+                                           color="#00EBBE"></ods-map-layer>
+                        
+                    </ods-map>
+                
             </div>
+        
         </ods-dataset-context>
     </div>
 
@@ -128,7 +141,8 @@
     </script>
 
 
-    <script src="architecturealacarte.js"></script>
+    <script src="architecturealacarte.min.js"></script>
+    <script src="ods-widgets/ods-widgets.min.js"></script>
 
     <script type="text/javascript">
         var ods = angular.module('ods-widgets');

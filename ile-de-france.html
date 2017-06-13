@@ -8,11 +8,15 @@
     essonne, hauts-de-seinge, seine-saint-denis, val-de-marne, val-d'oise"/>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="architecturealacarte.min.css">
-    <link rel="stylesheet" href="fonts/ostrich-sans/ostrich-sans.css">
-    <link rel="stylesheet" href="fonts/droid-serif/droid-serif.css">
-    <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.css">
-    <link rel="stylesheet" href="vendor/ods-widgets/ods-widgets.min.css">
+    
+    
+        <link rel="stylesheet" href="architecturealacarte.min.css">
+        <link rel="stylesheet" href="fonts/ostrich-sans/ostrich-sans.css">
+        <link rel="stylesheet" href="fonts/droid-serif/droid-serif.css">
+        <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.css">
+    
+    <link rel="stylesheet" href="ods-widgets/ods-widgets.min.css">
+
 </head>
 <body>
 
@@ -32,6 +36,9 @@
 
     </h1>
 
+    </div>
+
+    
     
     <div class="archi-feedback">
         Des questions, remarques ou suggestions ? <a href="mailto:contact@architecturealacarte.fr">Ecrivez-nous
@@ -39,43 +46,46 @@
     </div>
 
 
-    </div>
-
-    
+    <div class="archi-map" ng-app="ods-widgets">
+        
     <div class="archi-map" ng-app="ods-widgets">
         <ods-dataset-context context="archi"
-                             archi-domain=""
-                             archi-dataset="">
-            
-                <div class="archi-map__filters-toggle" ng-click="filtersHidden=!filtersHidden"
-                     ng-init="filtersHidden=true">
-                    <span ng-show="filtersHidden">Filtres</span>
-                    <span ng-hide="filtersHidden">Cacher les filtres</span>
-                </div>
-                <div class="archi-map__filters" ng-class="{'archi-map__filters--hidden': filtersHidden}">
-                    <ods-text-search placeholder="Rechercher..."
-                                     context="archi"></ods-text-search>
-
+                             archi-domain="public.opendatasoft.com"
+                             archi-dataset="architecture-remarquable-idf"
+                             archi-parameters="{'refine.publie': 'oui'}">
+            <div class="archi-map__filters-toggle" ng-click="filtersHidden=!filtersHidden" ng-init="filtersHidden=true">
+                <span ng-show="filtersHidden">Filtres</span>
+                <span ng-hide="filtersHidden">Cacher les filtres</span>
+            </div>
+            <div class="archi-map__filters" ng-class="{'archi-map__filters--hidden': filtersHidden}">
+                <ods-text-search placeholder="Rechercher..."
+                                 context="archi"></ods-text-search>
+                <ods-facets context="archi">
                     <div class="archi-map__facet">
                         <h3 class="archi-map__facet-title">
-                            Informations
+                            Visitable ?
                         </h3>
-                        <ods-facets context="archi">
-                            <ods-facet name="keywords" value-search="true"></ods-facet>
-                        </ods-facets>
+                        <ods-facet name="visitable"></ods-facet>
                     </div>
-
-                </div>
-            
-            <div class="archi-map__map">
-                <ods-map basemap="mapbox.high-contrast"
-                         toolbar-fullscreen="false">
-                    <ods-map-layer context="archi"
-                                   show-marker="false"
-                                   picto="dot"
-                                   color="#00EBBE"></ods-map-layer>
-                </ods-map>
+                    <div class="archi-map__facet">
+                        <h3 class="archi-map__facet-title">
+                            Architecte(s)
+                        </h3>
+                        <ods-facet name="architectes"></ods-facet>
+                    </div>
+                </ods-facets>
             </div>
+            <div class="archi-map__map">
+                <ods-map context="archi"
+                         basemap="mapbox.high-contrast"
+                         location="12,48.85387,2.33648"
+                         toolbar-drawing="false"
+                         toolbar-geolocation="false"
+                         toolbar-fullscreen="false"></ods-map>
+            </div>
+        </ods-dataset-context>
+    </div>
+
         </ods-dataset-context>
     </div>
 
@@ -125,7 +135,8 @@
     </script>
 
 
-    <script src="architecturealacarte.js"></script>
+    <script src="architecturealacarte.min.js"></script>
+    <script src="ods-widgets/ods-widgets.min.js"></script>
 
     <script type="text/javascript">
         var ods = angular.module('ods-widgets');
