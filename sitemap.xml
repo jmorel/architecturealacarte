@@ -4,41 +4,34 @@
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
     <url>
         <loc>http://architecturealacarte.fr/</loc>
-        <lastmod>2015-08-23T17:38:12+00:00</lastmod>
     </url>
     <url>
         <loc>http://architecturealacarte.fr/index.html</loc>
-        <lastmod>2015-08-23T17:38:12+00:00</lastmod>
     </url>
     
         
             <url>
                 <loc>http://architecturealacarte.fr/ile-de-france.html</loc>
-                <lastmod>2015-08-26T11:53:21+00:00</lastmod>
             </url>
         
             <url>
                 <loc>http://architecturealacarte.fr/mailto:contact@architecturealacarte.fr</loc>
-                <lastmod>2015-08-26T11:53:21+00:00</lastmod>
             </url>
         
     
         
             <url>
                 <loc>http://architecturealacarte.fr/journees-du-patrimoine-2015.html</loc>
-                <lastmod>2015-08-26T11:53:21+00:00</lastmod>
             </url>
         
             <url>
                 <loc>http://architecturealacarte.fr/journees-du-patrimoine-2016.html</loc>
-                <lastmod>2015-08-26T11:53:21+00:00</lastmod>
             </url>
         
     
         
             <url>
                 <loc>http://architecturealacarte.fr/50-lieux-en-france-a-voir-au-moins-une-fois-dans-sa-vie.html</loc>
-                <lastmod>2015-08-26T11:53:21+00:00</lastmod>
             </url>
         
     
