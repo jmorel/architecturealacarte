@@ -15,15 +15,13 @@
 </head>
 <body>
 
-<div class="archi-non-footer">
-    <div class="archi-header">
-        {% block header %}{% endblock %}
-    </div>
+<header>
+    {% block header %}{% endblock %}
+</header>
 
-    {% block main %}{% endblock %}
-</div>
+{% block main %}{% endblock %}
 
-<div class="archi-footer">
+<footer>
     {% block footer %}
         <p>
             <a href="index.html">Architecture à la carte</a> est un projet de
@@ -45,7 +43,7 @@
             </a>
         </p>
     {% endblock %}
-</div>
+</footer>
 
 {% block scripts %}
     <script>

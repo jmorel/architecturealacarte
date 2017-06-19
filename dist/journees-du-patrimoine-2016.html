@@ -8,54 +8,48 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
+    <link rel="stylesheet" href="ods-widgets/ods-widgets.min.css">
     
         <link rel="stylesheet" href="architecturealacarte.min.css">
         <link rel="stylesheet" href="fonts/ostrich-sans/ostrich-sans.css">
         <link rel="stylesheet" href="fonts/droid-serif/droid-serif.css">
         <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.css">
     
-    <link rel="stylesheet" href="ods-widgets/ods-widgets.min.css">
 
 </head>
 <body>
 
-<div class="archi-non-footer">
-    <div class="archi-header">
-        
-    <a class="archi-header__breadcrumbs" href="index.html">
+<header>
+    
+    <a class="breadcrumbs" href="index.html">
         <i class="fa fa-arrow-circle-o-left"></i>
         Architecture à la carte
     </a>
 
-    <h1 class="archi-header__title">
+    <h1>
         
     Journees du patrimoine 2016
 
     </h1>
 
-    </div>
+</header>
+
 
     
-    
-    <div class="archi-feedback">
-        <p>
-            Cette carte a pu être réalisée grâce au
-            <a href="https://data.opendatasoft.com/explore/dataset/jep_2016_ministculture%40datainfolocale/">jeu de
-                donnée libre et ouvert</a>
-            publié par les <a href="http://journeesdupatrimoine.culturecommunication.gouv.fr">Journées du Patrimoine</a>
-            et retravaillé par
-            <a href="http://datainfolocale.opendatasoft.com/page/home/">Info locale</a>.
-        </p>
-        <p>
-            Des questions, remarques ou suggestions ? <a href="mailto:contact@architecturealacarte.fr">Ecrivez-nous
-            !</a>
-        </p>
-    </div>
+    <p>
+        Cette carte a pu être réalisée grâce au
+        <a href="https://data.opendatasoft.com/explore/dataset/jep_2016_ministculture%40datainfolocale/">jeu de
+            donnée libre et ouvert</a>
+        publié par les <a href="http://journeesdupatrimoine.culturecommunication.gouv.fr">Journées du Patrimoine</a>
+        et retravaillé par
+        <a href="http://datainfolocale.opendatasoft.com/page/home/">Info locale</a>.
+    </p>
 
 
-    <div class="archi-map" ng-app="ods-widgets">
+    <div class="map" ng-app="ods-widgets">
         
             <ods-dataset-context context="archi"
+                                 url-sync="true"
                                  archi-domain="public.opendatasoft.com"
                                  archi-dataset="jep_2016_ministculture%40datainfolocale">
             
@@ -64,11 +58,11 @@
                     <span ng-show="filtersHidden">Filtres</span>
                     <span ng-hide="filtersHidden">Cacher les filtres</span>
                 </div>
-                <div class="archi-map__filters" ng-class="{'archi-map__filters--hidden': filtersHidden}">
+                <div class="filters">
                     <ods-text-search placeholder="Rechercher..."
                                      context="archi"></ods-text-search>
 
-                    <div class="archi-map__facet">
+                    <div class="facet">
                         <h3 class="archi-map__facet-title">
                             Informations
                         </h3>
@@ -79,29 +73,26 @@
 
                 </div>
             
-            <div class="archi-map__map">
-                
-                    <ods-map basemap="mapbox.high-contrast"
-                             location="12,48.85387,2.33648"
-                             toolbar-fullscreen="false"
-                             toolbar-geolocation="false"
-                             toolbar-drawing="false">
-                        
-                            <ods-map-layer context="archi"
-                                           show-marker="false"
-                                           picto="dot"
-                                           color="#00EBBE"></ods-map-layer>
-                        
-                    </ods-map>
-                
-            </div>
+            
+                <ods-map basemap="mapbox.streets"
+                         location="12,48.85387,2.33648"
+                         toolbar-fullscreen="false"
+                         toolbar-geolocation="false"
+                         toolbar-drawing="false">
+                    
+                        <ods-map-layer context="archi"
+                                       show-marker="false"
+                                       picto="dot"
+                                       color="#00EBBE"></ods-map-layer>
+                    
+                </ods-map>
+            
         
         </ods-dataset-context>
     </div>
 
-</div>
 
-<div class="archi-footer">
+<footer>
     
         <p>
             <a href="index.html">Architecture à la carte</a> est un projet de
@@ -123,7 +114,7 @@
             </a>
         </p>
     
-</div>
+</footer>
 
 
     

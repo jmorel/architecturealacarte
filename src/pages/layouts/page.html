@@ -1,17 +1,17 @@
 {% extends 'layouts/base.html' %}
 
 {% block style %}
-    {{ super() }}
     <link rel="stylesheet" href="ods-widgets/ods-widgets.min.css">
+    {{ super() }}
 {% endblock %}
 
 {% block header %}
-    <a class="archi-header__breadcrumbs" href="index.html">
+    <a class="breadcrumbs" href="index.html">
         <i class="fa fa-arrow-circle-o-left"></i>
         Architecture à la carte
     </a>
 
-    <h1 class="archi-header__title">
+    <h1>
         {% block title %}{% endblock %}
     </h1>
 {% endblock %}
@@ -19,9 +19,10 @@
 {% block main %}
     {% block intro %}{% endblock %}
 
-    <div class="archi-map" ng-app="ods-widgets">
+    <div class="map" ng-app="ods-widgets">
         {% block map_context %}
             <ods-dataset-context context="archi"
+                                 url-sync="true"
                                  archi-domain="{% block ods_domain_url %}{% endblock %}"
                                  archi-dataset="{% block ods_dataset_id %}{% endblock %}">
             {% block map_filters %}
@@ -30,11 +31,11 @@
                     <span ng-show="filtersHidden">Filtres</span>
                     <span ng-hide="filtersHidden">Cacher les filtres</span>
                 </div>
-                <div class="archi-map__filters" ng-class="{'archi-map__filters--hidden': filtersHidden}">
+                <div class="filters">
                     <ods-text-search placeholder="Rechercher..."
                                      context="archi"></ods-text-search>
 
-                    <div class="archi-map__facet">
+                    <div class="facet">
                         <h3 class="archi-map__facet-title">
                             Informations
                         </h3>
@@ -45,22 +46,20 @@
 
                 </div>
             {% endblock %}
-            <div class="archi-map__map">
-                {% block map %}
-                    <ods-map basemap="mapbox.high-contrast"
-                             location="{% block map_location %}12,48.85387,2.33648{% endblock %}"
-                             toolbar-fullscreen="false"
-                             toolbar-geolocation="false"
-                             toolbar-drawing="false">
-                        {% block map_layer %}
-                            <ods-map-layer context="archi"
-                                           show-marker="false"
-                                           picto="dot"
-                                           color="#00EBBE">{% block map_tooltip %}{% endblock %}</ods-map-layer>
-                        {% endblock %}
-                    </ods-map>
-                {% endblock %}
-            </div>
+            {% block map %}
+                <ods-map basemap="mapbox.streets"
+                         location="{% block map_location %}12,48.85387,2.33648{% endblock %}"
+                         toolbar-fullscreen="false"
+                         toolbar-geolocation="false"
+                         toolbar-drawing="false">
+                    {% block map_layer %}
+                        <ods-map-layer context="archi"
+                                       show-marker="false"
+                                       picto="dot"
+                                       color="#00EBBE">{% block map_tooltip %}{% endblock %}</ods-map-layer>
+                    {% endblock %}
+                </ods-map>
+            {% endblock %}
         {% endblock %}
         </ods-dataset-context>
     </div>

@@ -1,19 +1,11 @@
-.archi-non-footer {
-    background-color: @color-primary;
-    margin: 0;
-    padding: 0;
+footer {
+    font-size: 1rem;
+    font-style: italic;
+    padding: @spacing;
+    background-color: @color-primary-dark;
+    color: @color-primary-darker;
 }
 
-.archi-footer {
-    font-size: 0.8rem;
-    font-style: italic;
-    @media (max-width: @screen-small-max) {
-        padding: 1rem 2rem;
-    }
-    @media (min-width: @screen-medium-min) and (max-width: @screen-medium-max) {
-        padding: 1.67rem 2.33rem;
-    }
-    @media (min-width: @screen-large-min) {
-        padding: 3em 4rem;
-    }
+footer a {
+    color: @color-white;
 }

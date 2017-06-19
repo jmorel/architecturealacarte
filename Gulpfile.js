@@ -26,7 +26,7 @@ var sections = [
         ]
     },
     {
-        name: '',
+        name: 'Autre',
         pages: [
             {
                 url: '50-lieux-en-france-a-voir-au-moins-une-fois-dans-sa-vie.html',

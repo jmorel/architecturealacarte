@@ -3,19 +3,11 @@
 * {
     box-sizing: border-box;
 }
+
 html {
     width: 100%;
     height: 100%;
-
-    @media (max-width: @screen-small-max) {
-        font-size: @font-baseSize-small;
-    }
-    @media (min-width: @screen-medium-min) and (max-width: @screen-medium-max) {
-        font-size: @font-baseSize-medium;
-    }
-    @media (min-width: @screen-large-min) {
-        font-size: @font-baseSize-large;
-    }
+    font-size: 18px;
 }
 
 body {
@@ -24,18 +16,30 @@ body {
     position: relative;
     width: 100%;
     height: 100%;
-    background-color: @color-grey;
-    color: @color-white;
+    background-color: @color-primary;
+    color: @color-primary-darker;
     font-family: @font-family-serif;
+    font-size: ~"calc(1rem + 0.5vw)";
+    line-height: 1.5;
+}
+
+main {
+    padding: @spacing;
 }
 
 a {
-    color: inherit;
+    color: @color-white;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
 }
 
 p {
     margin: 0 0 1em 0;
 }
+
 p:last-child {
     margin: 0;
 }

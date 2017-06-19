@@ -7,55 +7,54 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
+    <link rel="stylesheet" href="ods-widgets/ods-widgets.min.css">
     
         <link rel="stylesheet" href="architecturealacarte.min.css">
         <link rel="stylesheet" href="fonts/ostrich-sans/ostrich-sans.css">
         <link rel="stylesheet" href="fonts/droid-serif/droid-serif.css">
         <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.css">
     
-    <link rel="stylesheet" href="ods-widgets/ods-widgets.min.css">
 
 </head>
 <body>
 
-<div class="archi-non-footer">
-    <div class="archi-header">
-        
-    <a class="archi-header__breadcrumbs" href="index.html">
+<header>
+    
+    <a class="breadcrumbs" href="index.html">
         <i class="fa fa-arrow-circle-o-left"></i>
         Architecture à la carte
     </a>
 
-    <h1 class="archi-header__title">
+    <h1>
         
     Les 50 lieux en France a voir au moins une fois dans sa vie
 
     </h1>
 
-    </div>
+</header>
 
-    
+
     
     <div class="archi-feedback">
-        Des questions, remarques ou suggestions ? <a href="mailto:contact@architecturealacarte.fr">Ecrivez-nous
-        !</a>
+        Cette sélection a été composée par les revues <a href="#">AD</a> et <a href="#">Vanity Fair</a> en supplément de
+        leurs numéros de juin 2017.
     </div>
 
 
-    <div class="archi-map" ng-app="ods-widgets">
+    <div class="map" ng-app="ods-widgets">
         
             <ods-dataset-context context="archi"
+                                 url-sync="true"
                                  archi-domain="jmorel.opendatasoft.com"
                                  archi-dataset="50-lieux-en-france-a-voir-au-moins-une-fois-dans-sa-vie">
             
-            <div class="archi-map__map">
-                
-                    <ods-map basemap="mapbox.high-contrast"
-                             location="12,48.85387,2.33648"
-                             toolbar-fullscreen="false"
-                             toolbar-geolocation="false"
-                             toolbar-drawing="false">
-                        
+            
+                <ods-map basemap="mapbox.streets"
+                         location="12,48.85387,2.33648"
+                         toolbar-fullscreen="false"
+                         toolbar-geolocation="false"
+                         toolbar-drawing="false">
+                    
     <ods-map-layer context="archi"
                    color-categories="{'Architecture':'#00EBBE','Lifestyle':'#619FC8','Art':'#F7C87E','Jardins et sites':'#CB516D','Patrimoine':'#F7AD84'}"
                    color-by-field="categorie"
@@ -73,16 +72,14 @@
                    title="50 lieux en France à voir au moins une fois dans sa vie"
                    description="Ce guide des 50 lieux en France à voir au moins une fois dans sa vie a été écrit par les revues AD et Vanity Fair pour leurs numéro de juin 2017."></ods-map-layer>
 
-                    </ods-map>
-                
-            </div>
+                </ods-map>
+            
         
         </ods-dataset-context>
     </div>
 
-</div>
 
-<div class="archi-footer">
+<footer>
     
         <p>
             <a href="index.html">Architecture à la carte</a> est un projet de
@@ -104,7 +101,7 @@
             </a>
         </p>
     
-</div>
+</footer>
 
 
     

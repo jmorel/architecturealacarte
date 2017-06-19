@@ -1,95 +1,55 @@
 @import "variables";
-.archi-header {
-    @media (max-width: @screen-small-max) {
-        margin: 0 2rem 0 0;
-        padding: 1rem 0;
-        border-bottom: 0.67rem solid @color-white;
 
-    }
-    @media (min-width: @screen-medium-min) and (max-width: @screen-medium-max) {
-        margin: 0 2.33rem 0 0;
-        padding: 1.67rem 0;
-        border-bottom: 0.67rem solid @color-white;
-
-    }
-    @media (min-width: @screen-large-min) {
-        margin: 0 4rem 0 0;
-        padding: 3rem 0 2rem 0;
-        border-bottom: 0.67rem solid @color-white;
-    }
+header {
+    padding: @spacing;
+    position: relative;
 }
 
-.archi-header__breadcrumbs {
+header:after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    right: @spacing;
+    background-color: @color-white;
+    bottom: ~"calc((-0.5rem - 1vw)/2)";
+    height: ~"calc(0.5rem + 1vw)";
+}
+
+.breadcrumbs {
     font-family: @font-family-serif;
     font-style: italic;
     text-decoration: none;
     display: block;
-    @media (max-width: @screen-small-max) {
-        font-size: 1.33rem;
-        margin: 0 0 1rem 2rem;
-    }
-    @media (min-width: @screen-medium-min) and (max-width: @screen-medium-max) {
-        font-size: 1.33rem;
-        margin: 0 0 1.67rem 2.33rem;
-    }
-    @media (min-width: @screen-large-min) {
-        font-size: 1.67rem;
-        margin: 0 0 2rem 4rem;
-    }
+    font-size: ~"calc(1rem + 1vw)";
+    margin: 0 0 @spacing/2 0;
+    color: @color-primary-darker;
 }
 
-.archi-header__breadcrumbs:hover {
+.breadcrumbs:hover {
     text-decoration: underline;
 }
 
-.archi-header__title {
+h1 {
     font-family: @font-family-slab;
     font-style: italic;
-    @media (max-width: @screen-small-max) {
-        font-size: 2.67rem;
-        margin: 0 0 0 2rem;
-    }
-    @media (min-width: @screen-medium-min) and (max-width: @screen-medium-max) {
-        font-size: 3rem;
-        margin: 0 0 0 2.33rem;
-    }
-    @media (min-width: @screen-large-min) {
-        font-size: 4rem;
-        margin: 0 0 0 4rem;
-    }
+    font-size: ~"calc(1rem + 5vw)";
+    line-height: 1.2;
+    margin: 0;
+    color: @color-white;
 }
 
-.archi-header__subtitle {
+h2 {
     font-weight: 400;
     font-style: italic;
     line-height: 1em;
-    @media (max-width: @screen-small-max) {
-        font-size: 1.33rem;
-        margin: 1rem 0 0 2rem;
-    }
-    @media (min-width: @screen-medium-min) and (max-width: @screen-medium-max) {
-        font-size: 1.33rem;
-        margin: 1rem 0 0 2.33rem
-
-    }
-    @media (min-width: @screen-large-min) {
-        font-size: 1.67rem;
-        margin: 0 0 0 4rem;
-    }
+    font-size: ~"calc(1rem + 1vw)";
+    margin: 0;
 }
 
-.archi-header__century {
+h1 sup {
     vertical-align: text-top;
-    @media (max-width: @screen-small-max) {
-        font-size: 1rem;
-        margin-left: 0.33rem;
-    }
-    @media (min-width: @screen-medium-min) and (max-width: @screen-medium-max) {
-        font-size: 1.33rem;
-        margin-left: 0.67rem;
-    }
-    @media (min-width: @screen-large-min) {
-        font-size: 3rem;
-        margin-left: 1rem;
-    }
+    font-size: ~"calc(0.33rem + 0.33vw)";
+    margin-left: 1rem;
+    color: @color-white;
 }

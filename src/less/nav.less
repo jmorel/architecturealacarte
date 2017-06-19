@@ -1,0 +1,50 @@
+@import "variables";
+
+nav {
+    position: relative;
+    padding: @spacing;
+}
+
+nav:after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: @spacing;
+    right: 0;
+    background-color: @color-white;
+    bottom: ~"calc((-0.5rem - 1vw)/2)";
+    height: ~"calc(0.5rem + 1vw)";
+}
+
+.nav-sections {
+    display: flex;
+}
+
+.nav-section {
+    flex-basis: 0;
+    flex-grow: 1;
+}
+
+.nav-section:not(:last-child) {
+    margin-right: @spacing/2;
+}
+
+nav h3 {
+    font-family: @font-family-slab;
+    font-style: italic;
+    margin: 0;
+    font-size: ~"calc(1rem + 2vw)";
+    line-height: 1.2;
+    color: @color-white;
+}
+
+nav ul {
+    margin: 0;
+    list-style: none;
+    font-style: italic;
+    padding: 0;
+}
+
+nav a {
+    color: @color-primary-darker;
+}
