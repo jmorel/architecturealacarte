@@ -8,96 +8,95 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
+    <link rel="stylesheet" href="ods-widgets/ods-widgets.min.css">
     
         <link rel="stylesheet" href="architecturealacarte.min.css">
         <link rel="stylesheet" href="fonts/ostrich-sans/ostrich-sans.css">
         <link rel="stylesheet" href="fonts/droid-serif/droid-serif.css">
         <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.css">
     
-    <link rel="stylesheet" href="ods-widgets/ods-widgets.min.css">
 
 </head>
 <body>
 
-<div class="archi-non-footer">
-    <div class="archi-header">
-        
-    <a class="archi-header__breadcrumbs" href="index.html">
+<header>
+    
+    <a class="breadcrumbs" href="index.html">
         <i class="fa fa-arrow-circle-o-left"></i>
         Architecture à la carte
     </a>
 
-    <h1 class="archi-header__title">
+    <h1>
         
     Journees du patrimoine 2015
 
     </h1>
 
-    </div>
+</header>
+
 
     
-    
-    <div class="archi-feedback">
+    <main>
         <p>
             Cette carte a pu être réalisée grâce au
             <a href="http://public.opendatasoft.com/explore/dataset/jep2015/">jeu de donnée libre et ouvert</a>
             publié par les <a href="http://journeesdupatrimoine.culturecommunication.gouv.fr">Journées du Patrimoine</a>.
         </p>
-        <p>
-            Des questions, remarques ou suggestions ? <a href="mailto:contact@architecturealacarte.fr">Ecrivez-nous
-            !</a>
-        </p>
-    </div>
+    </main>
 
 
-    <div class="archi-map" ng-app="ods-widgets">
+    <div class="map" ng-app="ods-widgets">
         
             <ods-dataset-context context="archi"
+                                 url-sync="true"
                                  archi-domain="public.opendatasoft.com"
                                  archi-dataset="jep2015">
             
-    <div class="archi-map__filters-toggle" ng-click="filtersHidden=!filtersHidden" ng-init="filtersHidden=true">
-        <span ng-show="filtersHidden">Filtres</span>
-        <span ng-hide="filtersHidden">Cacher les filtres</span>
-    </div>
-    <div class="archi-map__filters" ng-class="{'archi-map__filters--hidden': filtersHidden}">
+    <div class="filters">
         <ods-text-search placeholder="Rechercher..."
                          context="archi"></ods-text-search>
 
-        <div class="archi-map__facet">
-            <h3 class="archi-map__facet-title">
-                Informations
-            </h3>
-            <ods-facets context="archi">
-                <ods-facet name="keywords" value-search="true"></ods-facet>
-            </ods-facets>
+        <div class="tags"
+             ods-facet-results="items"
+             ods-facet-results-context="archi"
+             ods-facet-results-facet-name="keywords"
+             ng-init="seeAll = false">
+            <div class="tag"
+                 ng-class="{'tag--active': archi.parameters['refine.keywords'] && archi.parameters['refine.keywords'].indexOf(item.name) > -1}"
+                 ng-repeat="item in items"
+                 ng-show="$index < 10 || seeAll"
+                 ng-click="archi.toggleRefine('keywords', item.name)">
+                <span ng-bind="item.name" class="tag-value"></span>
+                <span ng-bind="item.count" class="tag-count"></span>
+            </div>
+            <button class="more-tags"
+                    ng-click="seeAll = !seeAll;">
+                <span ng-show="seeAll">Voir moins de catégories</span>
+                <span ng-hide="seeAll">Voir plus de catégories</span>
+            </button>
         </div>
-
     </div>
 
-            <div class="archi-map__map">
-                
-                    <ods-map basemap="mapbox.high-contrast"
-                             location="12,48.85387,2.33648"
-                             toolbar-fullscreen="false"
-                             toolbar-geolocation="false"
-                             toolbar-drawing="false">
-                        
-                            <ods-map-layer context="archi"
-                                           show-marker="false"
-                                           picto="dot"
-                                           color="#00EBBE"></ods-map-layer>
-                        
-                    </ods-map>
-                
-            </div>
+            
+                <ods-map basemap="mapbox.streets"
+                         location="12,48.85387,2.33648"
+                         toolbar-fullscreen="false"
+                         toolbar-geolocation="false"
+                         toolbar-drawing="false">
+                    
+                        <ods-map-layer context="archi"
+                                       show-marker="false"
+                                       picto="dot"
+                                       color="#00EBBE"></ods-map-layer>
+                    
+                </ods-map>
+            
         
         </ods-dataset-context>
     </div>
 
-</div>
 
-<div class="archi-footer">
+<footer>
     
         <p>
             <a href="index.html">Architecture à la carte</a> est un projet de
@@ -119,7 +118,7 @@
             </a>
         </p>
     
-</div>
+</footer>
 
 
     
