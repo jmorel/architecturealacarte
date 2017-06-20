@@ -91,15 +91,20 @@ gulp.task('ods-widgets', function () {
         .pipe(gulp.dest('./dist/ods-widgets/'))
 });
 
+gulp.task('misc', function () {
+    return gulp.src('./src/CNAME')
+        .pipe(gulp.dest('./dist/'))
+});
+
 gulp.task('deploy', function () {
-    git.exec({args: 'subtree push --prefix dist origin gh-pages'}, function (err, stdout) {
+    git.exec({args: 'push origin `git subtree split --prefix dist master`:gh-pages --force'}, function (err, stdout) {
         if (err) {
             throw err;
         }
     });
 });
 
-gulp.task('build', ['less', 'html', 'sitemap', 'js', 'fonts', 'ods-widgets']);
+gulp.task('build', ['less', 'html', 'sitemap', 'js', 'fonts', 'ods-widgets', 'misc']);
 gulp.task('default', ['build']);
 
 gulp.task('watch', function () {
