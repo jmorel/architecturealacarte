@@ -48,9 +48,10 @@
     <div class="map" ng-app="ods-widgets">
         
             <ods-dataset-context context="archi"
-                                 url-sync="true"
+                                 archi-urlsync="true"
                                  archi-domain="public.opendatasoft.com"
-                                 archi-dataset="jep2015">
+                                 archi-dataset="jep2015"
+                                 archi-parameters="">
             
     <div class="filters">
         <ods-text-search placeholder="Rechercher..."
@@ -148,10 +149,10 @@
         ods.config(function (ODSWidgetsConfigProvider, ModuleLazyLoaderProvider) {
             ODSWidgetsConfigProvider.setConfig({
                 basemaps: [{
-                    "provider": "mapbox.high-contrast",
+                    "provider": "mapbox.streets",
                     "mapbox_access_token": "pk.eyJ1IjoiamVyZW15bW9yZWwiLCJhIjoiZmZjZGMxNzUwZTJjYmQ5YmIwYjAzOTFjYWNlY2ExYTAifQ.wEKnZyKpqqSzWew8QEzCtg",
-                    "id": "mapbox.high-contrast",
-                    "label": "MapQuest"
+                    "id": "mapbox.streets",
+                    "label": "mapbox.streets"
                 }]
             })
         });

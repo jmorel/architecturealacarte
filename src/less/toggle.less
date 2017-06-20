@@ -1,0 +1,39 @@
+@import "variables";
+
+.toggle {
+    width: 100%;
+    display: flex;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    align-items: baseline;
+}
+
+.toggle-title {
+    margin-right: 0.33rem;
+}
+
+.toggle button {
+    font-size: 1rem;
+    padding: 0.33rem 0.67rem;
+    border: 1px solid @color-primary-darker;
+    cursor: pointer;
+    background: none;
+    border-right: none;
+    color: @color-primary-darker;
+}
+
+.toggle button.active,
+.toggle button:hover {
+    background-color: @color-white;
+}
+
+.toggle button:first-of-type {
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+}
+
+.toggle button:last-of-type {
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    border-right: 1px solid @color-primary-darker;
+}

@@ -10,52 +10,43 @@
 {% endblock %}
 
 {% block intro %}
-    <p>
-        Cette carte a pu être réalisée grâce au
-        <a href="https://data.opendatasoft.com/explore/dataset/jep_2016_ministculture%40datainfolocale/">jeu de
-            donnée libre et ouvert</a>
-        publié par les <a href="http://journeesdupatrimoine.culturecommunication.gouv.fr">Journées du Patrimoine</a>
-        et retravaillé par
-        <a href="http://datainfolocale.opendatasoft.com/page/home/">Info locale</a>.
-    </p>
+    <main>
+        <p>
+            Cette carte a pu être réalisée grâce au
+            <a href="https://data.opendatasoft.com/explore/dataset/jep_2016_ministculture%40datainfolocale/">jeu de donnée libre et ouvert</a>
+            publié par les <a href="http://journeesdupatrimoine.culturecommunication.gouv.fr">Journées du Patrimoine</a>
+            et retravaillé par <a href="http://datainfolocale.opendatasoft.com/page/home/">Info locale</a>.
+        </p>
+    </main>
 {% endblock %}
 
 {% block ods_domain_url %}public.opendatasoft.com{% endblock %}
 {% block ods_dataset_id %}jep_2016_ministculture%40datainfolocale{% endblock %}
 
-{% block content %}
-    <div class="archi-map" ng-app="ods-widgets">
-        <ods-dataset-context context="archi"
-                             archi-domain=""
-                             archi-dataset="">
-            <div class="archi-map__filters-toggle" ng-click="filtersHidden=!filtersHidden" ng-init="filtersHidden=true">
-                <span ng-show="filtersHidden">Filtres</span>
-                <span ng-hide="filtersHidden">Cacher les filtres</span>
-            </div>
-            <div class="archi-map__filters" ng-class="{'archi-map__filters--hidden': filtersHidden}">
-                <ods-text-search placeholder="Rechercher..."
-                                 context="archi"></ods-text-search>
+{% block map_filters %}
+    <div class="filters">
+        <ods-text-search placeholder="Rechercher..."
+                         context="archi"></ods-text-search>
 
-                <div class="archi-map__facet">
-                    <h3 class="archi-map__facet-title">
-                        Informations
-                    </h3>
-                    <ods-facets context="archi">
-                        <ods-facet name="type_d_evenement" value-search="true"></ods-facet>
-                    </ods-facets>
-                </div>
-
+        <div class="tags"
+             ods-facet-results="items"
+             ods-facet-results-context="archi"
+             ods-facet-results-facet-name="type_d_evenement"
+             ng-init="seeAll = false">
+            <div class="tag"
+                 ng-class="{'tag--active': archi.parameters['refine.type_d_evenement'] && archi.parameters['refine.type_d_evenement'].indexOf(item.name) > -1}"
+                 ng-repeat="item in items"
+                 ng-show="$index < 10 || seeAll"
+                 ng-click="archi.toggleRefine('type_d_evenement', item.name)">
+                <span ng-bind="item.name" class="tag-value"></span>
+                <span ng-bind="item.count" class="tag-count"></span>
             </div>
-            <div class="archi-map__map">
-                <ods-map basemap="mapbox.high-contrast"
-                         toolbar-fullscreen="false">
-                    <ods-map-layer context="archi"
-                                   show-marker="false"
-                                   picto="dot"
-                                   color="#00EBBE"></ods-map-layer>
-                </ods-map>
-            </div>
-        </ods-dataset-context>
+            <button class="more-tags"
+                    ng-click="seeAll = !seeAll;">
+                <span ng-show="seeAll">Voir moins de catégories</span>
+                <span ng-hide="seeAll">Voir plus de catégories</span>
+            </button>
+        </div>
     </div>
 {% endblock %}
 

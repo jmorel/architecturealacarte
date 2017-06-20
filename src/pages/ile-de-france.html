@@ -10,42 +10,50 @@
     Architecture remarquable des XX<sup>eme</sup> et XXI<sup>eme</sup> siecles en Ile de France
 {% endblock %}
 
-{% block map_context %}
-    <div class="archi-map" ng-app="ods-widgets">
-        <ods-dataset-context context="archi"
-                             archi-domain="public.opendatasoft.com"
-                             archi-dataset="architecture-remarquable-idf"
-                             archi-parameters="{'refine.publie': 'oui'}">
-            <div class="archi-map__filters-toggle" ng-click="filtersHidden=!filtersHidden" ng-init="filtersHidden=true">
-                <span ng-show="filtersHidden">Filtres</span>
-                <span ng-hide="filtersHidden">Cacher les filtres</span>
+{% block ods_domain_url %}public.opendatasoft.com{% endblock %}
+{% block ods_dataset_id %}architecture-remarquable-idf{% endblock %}
+{% block ods_context_parameters %}{'refine.publie': 'oui'}{% endblock %}
+
+{% block map_filters %}
+    <div class="filters">
+        <ods-text-search placeholder="Rechercher..."
+                         context="archi"></ods-text-search>
+
+        <div class="toggle">
+            <span class="toggle-title">Visitable ?</span>
+            <button ng-click="archi.parameters['refine.visitable'] = 'Oui'"
+                    ng-class="{'active': archi.parameters['refine.visitable'] == 'Oui'}">
+                Oui
+            </button>
+            <button ng-click="archi.parameters['refine.visitable'] = 'Non'"
+                    ng-class="{'active': archi.parameters['refine.visitable'] == 'Non'}">
+                Non
+            </button>
+            <button ng-click="archi.parameters['refine.visitable'] = null"
+                    ng-class="{'active': !archi.parameters['refine.visitable']}">
+                Peu importe
+            </button>
+        </div>
+
+        <div class="tags"
+             ods-facet-results="items"
+             ods-facet-results-context="archi"
+             ods-facet-results-facet-name="architectes"
+             ng-init="seeAll = false">
+            <div class="tag"
+                 ng-class="{'tag--active': archi.parameters['refine.architectes'] && archi.parameters['refine.architectes'].indexOf(item.name) > -1}"
+                 ng-repeat="item in items"
+                 ng-show="$index < 10 || seeAll"
+                 ng-click="archi.toggleRefine('architectes', item.name)">
+                <span ng-bind="item.name" class="tag-value"></span>
+                <span ng-bind="item.count" class="tag-count"></span>
             </div>
-            <div class="archi-map__filters" ng-class="{'archi-map__filters--hidden': filtersHidden}">
-                <ods-text-search placeholder="Rechercher..."
-                                 context="archi"></ods-text-search>
-                <ods-facets context="archi">
-                    <div class="archi-map__facet">
-                        <h3 class="archi-map__facet-title">
-                            Visitable ?
-                        </h3>
-                        <ods-facet name="visitable"></ods-facet>
-                    </div>
-                    <div class="archi-map__facet">
-                        <h3 class="archi-map__facet-title">
-                            Architecte(s)
-                        </h3>
-                        <ods-facet name="architectes"></ods-facet>
-                    </div>
-                </ods-facets>
-            </div>
-            <div class="archi-map__map">
-                <ods-map context="archi"
-                         basemap="mapbox.high-contrast"
-                         location="12,48.85387,2.33648"
-                         toolbar-drawing="false"
-                         toolbar-geolocation="false"
-                         toolbar-fullscreen="false"></ods-map>
-            </div>
-        </ods-dataset-context>
+            <button class="more-tags"
+                    ng-show="items.length"
+                    ng-click="seeAll = !seeAll;">
+                <span ng-show="seeAll">Voir moins d'architectes</span>
+                <span ng-hide="seeAll">Voir plus d'architectes</span>
+            </button>
+        </div>
     </div>
 {% endblock %}

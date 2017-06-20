@@ -22,9 +22,10 @@
     <div class="map" ng-app="ods-widgets">
         {% block map_context %}
             <ods-dataset-context context="archi"
-                                 url-sync="true"
+                                 archi-urlsync="true"
                                  archi-domain="{% block ods_domain_url %}{% endblock %}"
-                                 archi-dataset="{% block ods_dataset_id %}{% endblock %}">
+                                 archi-dataset="{% block ods_dataset_id %}{% endblock %}"
+                                 archi-parameters="{% block ods_context_parameters %}{% endblock %}">
             {% block map_filters %}
                 <div class="archi-map__filters-toggle" ng-click="filtersHidden=!filtersHidden"
                      ng-init="filtersHidden=true">
@@ -76,10 +77,10 @@
         ods.config(function (ODSWidgetsConfigProvider, ModuleLazyLoaderProvider) {
             ODSWidgetsConfigProvider.setConfig({
                 basemaps: [{
-                    "provider": "mapbox.high-contrast",
+                    "provider": "mapbox.streets",
                     "mapbox_access_token": "pk.eyJ1IjoiamVyZW15bW9yZWwiLCJhIjoiZmZjZGMxNzUwZTJjYmQ5YmIwYjAzOTFjYWNlY2ExYTAifQ.wEKnZyKpqqSzWew8QEzCtg",
-                    "id": "mapbox.high-contrast",
-                    "label": "MapQuest"
+                    "id": "mapbox.streets",
+                    "label": "mapbox.streets"
                 }]
             })
         });
