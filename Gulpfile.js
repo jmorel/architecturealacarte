@@ -92,8 +92,12 @@ gulp.task('ods-widgets', function () {
 });
 
 gulp.task('misc', function () {
-    return gulp.src('./src/CNAME')
-        .pipe(gulp.dest('./dist/'))
+    return [
+        gulp.src('./src/CNAME')
+            .pipe(gulp.dest('./dist/')),
+        gulp.src('./src/img/**/*')
+            .pipe(gulp.dest('./dist/img/'))
+    ]
 });
 
 gulp.task('deploy', function () {
