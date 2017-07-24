@@ -38,6 +38,8 @@
     </div>
 {% endblock %}
 
+{% block map_location %}6,46.36967,2.71362{% endblock %}
+
 {% block map_layer %}
     <ods-map-layer context="archi"
                    color-categories="{'Architecture':'#00EBBE','Lifestyle':'#619FC8','Art':'#F7C87E','Jardins et sites':'#CB516D','Patrimoine':'#F7AD84'}"
@@ -54,5 +56,26 @@
                    border-pattern="solid"
                    caption="false"
                    title="50 lieux en France à voir au moins une fois dans sa vie"
-                   description="Ce guide des 50 lieux en France à voir au moins une fois dans sa vie a été écrit par les revues AD et Vanity Fair pour leurs numéro de juin 2017."></ods-map-layer>
+                   description="Ce guide des 50 lieux en France à voir au moins une fois dans sa vie a été écrit par les revues AD et Vanity Fair pour leurs numéro de juin 2017.">
+        {% verbatim %}
+            <div style="text-align: center">
+                <h2>
+                    {{ record.fields.nom }}
+                </h2>
+                <p style="font-style:italic">
+                    {{ record.fields.description }}
+                </p>
+                <p ng-if="record.fields.image.filename">
+                    <ods-record-image context="archi"
+                                      field="image"
+                                      record="record"
+                    domain-url="https://jmorel.opendatasoft.com"></ods-record-image>
+                </p>
+                <p>
+                    {{ record.fields.adresse }} <br/>
+                    {{ record.fields.code_postal }} {{ record.fields.ville }}
+                </p>
+            </div>
+        {% endverbatim %}
+    </ods-map-layer>
 {% endblock %}
