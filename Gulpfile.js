@@ -31,6 +31,10 @@ var sections = [
             {
                 url: '50-lieux-en-france-a-voir-au-moins-une-fois-dans-sa-vie.html',
                 name: 'Les 50 lieux en France à voir au moins une fois dans sa vie'
+            },
+            {
+                url: 'ete-archi.html',
+                name: 'L\'été archi de David Abittan'
             }
         ]
     }

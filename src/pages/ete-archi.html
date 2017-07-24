@@ -1,0 +1,68 @@
+{% extends 'layouts/page.html' %}
+
+{% block page_title %}50 lieux en France à voir au moins une fois dans sa vie{% endblock %}
+
+{% block title %}
+    L'ete archi de David Abittan
+{% endblock %}
+
+{% block intro %}
+    <div class="archi-feedback">
+        Durant l’été, <a href="https://twitter.com/david_abittan">David Abittan<sup><i class="fa fa-twitter"></i></sup></a>
+        nous emmène chaque semaine sur <a href="https://www.franceinter.fr/emissions/l-ete-archi">France Inter</a> à la
+        découverte de toutes les époques de l’architecture de France.
+    </div>
+{% endblock %}
+
+{% block ods_domain_url %}jmorel.opendatasoft.com{% endblock %}
+{% block ods_dataset_id %}ete-archi{% endblock %}
+
+{% block map_filters %}
+    <div class="filters">
+        <ods-text-search placeholder="Rechercher..."
+                         context="archi"></ods-text-search>
+    </div>
+{% endblock %}
+
+{% block map_location %}6,46.36967,2.71362{% endblock %}
+
+{% block map_layer %}
+    <ods-map-layer context="archi"
+                   picto="dot"
+                   show-marker="false"
+                   shape-opacity="0.5"
+                   point-opacity="1"
+                   border-color="#FFFFFF"
+                   border-opacity="1"
+                   border-size="1"
+                   border-pattern="solid"
+                   caption="false"
+                   title="L'été archi de David Abittan"
+                   description="Durant l’été, David Abittan nous emmène chaque semaine à la découverte de toutes les époques de l’architecture de France.">
+        {% verbatim %}
+            <h2 style="text-align: left; font-style: normal">
+                {{ record.fields.titre }}
+            </h2>
+            <p>
+
+                <ods-record-image context="archi"
+                                  field="image"
+                                  record="record"
+                                  domain-url="https://jmorel.opendatasoft.com"></ods-record-image>
+                <br>
+                <span style="font-style: italic">{{ record.fields.credits_image }}</span>
+            </p>
+            <p>
+                <a href="{{ record.fields.page_web }}">Episode du {{ record.fields.date }}</a>
+            </p>
+            <p>
+                {{ record.fields.description }}
+            </p>
+            <p>
+                <a href="{{ record.fields.podcast }}" target="_blank">
+                    <i class="fa fa-play-circle"></i> Ecouter l'épisode
+                </a>
+            </p>
+        {% endverbatim %}
+    </ods-map-layer>
+{% endblock %}
