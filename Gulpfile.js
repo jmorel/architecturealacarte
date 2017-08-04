@@ -35,6 +35,10 @@ var sections = [
             {
                 url: 'ete-archi.html',
                 name: 'L\'été archi de David Abittan'
+            },
+            {
+                url: 'genie-des-lieux.html',
+                name: 'Le Génie des lieux'
             }
         ]
     }
