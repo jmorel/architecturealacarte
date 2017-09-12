@@ -19,7 +19,7 @@
 {% block main %}
     {% block intro %}{% endblock %}
 
-    <div class="map" ng-app="ods-widgets">
+    <div class="map ng-cloak" ng-app="ods-widgets">
         {% block map_context %}
             <ods-dataset-context context="archi"
                                  archi-urlsync="true"
