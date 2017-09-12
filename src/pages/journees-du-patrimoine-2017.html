@@ -1,0 +1,66 @@
+{% extends 'layouts/page.html' %}
+
+{% block page_title %}Journées du patrimoine 2016{% endblock %}
+{% block page_description %}Une carte interactive des visites possibles durant les journées du patrimoine
+    2016.{% endblock %}
+{% block page_keywords %}architecture, france, journées du patrimoine, visite{% endblock %}
+
+{% block title %}
+    Journees du patrimoine 2016
+{% endblock %}
+
+{% block intro %}
+    <main>
+        <p>
+            Cette carte a pu être réalisée grâce au
+            <a href="https://data.opendatasoft.com/explore/dataset/jep_2016_ministculture%40datainfolocale/">jeu de
+                donnée libre et ouvert</a>
+            publié par les <a href="http://journeesdupatrimoine.culturecommunication.gouv.fr">Journées du Patrimoine</a>.
+        </p>
+    </main>
+{% endblock %}
+
+{% block ods_domain_url %}data.culturecommunication.gouv.fr{% endblock %}
+{% block ods_dataset_id %}journees-du-patrimoine-2017{% endblock %}
+
+{% block map_filters %}
+    <div class="filters">
+        <ods-text-search placeholder="Rechercher..."
+                         context="archi"></ods-text-search>
+
+        <div class="tags"
+             ods-facet-results="items"
+             ods-facet-results-context="archi"
+             ods-facet-results-facet-name="type_d_evenement"
+             ng-init="seeAll = false">
+            <div class="tag"
+                 ng-class="{'tag--active': archi.parameters['refine.type_d_evenement'] && archi.parameters['refine.type_d_evenement'].indexOf(item.name) > -1}"
+                 ng-repeat="item in items"
+                 ng-show="$index < 10 || seeAll"
+                 ng-click="archi.toggleRefine('type_d_evenement', item.name)">
+                <span ng-bind="item.name" class="tag-value"></span>
+                <span ng-bind="item.count" class="tag-count"></span>
+            </div>
+            <button class="more-tags"
+                    ng-click="seeAll = !seeAll;">
+                <span ng-show="seeAll">Voir moins de catégories</span>
+                <span ng-hide="seeAll">Voir plus de catégories</span>
+            </button>
+        </div>
+    </div>
+{% endblock %}
+
+{% block map_location %}6,46.91275,3.21899{% endblock %}
+
+{% block map_tooltip %}
+    {% verbatim %}
+    <h2>{{ record.fields.titre_fr }}</h2>
+    <p>{{ record.fields.description_fr }}</p>
+    <ul>
+        <li>{{ record.fields.detail_des_conditions_fr }}</li>
+        <li>{{ record.fields.resume_horaires_fr }}</li>
+    </ul>
+    <a ng-href="{{ record.fields.lien }}">Voir l'événement</a>
+    {% endverbatim %}
+{% endblock %}
+

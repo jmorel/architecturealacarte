@@ -22,7 +22,8 @@ var sections = [
         name: "Journees du patrimoine",
         pages: [
             {url: 'journees-du-patrimoine-2015.html', name: 'Edition 2015'},
-            {url: 'journees-du-patrimoine-2016.html', name: 'Edition 2016'}
+            {url: 'journees-du-patrimoine-2016.html', name: 'Edition 2016'},
+            {url: 'journees-du-patrimoine-2017.html', name: 'Edition 2017'}
         ]
     },
     {
