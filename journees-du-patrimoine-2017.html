@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>Journées du patrimoine 2016 - Architecture à la carte</title>
+    <meta name="description" content="Une carte interactive des visites possibles durant les journées du patrimoine
+    2016."/>
+    <meta name="keywords" content="architecture, france, journées du patrimoine, visite"/>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" href="img/favicon.png">
+
+    
+    <link rel="stylesheet" href="ods-widgets/ods-widgets.min.css">
+    
+        <link rel="stylesheet" href="architecturealacarte.min.css">
+        <link rel="stylesheet" href="fonts/ostrich-sans/ostrich-sans.css">
+        <link rel="stylesheet" href="fonts/droid-serif/droid-serif.css">
+        <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.css">
+    
+
+</head>
+<body>
+
+<header>
+    
+    <a class="breadcrumbs" href="index.html">
+        <i class="fa fa-arrow-circle-o-left"></i>
+        Architecture à la carte
+    </a>
+
+    <h1>
+        
+    Journees du patrimoine 2016
+
+    </h1>
+
+</header>
+
+
+    
+    <main>
+        <p>
+            Cette carte a pu être réalisée grâce au
+            <a href="https://data.opendatasoft.com/explore/dataset/jep_2016_ministculture%40datainfolocale/">jeu de
+                donnée libre et ouvert</a>
+            publié par les <a href="http://journeesdupatrimoine.culturecommunication.gouv.fr">Journées du Patrimoine</a>.
+        </p>
+    </main>
+
+
+    <div class="map" ng-app="ods-widgets">
+        
+            <ods-dataset-context context="archi"
+                                 archi-urlsync="true"
+                                 archi-domain="data.culturecommunication.gouv.fr"
+                                 archi-dataset="journees-du-patrimoine-2017"
+                                 archi-parameters="">
+            
+    <div class="filters">
+        <ods-text-search placeholder="Rechercher..."
+                         context="archi"></ods-text-search>
+
+        <div class="tags"
+             ods-facet-results="items"
+             ods-facet-results-context="archi"
+             ods-facet-results-facet-name="type_d_evenement"
+             ng-init="seeAll = false">
+            <div class="tag"
+                 ng-class="{'tag--active': archi.parameters['refine.type_d_evenement'] && archi.parameters['refine.type_d_evenement'].indexOf(item.name) > -1}"
+                 ng-repeat="item in items"
+                 ng-show="$index < 10 || seeAll"
+                 ng-click="archi.toggleRefine('type_d_evenement', item.name)">
+                <span ng-bind="item.name" class="tag-value"></span>
+                <span ng-bind="item.count" class="tag-count"></span>
+            </div>
+            <button class="more-tags"
+                    ng-click="seeAll = !seeAll;">
+                <span ng-show="seeAll">Voir moins de catégories</span>
+                <span ng-hide="seeAll">Voir plus de catégories</span>
+            </button>
+        </div>
+    </div>
+
+            
+                <ods-map basemap="mapbox.streets"
+                         location="6,46.91275,3.21899"
+                         toolbar-fullscreen="false"
+                         toolbar-geolocation="false"
+                         toolbar-drawing="false">
+                    
+                        <ods-map-layer context="archi"
+                                       show-marker="false"
+                                       picto="dot"
+                                       color="#00EBBE">
+    
+    <h2>{{ record.fields.titre_fr }}</h2>
+    <p>{{ record.fields.description_fr }}</p>
+    <ul>
+        <li>{{ record.fields.detail_des_conditions_fr }}</li>
+        <li>{{ record.fields.resume_horaires_fr }}</li>
+    </ul>
+    <a ng-href="{{ record.fields.lien }}">Voir l'événement</a>
+    
+</ods-map-layer>
+                    
+                </ods-map>
+            
+        
+        </ods-dataset-context>
+    </div>
+
+
+<footer>
+    
+        <p>
+            <a href="index.html">Architecture à la carte</a> est un projet de
+            <a href="http://gabrielledesnoyers.com">Gabrielle Desnoyers</a> et
+            <a href="http://hexagonal.io">Jérémy Morel</a>
+            <sup><a href="http://twitter.com"><i class="fa fa-twitter"></i></a></sup>
+            rendu possible par la plateforme <a
+                href="https://www.opendatasoft.com/fr/solutions-open-data/">OpenDataSoft</a>.
+        </p>
+
+        <p>
+            La conception du projet et sa réalisation sont détaillées dans un
+            <a href="https://www.opendatasoft.com/fr/2015/08/21/une-balade-architecturale-journees-du-patrimoine/">article
+                de blog</a>. <br>
+            L'intégralité du code est open source et disponible sur
+            <a href="http://github.com/jmorel/architecturealacarte">
+                <i class="fa fa-github"></i>
+                Github
+            </a>
+        </p>
+    
+</footer>
+
+
+    
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-67014751-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+
+    <script src="architecturealacarte.min.js"></script>
+    <script src="ods-widgets/ods-widgets.min.js"></script>
+
+    <script type="text/javascript">
+        var ods = angular.module('ods-widgets');
+        ods.config(function (ODSWidgetsConfigProvider, ModuleLazyLoaderProvider) {
+            ODSWidgetsConfigProvider.setConfig({
+                basemaps: [{
+                    "provider": "mapbox.streets",
+                    "mapbox_access_token": "pk.eyJ1IjoiamVyZW15bW9yZWwiLCJhIjoiZmZjZGMxNzUwZTJjYmQ5YmIwYjAzOTFjYWNlY2ExYTAifQ.wEKnZyKpqqSzWew8QEzCtg",
+                    "id": "mapbox.streets",
+                    "label": "mapbox.streets"
+                }]
+            })
+        });
+    </script>
+
+</body>
+</html>
