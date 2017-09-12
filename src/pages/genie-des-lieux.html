@@ -23,6 +23,22 @@
     <div class="filters">
         <ods-text-search placeholder="Rechercher..."
                          context="archi"></ods-text-search>
+
+        <div class="tags"
+             ods-facet-results="items"
+             ods-facet-results-context="archi"
+             ods-facet-results-facet-name="saison"
+             ng-init="colors = {'2016':'#F7AD84','2017':'#00cba4'};">
+            <span class="tags-title">Saison :</span>
+            <div class="tag"
+                 ng-class="{'tag--active': archi.parameters['refine.saison'] && archi.parameters['refine.saison'].indexOf(item.name) > -1}"
+                 ng-repeat="item in items"
+                 ng-click="archi.toggleRefine('saison', item.name)">
+                <span ng-bind="item.name" class="tag-value"></span>
+                <span class="tag-color"
+                      style="background-color: {% verbatim %}{{ colors[item.name] }}{% endverbatim %}"></span>
+            </div>
+        </div>
     </div>
 {% endblock %}
 
@@ -38,7 +54,9 @@
                    border-opacity="1"
                    border-size="1"
                    border-pattern="solid"
-                   color="#00cba4"
+                   color-categories="{'2016':'#F7AD84','2017':'#00cba4'}"
+                   color-by-field="saison"
+                   color-categories-other="#6D7A87"
                    caption="false"
                    title="Le Génie des lieux"
                    description="Durant l'été, Camille Juza et Julien Donada nous emmènent sur France Culture arpenter des lieux qui ont marqué l'histoire de l'architecture. 8 semaines, 8 réponses de l'architecture à cette question : comment faire un lieu pour rassembler les gens ?">
