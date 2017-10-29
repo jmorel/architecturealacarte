@@ -89,7 +89,7 @@ gulp.task('js', function () {
         './node_modules/angular/angular.js',
         './node_modules/angular-sanitize/angular-sanitize.js'])
         .pipe(concat('architecturealacarte.js'))
-        .pipe(uglify())
+        // .pipe(uglify())
         .pipe(rename({
             suffix: '.min'
         }))
