@@ -8,6 +8,8 @@
 {% set ods_dataset = 'architecture-remarquable-idf' %}
 {% set ods_parameters = "{'refine.publie': 'oui'}" %}
 
+{% set map_location = '12,48.85387,2.33648' %}
+
 {% set tooltip_title_field = 'titre' %}
 {% set tooltip_image_field = 'image' %}
 {% set tooltip_credits_field = 'credits_image' %}
@@ -45,7 +47,7 @@
 
     <div class="tags"
          ods-facet-results="items"
-         ods-facet-results-context="archi"
+         ods-facet-results-context="map"
          ods-facet-results-facet-name="architectes"
          ng-init="seeAll = false">
         <div class="tag"
@@ -64,3 +66,5 @@
         </button>
     </div>
 {% endblock %}
+
+{% block tooltip %}{% endblock %}
