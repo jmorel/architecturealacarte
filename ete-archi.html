@@ -62,6 +62,7 @@
                     <div class="filters">
                         <ods-text-search placeholder="Rechercher..."
                                          context="map"></ods-text-search>
+                        
                     </div>
                 
 
@@ -120,6 +121,7 @@
                                 <div class="tooltip-body">
                                     <div class="tooltip-hero">
                                         <ods-record-image context="tooltip"
+                                                          ng-if="record.fields['image']"
                                                           field="image"
                                                           record="record"
                                                           domain-url="https://jmorel.opendatasoft.com"></ods-record-image>
@@ -144,24 +146,22 @@
                                                            caption="false"></ods-map-layer>
                                         </ods-map>
                                     </div>
-                                    <div class="tooltip-credits">
-                                        Crédits :
-                                        <span ng-bind="record.fields['credits_image']"></span>
-                                    </div>
+
+                                    
 
                                     
     
-    <p>
-        <a href="{{ record.fields.page_web }}">Episode du {{ record.fields.date }}</a>
-    </p>
-    <p>
-        {{ record.fields.description }}
-    </p>
-    <p>
-        <a href="{{ record.fields.podcast }}" target="_blank">
-            <i class="fa fa-play-circle"></i> Ecouter l'épisode
-        </a>
-    </p>
+        <p>
+            <a href="{{ record.fields.page_web }}">Episode du {{ record.fields.date }}</a>
+        </p>
+        <p>
+            {{ record.fields.description }}
+        </p>
+        <p>
+            <a href="{{ record.fields.podcast }}" target="_blank">
+                <i class="fa fa-play-circle"></i> Ecouter l'épisode
+            </a>
+        </p>
     
 
                                 </div>

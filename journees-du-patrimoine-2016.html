@@ -144,6 +144,7 @@
                                 <div class="tooltip-body">
                                     <div class="tooltip-hero">
                                         <ods-record-image context="tooltip"
+                                                          ng-if="record.fields['']"
                                                           field=""
                                                           record="record"
                                                           domain-url="https://"></ods-record-image>
@@ -168,10 +169,8 @@
                                                            caption="false"></ods-map-layer>
                                         </ods-map>
                                     </div>
-                                    <div class="tooltip-credits">
-                                        Crédits :
-                                        <span ng-bind="record.fields['']"></span>
-                                    </div>
+
+                                    
 
                                     
                                 </div>
