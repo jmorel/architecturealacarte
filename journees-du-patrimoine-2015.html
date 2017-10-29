@@ -20,7 +20,7 @@
     
 
 
-    <base href="">
+    <base href="/journees-du-patrimoine-2015.html">
 </head>
 <body>
 
@@ -53,40 +53,41 @@
     <div class="map ng-cloak" ng-app="archi">
         
             <ods-dataset-context context="map,tooltip"
-                                 map-domain=""
-                                 map-dataset=""
+                                 map-domain="public.opendatasoft.com"
+                                 map-dataset="jep2015"
                                  map-parameters=""
-                                 tooltip-domain=""
+                                 tooltip-domain="public.opendatasoft.com"
                                  tooltip-urlsync="true"
-                                 tooltip-dataset="">
+                                 tooltip-dataset="jep2015">
                 <!-- filters -->
 
                 
-    <div class="filters">
-        <ods-text-search placeholder="Rechercher..."
-                         context="archi"></ods-text-search>
-
-        <div class="tags"
-             ods-facet-results="items"
-             ods-facet-results-context="archi"
-             ods-facet-results-facet-name="keywords"
-             ng-init="seeAll = false">
-            <div class="tag"
-                 ng-class="{'tag--active': archi.parameters['refine.keywords'] && archi.parameters['refine.keywords'].indexOf(item.name) > -1}"
-                 ng-repeat="item in items"
-                 ng-show="$index < 10 || seeAll"
-                 ng-click="archi.toggleRefine('keywords', item.name)">
-                <span ng-bind="item.name" class="tag-value"></span>
-                <span ng-bind="item.count" class="tag-count"></span>
-            </div>
-            <button class="more-tags"
-                    ng-click="seeAll = !seeAll;">
-                <span ng-show="seeAll">Voir moins de catégories</span>
-                <span ng-hide="seeAll">Voir plus de catégories</span>
-            </button>
+                    <div class="filters">
+                        <ods-text-search placeholder="Rechercher..."
+                                         context="map"></ods-text-search>
+                        
+    <div class="tags"
+         ods-facet-results="items"
+         ods-facet-results-context="map"
+         ods-facet-results-facet-name="keywords"
+         ng-init="seeAll = false">
+        <div class="tag"
+             ng-class="{'tag--active': map.parameters['refine.keywords'] && map.parameters['refine.keywords'].indexOf(item.name) > -1}"
+             ng-repeat="item in items"
+             ng-show="$index < 10 || seeAll"
+             ng-click="map.toggleRefine('keywords', item.name)">
+            <span ng-bind="item.name" class="tag-value"></span>
+            <span ng-bind="item.count" class="tag-count"></span>
         </div>
+        <button class="more-tags"
+                ng-click="seeAll = !seeAll;">
+            <span ng-show="seeAll">Voir moins de catégories</span>
+            <span ng-hide="seeAll">Voir plus de catégories</span>
+        </button>
     </div>
 
+                    </div>
+                
 
                 <div class="map-tooltip-wrapper">
 
@@ -108,58 +109,6 @@
 
                     <!-- tooltip -->
 
-                    
-                        <div class="tooltip"
-                             ng-class="{'tooltip--shown': tooltip.parameters['refine.'] && !loading}"
-                             ods-results="records"
-                             ods-results-context="tooltip"
-                             ods-results-max="1">
-                            <div ng-repeat="record in records" class="tooltip-content">
-                                <div class="tooltip-header">
-                                    <h2 class="tooltip-title"
-                                        ng-bind="record.fields['']"></h2>
-                                    <button class="tooltip-close"
-                                            type="button"
-                                            ng-click="tooltip.parameters['refine.'] = undefined;">
-                                        <i class="fa fa-times" aria-hidden="true"></i>
-                                    </button>
-                                </div>
-
-                                <div class="tooltip-body">
-                                    <div class="tooltip-hero">
-                                        <ods-record-image context="tooltip"
-                                                          ng-if="record.fields['']"
-                                                          field=""
-                                                          record="record"
-                                                          domain-url="https://"></ods-record-image>
-                                        <ods-map basemap="mapbox.streets"
-                                                 location="{{ '5,' + record.fields.coordonnees[0] + ',' + record.fields.coordonnees[1] }}"
-                                                 class="tooltip-map"
-                                                 toolbar-fullscreen="false"
-                                                 toolbar-geolocation="false"
-                                                 scroll-wheel-zoom="false"
-                                                 no-refit="true"
-                                                 toolbar-drawing="false">
-                                            <ods-map-layer context="tooltip"
-                                                           refine-on-click-context="dummy"
-                                                           picto="dot"
-                                                           show-marker="false"
-                                                           shape-opacity="0.5"
-                                                           point-opacity="1"
-                                                           border-color="#FFFFFF"
-                                                           border-opacity="1"
-                                                           border-size="1"
-                                                           border-pattern="solid"
-                                                           caption="false"></ods-map-layer>
-                                        </ods-map>
-                                    </div>
-
-                                    
-
-                                    
-                                </div>
-                            </div>
-                        </div>
                     
                 </div>
             </ods-dataset-context>
