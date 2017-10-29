@@ -21,7 +21,7 @@ header:after {
     font-style: italic;
     text-decoration: none;
     display: block;
-    font-size: ~"calc(1rem + 1vw)";
+    font-size: @font-size-fluid-large;
     margin: 0 0 @spacing/2 0;
     color: @color-primary-darker;
 }
@@ -33,7 +33,7 @@ header:after {
 h1 {
     font-family: @font-family-slab;
     font-style: italic;
-    font-size: ~"calc(1rem + 5vw)";
+    font-size: @font-size-fluid-larger;
     line-height: 1.2;
     margin: 0;
     color: @color-white;
@@ -43,13 +43,13 @@ h2 {
     font-weight: 400;
     font-style: italic;
     line-height: 1em;
-    font-size: ~"calc(1rem + 1vw)";
+    font-size: @font-size-fluid-large;
     margin: 0;
 }
 
 h1 sup {
     vertical-align: text-top;
-    font-size: ~"calc(1rem + 0.33vw)";
+    font-size: @font-size-fluid-small;
     margin-left: 1vw;
     color: @color-white;
 }

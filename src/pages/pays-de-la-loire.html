@@ -1,0 +1,59 @@
+{% extends 'layouts/page.html' %}
+
+{% block page_title %}Architecture remarquable en Pays de la Loire - Architecture à la carte{% endblock %}
+{% block page_description %}Une carte interactive de l'architecture remarquables des XXème et XXIème siècles en Île de
+    France{% endblock %}
+{% block page_keywords %}architecture, moderne,contemporaine, XX, XXI, Pays de la Loire, paris, yvelines, seine-et-marne,
+    essonne, hauts-de-seinge, seine-saint-denis, val-de-marne, val-d'oise{% endblock %}
+
+{% block title %}
+    Architecture remarquable des XX<sup>eme</sup> et XXI<sup>eme</sup> siecles en Pays de la Loire
+{% endblock %}
+
+{% block ods_domain_url %}public.opendatasoft.com{% endblock %}
+{% block ods_dataset_id %}architecture-remarquable-pays-loire{% endblock %}
+{% block ods_context_parameters %}{'refine.publie': 'oui'}{% endblock %}
+
+{% block map_filters %}
+    <div class="filters">
+        <ods-text-search placeholder="Rechercher..."
+                         context="archi"></ods-text-search>
+
+        <div class="toggle">
+            <span class="toggle-title">Visitable ?</span>
+            <button ng-click="archi.parameters['refine.visitable'] = 'Oui'"
+                    ng-class="{'active': archi.parameters['refine.visitable'] == 'Oui'}">
+                Oui
+            </button>
+            <button ng-click="archi.parameters['refine.visitable'] = 'Non'"
+                    ng-class="{'active': archi.parameters['refine.visitable'] == 'Non'}">
+                Non
+            </button>
+            <button ng-click="archi.parameters['refine.visitable'] = null"
+                    ng-class="{'active': !archi.parameters['refine.visitable']}">
+                Peu importe
+            </button>
+        </div>
+
+        <div class="tags"
+             ods-facet-results="items"
+             ods-facet-results-context="archi"
+             ods-facet-results-facet-name="architectes"
+             ng-init="seeAll = false">
+            <div class="tag"
+                 ng-class="{'tag--active': archi.parameters['refine.architectes'] && archi.parameters['refine.architectes'].indexOf(item.name) > -1}"
+                 ng-repeat="item in items"
+                 ng-show="$index < 10 || seeAll"
+                 ng-click="archi.toggleRefine('architectes', item.name)">
+                <span ng-bind="item.name" class="tag-value"></span>
+                <span ng-bind="item.count" class="tag-count"></span>
+            </div>
+            <button class="more-tags"
+                    ng-show="items.length"
+                    ng-click="seeAll = !seeAll;">
+                <span ng-show="seeAll">Voir moins d'architectes</span>
+                <span ng-hide="seeAll">Voir plus d'architectes</span>
+            </button>
+        </div>
+    </div>
+{% endblock %}

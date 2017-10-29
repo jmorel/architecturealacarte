@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block header %}
-    <a class="breadcrumbs" href="index.html">
+    <a class="breadcrumbs" href="/index.html">
         <i class="fa fa-arrow-circle-o-left"></i>
         Architecture à la carte
     </a>
@@ -19,70 +19,68 @@
 {% block main %}
     {% block intro %}{% endblock %}
 
-    <div class="map ng-cloak" ng-app="ods-widgets">
+    <div class="map ng-cloak" ng-app="archi">
         {% block map_context %}
             <ods-dataset-context context="archi"
                                  archi-urlsync="true"
                                  archi-domain="{% block ods_domain_url %}{% endblock %}"
                                  archi-dataset="{% block ods_dataset_id %}{% endblock %}"
                                  archi-parameters="{% block ods_context_parameters %}{% endblock %}">
-            {% block map_filters %}
-                <div class="archi-map__filters-toggle" ng-click="filtersHidden=!filtersHidden"
-                     ng-init="filtersHidden=true">
-                    <span ng-show="filtersHidden">Filtres</span>
-                    <span ng-hide="filtersHidden">Cacher les filtres</span>
-                </div>
-                <div class="filters">
-                    <ods-text-search placeholder="Rechercher..."
-                                     context="archi"></ods-text-search>
+                {% block map_filters %}
+                    <div class="filters">
+                        <ods-text-search placeholder="Rechercher..."
+                                         context="archi"></ods-text-search>
 
-                    <div class="facet">
-                        <h3 class="archi-map__facet-title">
-                            Informations
-                        </h3>
-                        <ods-facets context="archi">
-                            <ods-facet name="keywords" value-search="true"></ods-facet>
-                        </ods-facets>
+                        <div class="facet">
+                            <h3 class="archi-map__facet-title">
+                                Informations
+                            </h3>
+                            <ods-facets context="archi">
+                                <ods-facet name="keywords" value-search="true"></ods-facet>
+                            </ods-facets>
+                        </div>
+
                     </div>
-
-                </div>
-            {% endblock %}
-            {% block map %}
-                <ods-map basemap="mapbox.streets"
-                         location="{% block map_location %}12,48.85387,2.33648{% endblock %}"
-                         toolbar-fullscreen="false"
-                         toolbar-geolocation="false"
-                         toolbar-drawing="false">
-                    {% block map_layer %}
-                        <ods-map-layer context="archi"
-                                       show-marker="false"
-                                       picto="dot"
-                                       color="#00EBBE">{% block map_tooltip %}{% endblock %}</ods-map-layer>
-                    {% endblock %}
-                </ods-map>
-            {% endblock %}
+                {% endblock %}
+                {% block map %}
+                    <ods-map basemap="mapbox.streets"
+                             location="{% block map_location %}12,48.85387,2.33648{% endblock %}"
+                             toolbar-fullscreen="false"
+                             toolbar-geolocation="false"
+                             toolbar-drawing="false">
+                        {% block map_layer %}
+                            <ods-map-layer context="archi"
+                                           show-marker="false"
+                                           picto="dot"
+                                           color="#00EBBE">{% block map_tooltip %}{% endblock %}</ods-map-layer>
+                        {% endblock %}
+                    </ods-map>
+                {% endblock %}
+            </ods-dataset-context>
         {% endblock %}
-        </ods-dataset-context>
     </div>
 {% endblock %}
 
 {% block scripts %}
     {{ super() }}
 
-    <script src="architecturealacarte.min.js"></script>
-    <script src="ods-widgets/ods-widgets.min.js"></script>
+    <script src="/architecturealacarte.min.js"></script>
+    <script src="/ods-widgets/ods-widgets.js"></script>
 
     <script type="text/javascript">
-        var ods = angular.module('ods-widgets');
-        ods.config(function (ODSWidgetsConfigProvider, ModuleLazyLoaderProvider) {
-            ODSWidgetsConfigProvider.setConfig({
-                basemaps: [{
-                    "provider": "mapbox.streets",
-                    "mapbox_access_token": "pk.eyJ1IjoiamVyZW15bW9yZWwiLCJhIjoiZmZjZGMxNzUwZTJjYmQ5YmIwYjAzOTFjYWNlY2ExYTAifQ.wEKnZyKpqqSzWew8QEzCtg",
-                    "id": "mapbox.streets",
-                    "label": "mapbox.streets"
-                }]
-            })
-        });
+        (function () {
+            var archi = angular.module('archi', ['ods-widgets']);
+
+            archi.config(function (ODSWidgetsConfigProvider) {
+                ODSWidgetsConfigProvider.setConfig({
+                    basemaps: [{
+                        "provider": "mapbox.streets",
+                        "mapbox_access_token": "pk.eyJ1IjoiamVyZW15bW9yZWwiLCJhIjoiZmZjZGMxNzUwZTJjYmQ5YmIwYjAzOTFjYWNlY2ExYTAifQ.wEKnZyKpqqSzWew8QEzCtg",
+                        "id": "mapbox.streets",
+                        "label": "mapbox.streets"
+                    }]
+                });
+            });
+        }());
     </script>
 {% endblock %}
