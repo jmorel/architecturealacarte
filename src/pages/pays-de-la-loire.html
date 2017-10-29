@@ -1,0 +1,27 @@
+{% extends 'layouts/page.html' %}
+
+{# Variables #}
+
+{% set base_href='/pays-de-la-loire.html' %}
+
+{% set ods_domain = 'jmorel.opendatasoft.com' %}
+{% set ods_dataset = 'architecture-remarquable-pays-loire' %}
+{% set ods_parameters = "{'refine.publie': 'oui'}" %}
+
+{% set map_location = '12,48.85387,2.33648' %}
+
+{% set tooltip_title_field = 'titre' %}
+{% set tooltip_image_field = 'image' %}
+{% set tooltip_credits_field = 'credits_image' %}
+
+{# Header #}
+
+{% block page_title %}Architecture remarquable en Pays de la Loire - Architecture à la carte{% endblock %}
+{% block page_description %}Une carte interactive de l'architecture remarquables des XXème et XXIème siècles en Île de
+    France{% endblock %}
+{% block page_keywords %}architecture, moderne,contemporaine, XX, XXI, Pays de la Loire, paris, yvelines, seine-et-marne,
+    essonne, hauts-de-seinge, seine-saint-denis, val-de-marne, val-d'oise{% endblock %}
+
+{% block title %}
+    Architecture remarquable des XX<sup>eme</sup> et XXI<sup>eme</sup> siecles en Pays de la Loire
+{% endblock %}

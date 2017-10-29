@@ -18,12 +18,14 @@
         <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.css">
     
 
+
+    <base href="/genie-des-lieux.html">
 </head>
 <body>
 
 <header>
     
-    <a class="breadcrumbs" href="index.html">
+    <a class="breadcrumbs" href="/index.html">
         <i class="fa fa-arrow-circle-o-left"></i>
         Architecture à la carte
     </a>
@@ -47,44 +49,58 @@
     </div>
 
 
-
-    <div class="map ng-cloak" ng-app="ods-widgets">
+    <div class="map ng-cloak" ng-app="archi">
         
-            <ods-dataset-context context="archi"
-                                 archi-urlsync="true"
-                                 archi-domain="jmorel.opendatasoft.com"
-                                 archi-dataset="le-genie-des-lieux"
-                                 archi-parameters="">
-            
-    <div class="filters">
-        <ods-text-search placeholder="Rechercher..."
-                         context="archi"></ods-text-search>
+            <ods-dataset-context context="map,tooltip"
+                                 map-domain="jmorel.opendatasoft.com"
+                                 map-dataset="le-genie-des-lieux"
+                                 map-parameters=""
+                                 tooltip-domain="jmorel.opendatasoft.com"
+                                 tooltip-urlsync="true"
+                                 tooltip-dataset="le-genie-des-lieux">
+                <!-- filters -->
 
-        <div class="tags"
-             ods-facet-results="items"
-             ods-facet-results-context="archi"
-             ods-facet-results-facet-name="saison"
-             ng-init="colors = {'2016':'#F7AD84','2017':'#00cba4'};">
-            <span class="tags-title">Saison :</span>
-            <div class="tag"
-                 ng-class="{'tag--active': archi.parameters['refine.saison'] && archi.parameters['refine.saison'].indexOf(item.name) > -1}"
-                 ng-repeat="item in items"
-                 ng-click="archi.toggleRefine('saison', item.name)">
-                <span ng-bind="item.name" class="tag-value"></span>
-                <span class="tag-color"
-                      style="background-color: {{ colors[item.name] }}"></span>
-            </div>
+                
+                    <div class="filters">
+                        <ods-text-search placeholder="Rechercher..."
+                                         context="map"></ods-text-search>
+                        
+    <div class="tags"
+         ods-facet-results="items"
+         ods-facet-results-context="map"
+         ods-facet-results-facet-name="saison"
+         ng-init="colors = {'2016':'#F7AD84','2017':'#00cba4'};">
+        <span class="tags-title">Saison :</span>
+        <div class="tag"
+             ng-class="{'tag--active': map.parameters['refine.saison'] && map.parameters['refine.saison'].indexOf(item.name) > -1}"
+             ng-repeat="item in items"
+             ng-click="archi.toggleRefine('saison', item.name)">
+            <span ng-bind="item.name" class="tag-value"></span>
+            <span class="tag-color"
+                  style="background-color: {{ colors[item.name] }}"></span>
         </div>
     </div>
 
-            
-                <ods-map basemap="mapbox.streets"
-                         location="6,46.36967,2.71362"
-                         toolbar-fullscreen="false"
-                         toolbar-geolocation="false"
-                         toolbar-drawing="false">
+                    </div>
+                
+
+                <div class="map-tooltip-wrapper">
+
+                    <!-- map -->
+
                     
-    <ods-map-layer context="archi"
+                        <ods-map basemap="mapbox.streets"
+                                 class="main-map"
+                                 ng-class="{'main-map--blurry': tooltip.parameters['refine.titre']}"
+                                 location="6,46.36967,2.71362"
+                                 toolbar-fullscreen="false"
+                                 toolbar-geolocation="false"
+                                 toolbar-drawing="false">
+                        
+    <ods-map-layer context="map"
+                   refine-on-click-context="tooltip"
+                   refine-on-click-tooltip-map-field="titre"
+                   refine-on-click-tooltip-context-field="titre"
                    picto="dot"
                    show-marker="false"
                    shape-opacity="0.5"
@@ -98,38 +114,83 @@
                    color-categories-other="#6D7A87"
                    caption="false"
                    title="Le Génie des lieux"
-                   description="Durant l'été, Camille Juza et Julien Donada nous emmènent sur France Culture arpenter des lieux qui ont marqué l'histoire de l'architecture. 8 semaines, 8 réponses de l'architecture à cette question : comment faire un lieu pour rassembler les gens ?">
-        
-            <h2 style="text-align: left; font-style: normal">
-                {{ record.fields.titre }}
-            </h2>
-            <p>
+                   description="Durant l'été, Camille Juza et Julien Donada nous emmènent sur France Culture arpenter des lieux qui ont marqué l'histoire de l'architecture. 8 semaines, 8 réponses de l'architecture à cette question : comment faire un lieu pour rassembler les gens ?"></ods-map-layer>
 
-                <ods-record-image context="archi"
-                                  field="image"
-                                  record="record"
-                                  domain-url="https://jmorel.opendatasoft.com"></ods-record-image>
-                <br>
-                <span style="font-style: italic">{{ record.fields.credits_image }}</span>
-            </p>
-            <p>
-                <a href="{{ record.fields.page_web }}">Episode du {{ record.fields.date }}</a>
-            </p>
-            <p>
-                {{ record.fields.description }}
-            </p>
-            <p>
-                <a href="{{ record.fields.podcast }}" target="_blank">
-                    <i class="fa fa-play-circle"></i> Ecouter l'épisode
-                </a>
-            </p>
-        
-    </ods-map-layer>
+                        </ods-map>
+                    
 
-                </ods-map>
-            
+                    <!-- tooltip -->
+
+                    
+                        <div class="tooltip"
+                             ng-class="{'tooltip--shown': tooltip.parameters['refine.titre'] && !loading}"
+                             ods-results="records"
+                             ods-results-context="tooltip"
+                             ods-results-max="1">
+                            <div ng-repeat="record in records" class="tooltip-content">
+                                <div class="tooltip-header">
+                                    <h2 class="tooltip-title"
+                                        ng-bind="record.fields['titre']"></h2>
+                                    <button class="tooltip-close"
+                                            type="button"
+                                            ng-click="tooltip.parameters['refine.titre'] = undefined;">
+                                        <i class="fa fa-times" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+
+                                <div class="tooltip-body">
+                                    <div class="tooltip-hero">
+                                        <ods-record-image context="tooltip"
+                                                          ng-if="record.fields['image']"
+                                                          field="image"
+                                                          record="record"
+                                                          domain-url="https://jmorel.opendatasoft.com"></ods-record-image>
+                                        <ods-map basemap="mapbox.streets"
+                                                 location="{{ '5,' + record.fields.coordonnees[0] + ',' + record.fields.coordonnees[1] }}"
+                                                 class="tooltip-map"
+                                                 toolbar-fullscreen="false"
+                                                 toolbar-geolocation="false"
+                                                 scroll-wheel-zoom="false"
+                                                 no-refit="true"
+                                                 toolbar-drawing="false">
+                                            <ods-map-layer context="tooltip"
+                                                           refine-on-click-context="dummy"
+                                                           picto="dot"
+                                                           show-marker="false"
+                                                           shape-opacity="0.5"
+                                                           point-opacity="1"
+                                                           border-color="#FFFFFF"
+                                                           border-opacity="1"
+                                                           border-size="1"
+                                                           border-pattern="solid"
+                                                           caption="false"></ods-map-layer>
+                                        </ods-map>
+                                    </div>
+
+                                    
+
+                                    
+    
+        <p>
+            <a href="{{ record.fields.page_web }}">Episode du {{ record.fields.date }}</a>
+        </p>
+        <p>
+            {{ record.fields.description }}
+        </p>
+        <p>
+            <a href="{{ record.fields.podcast }}" target="_blank">
+                <i class="fa fa-play-circle"></i> Ecouter l'épisode
+            </a>
+        </p>
+    
+
+                                </div>
+                            </div>
+                        </div>
+                    
+                </div>
+            </ods-dataset-context>
         
-        </ods-dataset-context>
     </div>
 
 
@@ -177,21 +238,26 @@
     </script>
 
 
-    <script src="architecturealacarte.min.js"></script>
-    <script src="ods-widgets/ods-widgets.min.js"></script>
+    <script src="/architecturealacarte.min.js"></script>
+    <script src="/ods-widgets/ods-widgets.js"></script>
 
     <script type="text/javascript">
-        var ods = angular.module('ods-widgets');
-        ods.config(function (ODSWidgetsConfigProvider, ModuleLazyLoaderProvider) {
-            ODSWidgetsConfigProvider.setConfig({
-                basemaps: [{
-                    "provider": "mapbox.streets",
-                    "mapbox_access_token": "pk.eyJ1IjoiamVyZW15bW9yZWwiLCJhIjoiZmZjZGMxNzUwZTJjYmQ5YmIwYjAzOTFjYWNlY2ExYTAifQ.wEKnZyKpqqSzWew8QEzCtg",
-                    "id": "mapbox.streets",
-                    "label": "mapbox.streets"
-                }]
-            })
-        });
+        (function () {
+            var archi = angular.module('archi', ['ods-widgets']);
+
+            archi.config(function (ODSWidgetsConfigProvider, $locationProvider) {
+                ODSWidgetsConfigProvider.setConfig({
+                    basemaps: [{
+                        "provider": "mapbox.streets",
+                        "mapbox_access_token": "pk.eyJ1IjoiamVyZW15bW9yZWwiLCJhIjoiZmZjZGMxNzUwZTJjYmQ5YmIwYjAzOTFjYWNlY2ExYTAifQ.wEKnZyKpqqSzWew8QEzCtg",
+                        "id": "mapbox.streets",
+                        "label": "mapbox.streets"
+                    }]
+                });
+
+                $locationProvider.html5Mode(true);
+            });
+        }());
     </script>
 
 </body>

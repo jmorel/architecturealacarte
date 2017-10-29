@@ -20,12 +20,14 @@
         <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.css">
     
 
+
+    <base href="/ile-de-france.html">
 </head>
 <body>
 
 <header>
     
-    <a class="breadcrumbs" href="index.html">
+    <a class="breadcrumbs" href="/index.html">
         <i class="fa fa-arrow-circle-o-left"></i>
         Architecture à la carte
     </a>
@@ -41,72 +43,86 @@
 
     
 
-    <div class="map ng-cloak" ng-app="ods-widgets">
+    <div class="map ng-cloak" ng-app="archi">
         
-            <ods-dataset-context context="archi"
-                                 archi-urlsync="true"
-                                 archi-domain="public.opendatasoft.com"
-                                 archi-dataset="architecture-remarquable-idf"
-                                 archi-parameters="{'refine.publie': 'oui'}">
-            
-    <div class="filters">
-        <ods-text-search placeholder="Rechercher..."
-                         context="archi"></ods-text-search>
+            <ods-dataset-context context="map,tooltip"
+                                 map-domain="public.opendatasoft.com"
+                                 map-dataset="architecture-remarquable-idf"
+                                 map-parameters="{&#39;refine.publie&#39;: &#39;oui&#39;}"
+                                 tooltip-domain="public.opendatasoft.com"
+                                 tooltip-urlsync="true"
+                                 tooltip-dataset="architecture-remarquable-idf">
+                <!-- filters -->
 
-        <div class="toggle">
-            <span class="toggle-title">Visitable ?</span>
-            <button ng-click="archi.parameters['refine.visitable'] = 'Oui'"
-                    ng-class="{'active': archi.parameters['refine.visitable'] == 'Oui'}">
-                Oui
-            </button>
-            <button ng-click="archi.parameters['refine.visitable'] = 'Non'"
-                    ng-class="{'active': archi.parameters['refine.visitable'] == 'Non'}">
-                Non
-            </button>
-            <button ng-click="archi.parameters['refine.visitable'] = null"
-                    ng-class="{'active': !archi.parameters['refine.visitable']}">
-                Peu importe
-            </button>
-        </div>
-
-        <div class="tags"
-             ods-facet-results="items"
-             ods-facet-results-context="archi"
-             ods-facet-results-facet-name="architectes"
-             ng-init="seeAll = false">
-            <div class="tag"
-                 ng-class="{'tag--active': archi.parameters['refine.architectes'] && archi.parameters['refine.architectes'].indexOf(item.name) > -1}"
-                 ng-repeat="item in items"
-                 ng-show="$index < 10 || seeAll"
-                 ng-click="archi.toggleRefine('architectes', item.name)">
-                <span ng-bind="item.name" class="tag-value"></span>
-                <span ng-bind="item.count" class="tag-count"></span>
-            </div>
-            <button class="more-tags"
-                    ng-show="items.length"
-                    ng-click="seeAll = !seeAll;">
-                <span ng-show="seeAll">Voir moins d'architectes</span>
-                <span ng-hide="seeAll">Voir plus d'architectes</span>
-            </button>
-        </div>
+                
+                    <div class="filters">
+                        <ods-text-search placeholder="Rechercher..."
+                                         context="map"></ods-text-search>
+                        
+    <div class="toggle">
+        <span class="toggle-title">Visitable ?</span>
+        <button ng-click="map.parameters['refine.visitable'] = 'Oui'"
+                ng-class="{'active': map.parameters['refine.visitable'] == 'Oui'}">
+            Oui
+        </button>
+        <button ng-click="map.parameters['refine.visitable'] = 'Non'"
+                ng-class="{'active': map.parameters['refine.visitable'] == 'Non'}">
+            Non
+        </button>
+        <button ng-click="map.parameters['refine.visitable'] = null"
+                ng-class="{'active': !map.parameters['refine.visitable']}">
+            Peu importe
+        </button>
     </div>
 
-            
-                <ods-map basemap="mapbox.streets"
-                         location="12,48.85387,2.33648"
-                         toolbar-fullscreen="false"
-                         toolbar-geolocation="false"
-                         toolbar-drawing="false">
+    <div class="tags"
+         ods-facet-results="items"
+         ods-facet-results-context="map"
+         ods-facet-results-facet-name="architectes"
+         ng-init="seeAll = false">
+        <div class="tag"
+             ng-class="{'tag--active': map.parameters['refine.architectes'] && map.parameters['refine.architectes'].indexOf(item.name) > -1}"
+             ng-repeat="item in items"
+             ng-show="$index < 10 || seeAll"
+             ng-click="map.toggleRefine('architectes', item.name)">
+            <span ng-bind="item.name" class="tag-value"></span>
+            <span ng-bind="item.count" class="tag-count"></span>
+        </div>
+        <button class="more-tags"
+                ng-show="items.length"
+                ng-click="seeAll = !seeAll;">
+            <span ng-show="seeAll">Voir moins d'architectes</span>
+            <span ng-hide="seeAll">Voir plus d'architectes</span>
+        </button>
+    </div>
+
+                    </div>
+                
+
+                <div class="map-tooltip-wrapper">
+
+                    <!-- map -->
+
                     
-                        <ods-map-layer context="archi"
-                                       show-marker="false"
-                                       picto="dot"
-                                       color="#00EBBE"></ods-map-layer>
+                        <ods-map basemap="mapbox.streets"
+                                 class="main-map"
+                                 ng-class="{'main-map--blurry': tooltip.parameters['refine.titre']}"
+                                 location="12,48.85387,2.33648"
+                                 toolbar-fullscreen="false"
+                                 toolbar-geolocation="false"
+                                 toolbar-drawing="false">
+                        
+                            <ods-map-layer context="map"></ods-map-layer>
+                        
+                        </ods-map>
                     
-                </ods-map>
-            
+
+                    <!-- tooltip -->
+
+                    
+                </div>
+            </ods-dataset-context>
         
-        </ods-dataset-context>
     </div>
 
 
@@ -154,21 +170,26 @@
     </script>
 
 
-    <script src="architecturealacarte.min.js"></script>
-    <script src="ods-widgets/ods-widgets.min.js"></script>
+    <script src="/architecturealacarte.min.js"></script>
+    <script src="/ods-widgets/ods-widgets.js"></script>
 
     <script type="text/javascript">
-        var ods = angular.module('ods-widgets');
-        ods.config(function (ODSWidgetsConfigProvider, ModuleLazyLoaderProvider) {
-            ODSWidgetsConfigProvider.setConfig({
-                basemaps: [{
-                    "provider": "mapbox.streets",
-                    "mapbox_access_token": "pk.eyJ1IjoiamVyZW15bW9yZWwiLCJhIjoiZmZjZGMxNzUwZTJjYmQ5YmIwYjAzOTFjYWNlY2ExYTAifQ.wEKnZyKpqqSzWew8QEzCtg",
-                    "id": "mapbox.streets",
-                    "label": "mapbox.streets"
-                }]
-            })
-        });
+        (function () {
+            var archi = angular.module('archi', ['ods-widgets']);
+
+            archi.config(function (ODSWidgetsConfigProvider, $locationProvider) {
+                ODSWidgetsConfigProvider.setConfig({
+                    basemaps: [{
+                        "provider": "mapbox.streets",
+                        "mapbox_access_token": "pk.eyJ1IjoiamVyZW15bW9yZWwiLCJhIjoiZmZjZGMxNzUwZTJjYmQ5YmIwYjAzOTFjYWNlY2ExYTAifQ.wEKnZyKpqqSzWew8QEzCtg",
+                        "id": "mapbox.streets",
+                        "label": "mapbox.streets"
+                    }]
+                });
+
+                $locationProvider.html5Mode(true);
+            });
+        }());
     </script>
 
 </body>

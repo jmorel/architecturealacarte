@@ -15,6 +15,7 @@ var sections = [
         name: "Les regions",
         pages: [
             {url: 'ile-de-france.html', name: 'Île de France'},
+            // {url: 'pays-de-la-loire.html', name: 'Pays de la Loire'},
             {url: 'mailto:contact@architecturealacarte.fr', name: 'Ajoutez la votre'}
         ]
     },
