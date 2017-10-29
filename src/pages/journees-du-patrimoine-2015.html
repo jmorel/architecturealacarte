@@ -1,5 +1,14 @@
 {% extends 'layouts/page.html' %}
 
+{# Variables #}
+
+{% set base_href='/journees-du-patrimoine-2015.html' %}
+
+{% set ods_domain = 'public.opendatasoft.com' %}
+{% set ods_dataset = 'jep2015' %}
+
+{# Header #}
+
 {% block page_title %}Journées du patrimoine 2015{% endblock %}
 {% block page_description %}Une carte interactive des visites possibles durant les journées du patrimoine
     2015.{% endblock %}
@@ -19,32 +28,28 @@
     </main>
 {% endblock %}
 
-{% block ods_domain_url %}public.opendatasoft.com{% endblock %}
-{% block ods_dataset_id %}jep2015{% endblock %}
+{# Filters #}
 
-{% block map_filters %}
-    <div class="filters">
-        <ods-text-search placeholder="Rechercher..."
-                         context="archi"></ods-text-search>
-
-        <div class="tags"
-             ods-facet-results="items"
-             ods-facet-results-context="archi"
-             ods-facet-results-facet-name="keywords"
-             ng-init="seeAll = false">
-            <div class="tag"
-                 ng-class="{'tag--active': archi.parameters['refine.keywords'] && archi.parameters['refine.keywords'].indexOf(item.name) > -1}"
-                 ng-repeat="item in items"
-                 ng-show="$index < 10 || seeAll"
-                 ng-click="archi.toggleRefine('keywords', item.name)">
-                <span ng-bind="item.name" class="tag-value"></span>
-                <span ng-bind="item.count" class="tag-count"></span>
-            </div>
-            <button class="more-tags"
-                    ng-click="seeAll = !seeAll;">
-                <span ng-show="seeAll">Voir moins de catégories</span>
-                <span ng-hide="seeAll">Voir plus de catégories</span>
-            </button>
+{% block extra_map_filters %}
+    <div class="tags"
+         ods-facet-results="items"
+         ods-facet-results-context="map"
+         ods-facet-results-facet-name="keywords"
+         ng-init="seeAll = false">
+        <div class="tag"
+             ng-class="{'tag--active': map.parameters['refine.keywords'] && map.parameters['refine.keywords'].indexOf(item.name) > -1}"
+             ng-repeat="item in items"
+             ng-show="$index < 10 || seeAll"
+             ng-click="map.toggleRefine('keywords', item.name)">
+            <span ng-bind="item.name" class="tag-value"></span>
+            <span ng-bind="item.count" class="tag-count"></span>
         </div>
+        <button class="more-tags"
+                ng-click="seeAll = !seeAll;">
+            <span ng-show="seeAll">Voir moins de catégories</span>
+            <span ng-hide="seeAll">Voir plus de catégories</span>
+        </button>
     </div>
 {% endblock %}
+
+{% block tooltip %}{% endblock %}
