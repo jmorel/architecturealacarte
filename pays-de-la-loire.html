@@ -21,7 +21,7 @@
     
 
 
-    <base href="">
+    <base href="/pays-de-la-loire.html">
 </head>
 <body>
 
@@ -46,57 +46,21 @@
     <div class="map ng-cloak" ng-app="archi">
         
             <ods-dataset-context context="map,tooltip"
-                                 map-domain=""
-                                 map-dataset=""
-                                 map-parameters=""
-                                 tooltip-domain=""
+                                 map-domain="jmorel.opendatasoft.com"
+                                 map-dataset="architecture-remarquable-pays-loire"
+                                 map-parameters="{&#39;refine.publie&#39;: &#39;oui&#39;}"
+                                 tooltip-domain="jmorel.opendatasoft.com"
                                  tooltip-urlsync="true"
-                                 tooltip-dataset="">
+                                 tooltip-dataset="architecture-remarquable-pays-loire">
                 <!-- filters -->
 
                 
-    <div class="filters">
-        <ods-text-search placeholder="Rechercher..."
-                         context="archi"></ods-text-search>
-
-        <div class="toggle">
-            <span class="toggle-title">Visitable ?</span>
-            <button ng-click="archi.parameters['refine.visitable'] = 'Oui'"
-                    ng-class="{'active': archi.parameters['refine.visitable'] == 'Oui'}">
-                Oui
-            </button>
-            <button ng-click="archi.parameters['refine.visitable'] = 'Non'"
-                    ng-class="{'active': archi.parameters['refine.visitable'] == 'Non'}">
-                Non
-            </button>
-            <button ng-click="archi.parameters['refine.visitable'] = null"
-                    ng-class="{'active': !archi.parameters['refine.visitable']}">
-                Peu importe
-            </button>
-        </div>
-
-        <div class="tags"
-             ods-facet-results="items"
-             ods-facet-results-context="archi"
-             ods-facet-results-facet-name="architectes"
-             ng-init="seeAll = false">
-            <div class="tag"
-                 ng-class="{'tag--active': archi.parameters['refine.architectes'] && archi.parameters['refine.architectes'].indexOf(item.name) > -1}"
-                 ng-repeat="item in items"
-                 ng-show="$index < 10 || seeAll"
-                 ng-click="archi.toggleRefine('architectes', item.name)">
-                <span ng-bind="item.name" class="tag-value"></span>
-                <span ng-bind="item.count" class="tag-count"></span>
-            </div>
-            <button class="more-tags"
-                    ng-show="items.length"
-                    ng-click="seeAll = !seeAll;">
-                <span ng-show="seeAll">Voir moins d'architectes</span>
-                <span ng-hide="seeAll">Voir plus d'architectes</span>
-            </button>
-        </div>
-    </div>
-
+                    <div class="filters">
+                        <ods-text-search placeholder="Rechercher..."
+                                         context="map"></ods-text-search>
+                        
+                    </div>
+                
 
                 <div class="map-tooltip-wrapper">
 
@@ -106,27 +70,12 @@
                         <ods-map basemap="mapbox.streets"
                                  class="main-map"
                                  ng-class="{'main-map--blurry': tooltip.parameters['refine.titre']}"
-                                 location="6,46.36967,2.71362"
+                                 location="12,48.85387,2.33648"
                                  toolbar-fullscreen="false"
                                  toolbar-geolocation="false"
                                  toolbar-drawing="false">
                         
-                            <ods-map-layer context="map"
-                                           refine-on-click-context="tooltip"
-                                           refine-on-click-tooltip-map-field="titre"
-                                           refine-on-click-tooltip-context-field="titre"
-                                           picto="dot"
-                                           color="#00EBBE"
-                                           show-marker="false"
-                                           shape-opacity="0.5"
-                                           point-opacity="1"
-                                           border-color="#FFFFFF"
-                                           border-opacity="1"
-                                           border-size="1"
-                                           border-pattern="solid"
-                                           caption="false"
-                                           title=""
-                                           description=""></ods-map-layer>
+                            <ods-map-layer context="map"></ods-map-layer>
                         
                         </ods-map>
                     
@@ -135,17 +84,17 @@
 
                     
                         <div class="tooltip"
-                             ng-class="{'tooltip--shown': tooltip.parameters['refine.'] && !loading}"
+                             ng-class="{'tooltip--shown': tooltip.parameters['refine.titre'] && !loading}"
                              ods-results="records"
                              ods-results-context="tooltip"
                              ods-results-max="1">
                             <div ng-repeat="record in records" class="tooltip-content">
                                 <div class="tooltip-header">
                                     <h2 class="tooltip-title"
-                                        ng-bind="record.fields['']"></h2>
+                                        ng-bind="record.fields['titre']"></h2>
                                     <button class="tooltip-close"
                                             type="button"
-                                            ng-click="tooltip.parameters['refine.'] = undefined;">
+                                            ng-click="tooltip.parameters['refine.titre'] = undefined;">
                                         <i class="fa fa-times" aria-hidden="true"></i>
                                     </button>
                                 </div>
@@ -153,10 +102,10 @@
                                 <div class="tooltip-body">
                                     <div class="tooltip-hero">
                                         <ods-record-image context="tooltip"
-                                                          ng-if="record.fields['']"
-                                                          field=""
+                                                          ng-if="record.fields['image']"
+                                                          field="image"
                                                           record="record"
-                                                          domain-url="https://"></ods-record-image>
+                                                          domain-url="https://jmorel.opendatasoft.com"></ods-record-image>
                                         <ods-map basemap="mapbox.streets"
                                                  location="{{ '5,' + record.fields.coordonnees[0] + ',' + record.fields.coordonnees[1] }}"
                                                  class="tooltip-map"
