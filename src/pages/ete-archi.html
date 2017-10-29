@@ -53,16 +53,16 @@
 
 {% block tooltip_content %}
     {% verbatim %}
-    <p>
-        <a href="{{ record.fields.page_web }}">Episode du {{ record.fields.date }}</a>
-    </p>
-    <p>
-        {{ record.fields.description }}
-    </p>
-    <p>
-        <a href="{{ record.fields.podcast }}" target="_blank">
-            <i class="fa fa-play-circle"></i> Ecouter l'épisode
-        </a>
-    </p>
+        <p>
+            <a href="{{ record.fields.page_web }}">Episode du {{ record.fields.date }}</a>
+        </p>
+        <p>
+            {{ record.fields.description }}
+        </p>
+        <p>
+            <a href="{{ record.fields.podcast }}" target="_blank">
+                <i class="fa fa-play-circle"></i> Ecouter l'épisode
+            </a>
+        </p>
     {% endverbatim %}
 {% endblock %}

@@ -34,6 +34,7 @@
                     <div class="filters">
                         <ods-text-search placeholder="Rechercher..."
                                          context="map"></ods-text-search>
+                        {% block extra_map_filters %}{% endblock %}
                     </div>
                 {% endblock %}
 
@@ -92,6 +93,7 @@
                                 <div class="tooltip-body">
                                     <div class="tooltip-hero">
                                         <ods-record-image context="tooltip"
+                                                          ng-if="record.fields['{{ tooltip_image_field }}']"
                                                           field="{{ tooltip_image_field }}"
                                                           record="record"
                                                           domain-url="https://{{ ods_domain }}"></ods-record-image>
@@ -116,10 +118,13 @@
                                                            caption="false"></ods-map-layer>
                                         </ods-map>
                                     </div>
-                                    <div class="tooltip-credits">
-                                        Crédits :
-                                        <span ng-bind="record.fields['{{ tooltip_credits_field }}']"></span>
-                                    </div>
+
+                                    {% if tooltip_credits_fields %}
+                                        <div class="tooltip-credits">
+                                            Crédits :
+                                            <span ng-bind="record.fields['{{ tooltip_credits_field }}']"></span>
+                                        </div>
+                                    {% endif %}
 
                                     {% block tooltip_content %}{% endblock %}
                                 </div>

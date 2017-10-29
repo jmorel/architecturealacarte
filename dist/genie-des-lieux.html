@@ -19,7 +19,7 @@
     
 
 
-    <base href="">
+    <base href="/genie-des-lieux.html">
 </head>
 <body>
 
@@ -52,36 +52,37 @@
     <div class="map ng-cloak" ng-app="archi">
         
             <ods-dataset-context context="map,tooltip"
-                                 map-domain=""
-                                 map-dataset=""
+                                 map-domain="jmorel.opendatasoft.com"
+                                 map-dataset="le-genie-des-lieux"
                                  map-parameters=""
-                                 tooltip-domain=""
+                                 tooltip-domain="jmorel.opendatasoft.com"
                                  tooltip-urlsync="true"
-                                 tooltip-dataset="">
+                                 tooltip-dataset="le-genie-des-lieux">
                 <!-- filters -->
 
                 
-    <div class="filters">
-        <ods-text-search placeholder="Rechercher..."
-                         context="archi"></ods-text-search>
-
-        <div class="tags"
-             ods-facet-results="items"
-             ods-facet-results-context="archi"
-             ods-facet-results-facet-name="saison"
-             ng-init="colors = {'2016':'#F7AD84','2017':'#00cba4'};">
-            <span class="tags-title">Saison :</span>
-            <div class="tag"
-                 ng-class="{'tag--active': archi.parameters['refine.saison'] && archi.parameters['refine.saison'].indexOf(item.name) > -1}"
-                 ng-repeat="item in items"
-                 ng-click="archi.toggleRefine('saison', item.name)">
-                <span ng-bind="item.name" class="tag-value"></span>
-                <span class="tag-color"
-                      style="background-color: {{ colors[item.name] }}"></span>
-            </div>
+                    <div class="filters">
+                        <ods-text-search placeholder="Rechercher..."
+                                         context="map"></ods-text-search>
+                        
+    <div class="tags"
+         ods-facet-results="items"
+         ods-facet-results-context="map"
+         ods-facet-results-facet-name="saison"
+         ng-init="colors = {'2016':'#F7AD84','2017':'#00cba4'};">
+        <span class="tags-title">Saison :</span>
+        <div class="tag"
+             ng-class="{'tag--active': map.parameters['refine.saison'] && map.parameters['refine.saison'].indexOf(item.name) > -1}"
+             ng-repeat="item in items"
+             ng-click="archi.toggleRefine('saison', item.name)">
+            <span ng-bind="item.name" class="tag-value"></span>
+            <span class="tag-color"
+                  style="background-color: {{ colors[item.name] }}"></span>
         </div>
     </div>
 
+                    </div>
+                
 
                 <div class="map-tooltip-wrapper">
 
@@ -96,7 +97,10 @@
                                  toolbar-geolocation="false"
                                  toolbar-drawing="false">
                         
-    <ods-map-layer context="archi"
+    <ods-map-layer context="map"
+                   refine-on-click-context="tooltip"
+                   refine-on-click-tooltip-map-field="titre"
+                   refine-on-click-tooltip-context-field="titre"
                    picto="dot"
                    show-marker="false"
                    shape-opacity="0.5"
@@ -110,33 +114,7 @@
                    color-categories-other="#6D7A87"
                    caption="false"
                    title="Le Génie des lieux"
-                   description="Durant l'été, Camille Juza et Julien Donada nous emmènent sur France Culture arpenter des lieux qui ont marqué l'histoire de l'architecture. 8 semaines, 8 réponses de l'architecture à cette question : comment faire un lieu pour rassembler les gens ?">
-        
-            <h2 style="text-align: left; font-style: normal">
-                {{ record.fields.titre }}
-            </h2>
-            <p>
-
-                <ods-record-image context="archi"
-                                  field="image"
-                                  record="record"
-                                  domain-url="https://jmorel.opendatasoft.com"></ods-record-image>
-                <br>
-                <span style="font-style: italic">{{ record.fields.credits_image }}</span>
-            </p>
-            <p>
-                <a href="{{ record.fields.page_web }}">Episode du {{ record.fields.date }}</a>
-            </p>
-            <p>
-                {{ record.fields.description }}
-            </p>
-            <p>
-                <a href="{{ record.fields.podcast }}" target="_blank">
-                    <i class="fa fa-play-circle"></i> Ecouter l'épisode
-                </a>
-            </p>
-        
-    </ods-map-layer>
+                   description="Durant l'été, Camille Juza et Julien Donada nous emmènent sur France Culture arpenter des lieux qui ont marqué l'histoire de l'architecture. 8 semaines, 8 réponses de l'architecture à cette question : comment faire un lieu pour rassembler les gens ?"></ods-map-layer>
 
                         </ods-map>
                     
@@ -145,17 +123,17 @@
 
                     
                         <div class="tooltip"
-                             ng-class="{'tooltip--shown': tooltip.parameters['refine.'] && !loading}"
+                             ng-class="{'tooltip--shown': tooltip.parameters['refine.titre'] && !loading}"
                              ods-results="records"
                              ods-results-context="tooltip"
                              ods-results-max="1">
                             <div ng-repeat="record in records" class="tooltip-content">
                                 <div class="tooltip-header">
                                     <h2 class="tooltip-title"
-                                        ng-bind="record.fields['']"></h2>
+                                        ng-bind="record.fields['titre']"></h2>
                                     <button class="tooltip-close"
                                             type="button"
-                                            ng-click="tooltip.parameters['refine.'] = undefined;">
+                                            ng-click="tooltip.parameters['refine.titre'] = undefined;">
                                         <i class="fa fa-times" aria-hidden="true"></i>
                                     </button>
                                 </div>
@@ -163,9 +141,10 @@
                                 <div class="tooltip-body">
                                     <div class="tooltip-hero">
                                         <ods-record-image context="tooltip"
-                                                          field=""
+                                                          ng-if="record.fields['image']"
+                                                          field="image"
                                                           record="record"
-                                                          domain-url="https://"></ods-record-image>
+                                                          domain-url="https://jmorel.opendatasoft.com"></ods-record-image>
                                         <ods-map basemap="mapbox.streets"
                                                  location="{{ '5,' + record.fields.coordonnees[0] + ',' + record.fields.coordonnees[1] }}"
                                                  class="tooltip-map"
@@ -187,12 +166,24 @@
                                                            caption="false"></ods-map-layer>
                                         </ods-map>
                                     </div>
-                                    <div class="tooltip-credits">
-                                        Crédits :
-                                        <span ng-bind="record.fields['']"></span>
-                                    </div>
 
                                     
+
+                                    
+    
+        <p>
+            <a href="{{ record.fields.page_web }}">Episode du {{ record.fields.date }}</a>
+        </p>
+        <p>
+            {{ record.fields.description }}
+        </p>
+        <p>
+            <a href="{{ record.fields.podcast }}" target="_blank">
+                <i class="fa fa-play-circle"></i> Ecouter l'épisode
+            </a>
+        </p>
+    
+
                                 </div>
                             </div>
                         </div>

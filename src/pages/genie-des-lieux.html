@@ -1,5 +1,19 @@
 {% extends 'layouts/page.html' %}
 
+{# Variables #}
+
+{% set base_href='/genie-des-lieux.html' %}
+
+{% set ods_domain = 'jmorel.opendatasoft.com' %}
+{% set ods_dataset = 'le-genie-des-lieux' %}
+{% set ods_parameters = '' %}
+
+{% set tooltip_title_field = 'titre' %}
+{% set tooltip_image_field = 'image' %}
+{% set tooltip_credits_field = 'credits_image' %}
+
+{# Header #}
+
 {% block page_title %}Le Génie des lieux{% endblock %}
 
 {% block title %}
@@ -16,36 +30,33 @@
     </div>
 {% endblock %}
 
-{% block ods_domain_url %}jmorel.opendatasoft.com{% endblock %}
-{% block ods_dataset_id %}le-genie-des-lieux{% endblock %}
+{# Filters #}
 
-{% block map_filters %}
-    <div class="filters">
-        <ods-text-search placeholder="Rechercher..."
-                         context="archi"></ods-text-search>
-
-        <div class="tags"
-             ods-facet-results="items"
-             ods-facet-results-context="archi"
-             ods-facet-results-facet-name="saison"
-             ng-init="colors = {'2016':'#F7AD84','2017':'#00cba4'};">
-            <span class="tags-title">Saison :</span>
-            <div class="tag"
-                 ng-class="{'tag--active': archi.parameters['refine.saison'] && archi.parameters['refine.saison'].indexOf(item.name) > -1}"
-                 ng-repeat="item in items"
-                 ng-click="archi.toggleRefine('saison', item.name)">
-                <span ng-bind="item.name" class="tag-value"></span>
-                <span class="tag-color"
-                      style="background-color: {% verbatim %}{{ colors[item.name] }}{% endverbatim %}"></span>
-            </div>
+{% block extra_map_filters %}
+    <div class="tags"
+         ods-facet-results="items"
+         ods-facet-results-context="map"
+         ods-facet-results-facet-name="saison"
+         ng-init="colors = {'2016':'#F7AD84','2017':'#00cba4'};">
+        <span class="tags-title">Saison :</span>
+        <div class="tag"
+             ng-class="{'tag--active': map.parameters['refine.saison'] && map.parameters['refine.saison'].indexOf(item.name) > -1}"
+             ng-repeat="item in items"
+             ng-click="archi.toggleRefine('saison', item.name)">
+            <span ng-bind="item.name" class="tag-value"></span>
+            <span class="tag-color"
+                  style="background-color: {% verbatim %}{{ colors[item.name] }}{% endverbatim %}"></span>
         </div>
     </div>
 {% endblock %}
 
-{% block map_location %}6,46.36967,2.71362{% endblock %}
+{# Map #}
 
 {% block map_layer %}
-    <ods-map-layer context="archi"
+    <ods-map-layer context="map"
+                   refine-on-click-context="tooltip"
+                   refine-on-click-tooltip-map-field="titre"
+                   refine-on-click-tooltip-context-field="titre"
                    picto="dot"
                    show-marker="false"
                    shape-opacity="0.5"
@@ -59,31 +70,23 @@
                    color-categories-other="#6D7A87"
                    caption="false"
                    title="Le Génie des lieux"
-                   description="Durant l'été, Camille Juza et Julien Donada nous emmènent sur France Culture arpenter des lieux qui ont marqué l'histoire de l'architecture. 8 semaines, 8 réponses de l'architecture à cette question : comment faire un lieu pour rassembler les gens ?">
-        {% verbatim %}
-            <h2 style="text-align: left; font-style: normal">
-                {{ record.fields.titre }}
-            </h2>
-            <p>
+                   description="Durant l'été, Camille Juza et Julien Donada nous emmènent sur France Culture arpenter des lieux qui ont marqué l'histoire de l'architecture. 8 semaines, 8 réponses de l'architecture à cette question : comment faire un lieu pour rassembler les gens ?"></ods-map-layer>
+{% endblock %}
 
-                <ods-record-image context="archi"
-                                  field="image"
-                                  record="record"
-                                  domain-url="https://jmorel.opendatasoft.com"></ods-record-image>
-                <br>
-                <span style="font-style: italic">{{ record.fields.credits_image }}</span>
-            </p>
-            <p>
-                <a href="{{ record.fields.page_web }}">Episode du {{ record.fields.date }}</a>
-            </p>
-            <p>
-                {{ record.fields.description }}
-            </p>
-            <p>
-                <a href="{{ record.fields.podcast }}" target="_blank">
-                    <i class="fa fa-play-circle"></i> Ecouter l'épisode
-                </a>
-            </p>
-        {% endverbatim %}
-    </ods-map-layer>
+{# Tooltip #}
+
+{% block tooltip_content %}
+    {% verbatim %}
+        <p>
+            <a href="{{ record.fields.page_web }}">Episode du {{ record.fields.date }}</a>
+        </p>
+        <p>
+            {{ record.fields.description }}
+        </p>
+        <p>
+            <a href="{{ record.fields.podcast }}" target="_blank">
+                <i class="fa fa-play-circle"></i> Ecouter l'épisode
+            </a>
+        </p>
+    {% endverbatim %}
 {% endblock %}

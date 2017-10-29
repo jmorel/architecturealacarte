@@ -19,7 +19,7 @@
     
 
 
-    <base href="">
+    <base href="/50-lieux-en-france-a-voir-au-moins-une-fois-dans-sa-vie.html">
 </head>
 <body>
 
@@ -41,7 +41,8 @@
 
     
     <div class="archi-feedback">
-        Cette sélection a été composée par les revues <a href="http://www.admagazine.fr/architecture/balade/diaporama/les-50-lieux-en-france-a-voir-au-moins-une-fois-dans-sa-vie/43560">AD</a>
+        Cette sélection a été composée par les revues <a
+            href="http://www.admagazine.fr/architecture/balade/diaporama/les-50-lieux-en-france-a-voir-au-moins-une-fois-dans-sa-vie/43560">AD</a>
         et <a href="http://www.vanityfair.fr/">Vanity Fair</a> en supplément de leurs numéros de juin 2017.
     </div>
 
@@ -49,35 +50,37 @@
     <div class="map ng-cloak" ng-app="archi">
         
             <ods-dataset-context context="map,tooltip"
-                                 map-domain=""
-                                 map-dataset=""
+                                 map-domain="jmorel.opendatasoft.com"
+                                 map-dataset="50-lieux-en-france-a-voir-au-moins-une-fois-dans-sa-vie"
                                  map-parameters=""
-                                 tooltip-domain=""
+                                 tooltip-domain="jmorel.opendatasoft.com"
                                  tooltip-urlsync="true"
-                                 tooltip-dataset="">
+                                 tooltip-dataset="50-lieux-en-france-a-voir-au-moins-une-fois-dans-sa-vie">
                 <!-- filters -->
 
                 
-    <div class="filters">
-        <ods-text-search placeholder="Rechercher..."
-                         context="archi"></ods-text-search>
-
-        <div class="tags"
-             ods-facet-results="items"
-             ods-facet-results-context="archi"
-             ods-facet-results-facet-name="categorie"
-             ng-init="seeAll = false; colors = {'Architecture':'#00EBBE','Lifestyle':'#619FC8','Art':'#F7C87E','Jardins et sites':'#CB516D','Patrimoine':'#F7AD84'}">
-            <div class="tag"
-                 ng-class="{'tag--active': archi.parameters['refine.categorie'] && archi.parameters['refine.categorie'].indexOf(item.name) > -1}"
-                 ng-repeat="item in items"
-                 ng-click="archi.toggleRefine('categorie', item.name)">
-                <span class="tag-color" style="background-color: {{ colors[item.name] }}"></span>
-                <span ng-bind="item.name" class="tag-value"></span>
-                <span ng-bind="item.count" class="tag-count"></span>
-            </div>
+                    <div class="filters">
+                        <ods-text-search placeholder="Rechercher..."
+                                         context="map"></ods-text-search>
+                        
+    <div class="tags"
+         ods-facet-results="items"
+         ods-facet-results-context="map"
+         ods-facet-results-facet-name="categorie"
+         ng-init="seeAll = false; colors = {'Architecture':'#00EBBE','Lifestyle':'#619FC8','Art':'#F7C87E','Jardins et sites':'#CB516D','Patrimoine':'#F7AD84'}">
+        <div class="tag"
+             ng-class="{'tag--active': map.parameters['refine.categorie'] && map.parameters['refine.categorie'].indexOf(item.name) > -1}"
+             ng-repeat="item in items"
+             ng-click="map.toggleRefine('categorie', item.name)">
+            <span class="tag-color"
+                  style="background-color: {{ colors[item.name] }}"></span>
+            <span ng-bind="item.name" class="tag-value"></span>
+            <span ng-bind="item.count" class="tag-count"></span>
         </div>
     </div>
 
+                    </div>
+                
 
                 <div class="map-tooltip-wrapper">
 
@@ -92,7 +95,10 @@
                                  toolbar-geolocation="false"
                                  toolbar-drawing="false">
                         
-    <ods-map-layer context="archi"
+    <ods-map-layer context="map"
+                   refine-on-click-context="tooltip"
+                   refine-on-click-tooltip-map-field="nom"
+                   refine-on-click-tooltip-context-field="nom"
                    color-categories="{'Architecture':'#00EBBE','Lifestyle':'#619FC8','Art':'#F7C87E','Jardins et sites':'#CB516D','Patrimoine':'#F7AD84'}"
                    color-by-field="categorie"
                    color-categories-other="#C32D1C"
@@ -107,28 +113,7 @@
                    border-pattern="solid"
                    caption="false"
                    title="50 lieux en France à voir au moins une fois dans sa vie"
-                   description="Ce guide des 50 lieux en France à voir au moins une fois dans sa vie a été écrit par les revues AD et Vanity Fair pour leurs numéro de juin 2017.">
-        
-            <div style="text-align: center">
-                <h2>
-                    {{ record.fields.nom }}
-                </h2>
-                <p style="font-style:italic">
-                    {{ record.fields.description }}
-                </p>
-                <p ng-if="record.fields.image.filename">
-                    <ods-record-image context="archi"
-                                      field="image"
-                                      record="record"
-                                      domain-url="https://jmorel.opendatasoft.com"></ods-record-image>
-                </p>
-                <p>
-                    {{ record.fields.adresse }} <br/>
-                    {{ record.fields.code_postal }} {{ record.fields.ville }}
-                </p>
-            </div>
-        
-    </ods-map-layer>
+                   description="Ce guide des 50 lieux en France à voir au moins une fois dans sa vie a été écrit par les revues AD et Vanity Fair pour leurs numéro de juin 2017."></ods-map-layer>
 
                         </ods-map>
                     
@@ -137,17 +122,17 @@
 
                     
                         <div class="tooltip"
-                             ng-class="{'tooltip--shown': tooltip.parameters['refine.'] && !loading}"
+                             ng-class="{'tooltip--shown': tooltip.parameters['refine.nom'] && !loading}"
                              ods-results="records"
                              ods-results-context="tooltip"
                              ods-results-max="1">
                             <div ng-repeat="record in records" class="tooltip-content">
                                 <div class="tooltip-header">
                                     <h2 class="tooltip-title"
-                                        ng-bind="record.fields['']"></h2>
+                                        ng-bind="record.fields['nom']"></h2>
                                     <button class="tooltip-close"
                                             type="button"
-                                            ng-click="tooltip.parameters['refine.'] = undefined;">
+                                            ng-click="tooltip.parameters['refine.nom'] = undefined;">
                                         <i class="fa fa-times" aria-hidden="true"></i>
                                     </button>
                                 </div>
@@ -155,9 +140,10 @@
                                 <div class="tooltip-body">
                                     <div class="tooltip-hero">
                                         <ods-record-image context="tooltip"
-                                                          field=""
+                                                          ng-if="record.fields['image']"
+                                                          field="image"
                                                           record="record"
-                                                          domain-url="https://"></ods-record-image>
+                                                          domain-url="https://jmorel.opendatasoft.com"></ods-record-image>
                                         <ods-map basemap="mapbox.streets"
                                                  location="{{ '5,' + record.fields.coordonnees[0] + ',' + record.fields.coordonnees[1] }}"
                                                  class="tooltip-map"
@@ -179,12 +165,20 @@
                                                            caption="false"></ods-map-layer>
                                         </ods-map>
                                     </div>
-                                    <div class="tooltip-credits">
-                                        Crédits :
-                                        <span ng-bind="record.fields['']"></span>
-                                    </div>
 
                                     
+
+                                    
+    
+        <p>
+            {{ record.fields.description }}
+        </p>
+        <p>
+            {{ record.fields.adresse }} <br/>
+            {{ record.fields.code_postal }} {{ record.fields.ville }}
+        </p>
+    
+
                                 </div>
                             </div>
                         </div>
