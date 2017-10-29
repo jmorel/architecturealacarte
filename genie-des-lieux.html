@@ -18,12 +18,14 @@
         <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.css">
     
 
+
+    
 </head>
 <body>
 
 <header>
     
-    <a class="breadcrumbs" href="index.html">
+    <a class="breadcrumbs" href="/index.html">
         <i class="fa fa-arrow-circle-o-left"></i>
         Architecture à la carte
     </a>
@@ -47,15 +49,14 @@
     </div>
 
 
-
-    <div class="map ng-cloak" ng-app="ods-widgets">
+    <div class="map ng-cloak" ng-app="archi">
         
             <ods-dataset-context context="archi"
                                  archi-urlsync="true"
                                  archi-domain="jmorel.opendatasoft.com"
                                  archi-dataset="le-genie-des-lieux"
                                  archi-parameters="">
-            
+                
     <div class="filters">
         <ods-text-search placeholder="Rechercher..."
                          context="archi"></ods-text-search>
@@ -77,13 +78,13 @@
         </div>
     </div>
 
-            
-                <ods-map basemap="mapbox.streets"
-                         location="6,46.36967,2.71362"
-                         toolbar-fullscreen="false"
-                         toolbar-geolocation="false"
-                         toolbar-drawing="false">
-                    
+                
+                    <ods-map basemap="mapbox.streets"
+                             location="6,46.36967,2.71362"
+                             toolbar-fullscreen="false"
+                             toolbar-geolocation="false"
+                             toolbar-drawing="false">
+                        
     <ods-map-layer context="archi"
                    picto="dot"
                    show-marker="false"
@@ -126,10 +127,10 @@
         
     </ods-map-layer>
 
-                </ods-map>
-            
+                    </ods-map>
+                
+            </ods-dataset-context>
         
-        </ods-dataset-context>
     </div>
 
 
@@ -177,21 +178,26 @@
     </script>
 
 
-    <script src="architecturealacarte.min.js"></script>
-    <script src="ods-widgets/ods-widgets.min.js"></script>
+    <script src="/architecturealacarte.min.js"></script>
+    <script src="/ods-widgets/ods-widgets.js"></script>
 
     <script type="text/javascript">
-        var ods = angular.module('ods-widgets');
-        ods.config(function (ODSWidgetsConfigProvider, ModuleLazyLoaderProvider) {
-            ODSWidgetsConfigProvider.setConfig({
-                basemaps: [{
-                    "provider": "mapbox.streets",
-                    "mapbox_access_token": "pk.eyJ1IjoiamVyZW15bW9yZWwiLCJhIjoiZmZjZGMxNzUwZTJjYmQ5YmIwYjAzOTFjYWNlY2ExYTAifQ.wEKnZyKpqqSzWew8QEzCtg",
-                    "id": "mapbox.streets",
-                    "label": "mapbox.streets"
-                }]
-            })
-        });
+        (function () {
+            var archi = angular.module('archi', ['ods-widgets']);
+
+            archi.config(function (ODSWidgetsConfigProvider, $locationProvider) {
+                ODSWidgetsConfigProvider.setConfig({
+                    basemaps: [{
+                        "provider": "mapbox.streets",
+                        "mapbox_access_token": "pk.eyJ1IjoiamVyZW15bW9yZWwiLCJhIjoiZmZjZGMxNzUwZTJjYmQ5YmIwYjAzOTFjYWNlY2ExYTAifQ.wEKnZyKpqqSzWew8QEzCtg",
+                        "id": "mapbox.streets",
+                        "label": "mapbox.streets"
+                    }]
+                });
+
+                $locationProvider.html5Mode(true);
+            });
+        }());
     </script>
 
 </body>

@@ -18,12 +18,14 @@
         <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.css">
     
 
+
+    <base href="/ete-archi.html" />
 </head>
 <body>
 
 <header>
     
-    <a class="breadcrumbs" href="index.html">
+    <a class="breadcrumbs" href="/index.html">
         <i class="fa fa-arrow-circle-o-left"></i>
         Architecture à la carte
     </a>
@@ -45,70 +47,126 @@
     </div>
 
 
-
-    <div class="map ng-cloak" ng-app="ods-widgets">
+    <div class="map ng-cloak" ng-app="archi">
         
-            <ods-dataset-context context="archi"
-                                 archi-urlsync="true"
-                                 archi-domain="jmorel.opendatasoft.com"
-                                 archi-dataset="ete-archi"
-                                 archi-parameters="">
-            
-    <div class="filters">
-        <ods-text-search placeholder="Rechercher..."
-                         context="archi"></ods-text-search>
-    </div>
+    <ods-dataset-context context="map,tooltip"
+                         map-domain="jmorel.opendatasoft.com"
+                         map-dataset="ete-archi"
+                         tooltip-domain="jmorel.opendatasoft.com"
+                         tooltip-urlsync="true"
+                         tooltip-dataset="ete-archi">
 
-            
-                <ods-map basemap="mapbox.streets"
-                         location="6,46.36967,2.71362"
-                         toolbar-fullscreen="false"
-                         toolbar-geolocation="false"
-                         toolbar-drawing="false">
+        <!-- filters -->
+
+        <div class="filters">
+            <ods-text-search placeholder="Rechercher..."
+                             context="archi"></ods-text-search>
+        </div>
+
+        <!-- map + tooltip -->
+
+        <div class="map-tooltip-wrapper"
+             ng-controller="RotateController">
+
+
+            <!-- map -->
+
+            <ods-map basemap="mapbox.streets"
+                     class="main-map"
+                     ng-class="{'main-map--blurry': tooltip.parameters['refine.titre']}"
+                     location="6,46.36967,2.71362"
+                     toolbar-fullscreen="false"
+                     toolbar-geolocation="false"
+                     toolbar-drawing="false">
+                <ods-map-layer context="map"
+                               refine-on-click-context="tooltip"
+                               refine-on-click-tooltip-map-field="titre"
+                               refine-on-click-tooltip-context-field="titre"
+                               picto="dot"
+                               show-marker="false"
+                               shape-opacity="0.5"
+                               point-opacity="1"
+                               border-color="#FFFFFF"
+                               border-opacity="1"
+                               border-size="1"
+                               border-pattern="solid"
+                               caption="false"
+                               title="L'été archi de David Abittan"
+                               description="Durant l’été, David Abittan nous emmène chaque semaine à la découverte de toutes les époques de l’architecture de France.">
+                </ods-map-layer>
+            </ods-map>
+
+            <!-- tooltip -->
+
+            <div class="tooltip"
+                 ng-class="{'tooltip--shown': tooltip.parameters['refine.titre'] && !loading}"
+                 ods-results="records"
+                 ods-results-context="tooltip"
+                 ods-results-max="1">
+                <div ng-repeat="record in records" class="tooltip-content">
                     
-    <ods-map-layer context="archi"
-                   picto="dot"
-                   show-marker="false"
-                   shape-opacity="0.5"
-                   point-opacity="1"
-                   border-color="#FFFFFF"
-                   border-opacity="1"
-                   border-size="1"
-                   border-pattern="solid"
-                   caption="false"
-                   title="L'été archi de David Abittan"
-                   description="Durant l’été, David Abittan nous emmène chaque semaine à la découverte de toutes les époques de l’architecture de France.">
-        
-            <h2 style="text-align: left; font-style: normal">
-                {{ record.fields.titre }}
-            </h2>
-            <p>
+                        <div class="tooltip-header">
+                            <h2 class="tooltip-title">
+                                {{ record.fields.titre }}
+                            </h2>
+                            <button class="tooltip-close"
+                                    type="button"
+                                    ng-click="tooltip.parameters['refine.titre'] = undefined;">
+                                <i class="fa fa-times" aria-hidden="true"></i>
+                            </button>
+                        </div>
 
-                <ods-record-image context="archi"
-                                  field="image"
-                                  record="record"
-                                  domain-url="https://jmorel.opendatasoft.com"></ods-record-image>
-                <br>
-                <span style="font-style: italic">{{ record.fields.credits_image }}</span>
-            </p>
-            <p>
-                <a href="{{ record.fields.page_web }}">Episode du {{ record.fields.date }}</a>
-            </p>
-            <p>
-                {{ record.fields.description }}
-            </p>
-            <p>
-                <a href="{{ record.fields.podcast }}" target="_blank">
-                    <i class="fa fa-play-circle"></i> Ecouter l'épisode
-                </a>
-            </p>
-        
-    </ods-map-layer>
+                        <div class="tooltip-body">
+                            <div class="tooltip-hero">
+                                <ods-record-image context="archi"
+                                                  field="image"
+                                                  record="record"
+                                                  domain-url="https://jmorel.opendatasoft.com"></ods-record-image>
+                                <ods-map basemap="mapbox.streets"
+                                         location="{{ '5,' + record.fields.coordonnees[0] + ',' + record.fields.coordonnees[1] }}"
+                                         class="tooltip-map"
+                                         toolbar-fullscreen="false"
+                                         toolbar-geolocation="false"
+                                         scroll-wheel-zoom="false"
+                                         no-refit="true"
+                                         toolbar-drawing="false">
+                                    <ods-map-layer context="tooltip"
+                                                   refine-on-click-context="dummy"
+                                                   picto="dot"
+                                                   show-marker="false"
+                                                   shape-opacity="0.5"
+                                                   point-opacity="1"
+                                                   border-color="#FFFFFF"
+                                                   border-opacity="1"
+                                                   border-size="1"
+                                                   border-pattern="solid"
+                                                   caption="false"
+                                                   title="L'été archi de David Abittan"
+                                                   description="Durant l’été, David Abittan nous emmène chaque semaine à la découverte de toutes les époques de l’architecture de France."></ods-map-layer>
+                                </ods-map>
+                            </div>
+                            <div class="tooltip-credits">Crédits : {{ record.fields.credits_image }}</div>
+                            <p>
+                                <a href="{{ record.fields.page_web }}">Episode du {{ record.fields.date }}</a>
+                            </p>
+                            <p>
+                                {{ record.fields.description }}
+                            </p>
+                            <p>
+                                <a href="{{ record.fields.podcast }}" target="_blank">
+                                    <i class="fa fa-play-circle"></i> Ecouter l'épisode
+                                </a>
+                            </p>
+                        </div>
+                    
+                </div>
+            </div>
+        </div>
+    </ods-dataset-context>
 
-                </ods-map>
-            
-        
-        </ods-dataset-context>
+
+
+
     </div>
 
 
@@ -138,6 +196,7 @@
 
 
     
+    
     <script>
         (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;
@@ -156,21 +215,47 @@
     </script>
 
 
-    <script src="architecturealacarte.min.js"></script>
-    <script src="ods-widgets/ods-widgets.min.js"></script>
+    <script src="/architecturealacarte.min.js"></script>
+    <script src="/ods-widgets/ods-widgets.js"></script>
 
     <script type="text/javascript">
-        var ods = angular.module('ods-widgets');
-        ods.config(function (ODSWidgetsConfigProvider, ModuleLazyLoaderProvider) {
-            ODSWidgetsConfigProvider.setConfig({
-                basemaps: [{
-                    "provider": "mapbox.streets",
-                    "mapbox_access_token": "pk.eyJ1IjoiamVyZW15bW9yZWwiLCJhIjoiZmZjZGMxNzUwZTJjYmQ5YmIwYjAzOTFjYWNlY2ExYTAifQ.wEKnZyKpqqSzWew8QEzCtg",
-                    "id": "mapbox.streets",
-                    "label": "mapbox.streets"
-                }]
-            })
-        });
+        (function () {
+            var archi = angular.module('archi', ['ods-widgets']);
+
+            archi.config(function (ODSWidgetsConfigProvider, $locationProvider) {
+                ODSWidgetsConfigProvider.setConfig({
+                    basemaps: [{
+                        "provider": "mapbox.streets",
+                        "mapbox_access_token": "pk.eyJ1IjoiamVyZW15bW9yZWwiLCJhIjoiZmZjZGMxNzUwZTJjYmQ5YmIwYjAzOTFjYWNlY2ExYTAifQ.wEKnZyKpqqSzWew8QEzCtg",
+                        "id": "mapbox.streets",
+                        "label": "mapbox.streets"
+                    }]
+                });
+
+                $locationProvider.html5Mode(true);
+            });
+        }());
+    </script>
+
+
+    <script>
+        (function () {
+            var archi = angular.module('archi');
+
+            archi.controller('RotateController', ['$scope', '$element', function ($scope, $element) {
+                $scope.wrapperWidth = 0;
+                $scope.wrapperHeight = 0;
+
+                var setRotationDirection = function () {
+                    $scope.wrapperHeight = $element.height();
+                    $scope.wrapperWidth = $element.width();
+                };
+
+                setRotationDirection();
+
+                $(window).on('resize', setRotationDirection);
+            }]);
+        })();
     </script>
 
 </body>
