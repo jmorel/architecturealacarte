@@ -7,7 +7,7 @@ class TableOfContents extends Component {
         super(props);
         this.state = {
             sections: [
-                [{ label: "L'été archi de David Abittan", url: "/ete-archi.html" }],
+                [{ label: "L'été archi de David Abittan", url: "/ete-archi" }],
                 [{ label: "Le génie des lieux", url: "test" }],
                 [
                     { label: "Les journées du patrimoine 2017", url: "test" },

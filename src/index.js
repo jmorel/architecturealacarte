@@ -11,7 +11,7 @@ ReactDOM.render(
     <BrowserRouter>
         <div>
             <Route exact component={Home} path="/"></Route>
-            <Route component={EteArchi} path="/ete-archi.html"></Route>
+            <Route component={EteArchi} path="/ete-archi"></Route>
         </div>
     </BrowserRouter>
     , document.getElementById('root'));
