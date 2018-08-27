@@ -63,6 +63,14 @@ main {
   justify-content: flex-start;
 }
 
+.Sidebar-content {
+  color: var(--color-darkestgreen);
+}
+
+.Sidebar-content p {
+  margin: var(--spacing-normal);
+}
+
 
 .Home .Sidebar-content {
   padding: var(--spacing-normal);

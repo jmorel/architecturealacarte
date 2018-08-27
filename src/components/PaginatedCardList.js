@@ -19,7 +19,9 @@ class PaginatedCardList extends React.Component {
 
 
     currentPageItems() {
-        return this.props.items.slice(this.state.currentPageIndex * this.state.pageSize, this.state.pageSize);
+        const start = this.state.currentPageIndex * this.state.pageSize;
+        const end = start + this.state.pageSize;
+        return this.props.items.slice(start, end);
     }
 
     lastPageIndex() {
@@ -39,7 +41,7 @@ class PaginatedCardList extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="PaginatedCardList">
                 {this.currentPageItems().map(item => (
                     <LocationCard key={item.date}
                         title={item.titre}
@@ -47,7 +49,8 @@ class PaginatedCardList extends React.Component {
                 ))}
                 <div className="Pagination">
                     {this.pageIndices().map(index =>
-                        <button key={index}
+                        <button className={index === this.state.currentPageIndex ? 'active' : ''}
+                            key={index}
                             onClick={() => this.setPageIndex(index)}>{index}</button>
                     )}
                 </div>
