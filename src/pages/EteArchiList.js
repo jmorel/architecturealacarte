@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import L from 'leaflet';
 import { Map, TileLayer, Marker } from 'react-leaflet';
 import axios from 'axios';
 
@@ -7,23 +6,14 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 import PaginatedCardList from '../components/PaginatedCardList';
 
-import './EteArchi.css';
+import { buildImageIcon, buildSimpleIcon } from '../utils';
+
+import './EteArchiList.css';
 import '../components/Header.css';
 import 'leaflet/dist/leaflet.css';
 
-const buildIcon = function (record) {
-    const iconRadius = 50;
-    const ratio = Math.max(record.image.width / iconRadius, record.image.height / iconRadius);
-    const iconHeight = record.image.height / ratio;
-    const iconWidth = record.image.width / ratio;
-    return L.icon({
-        iconUrl: `https://jmorel.opendatasoft.com/explore/dataset/ete-archi/files/${record.image.id}/300`,
-        iconSize:     [iconWidth, iconHeight],
-        iconAnchor:   [iconWidth/2, iconHeight/2],
-    })
-};
 
-class EteArchi extends Component {
+class EteArchiList extends Component {
     state = {
         records: []
     }
@@ -34,7 +24,8 @@ class EteArchi extends Component {
             .then(res => {
                 const records = res.data.map(record => ({
                     ...record,
-                    icon: buildIcon(record),
+                    imageIcon: buildImageIcon(record),
+                    simpleIcon: buildSimpleIcon(record),
                 }))
                 this.setState({ records: records });
             })
@@ -67,9 +58,9 @@ class EteArchi extends Component {
                         />
                         {this.state.records.filter(record => record.coordonnees).map(record =>
                             <Marker key={record.date}
-                                    position={record.coordonnees}
-                                    icon={record.icon}
-                                    onClick={this.navigateToRecord(record)}/>
+                                position={record.coordonnees}
+                                icon={record.imageIcon}
+                                onClick={this.navigateToRecord(record)} />
                         )}
                     </Map>
                 </main>
@@ -78,4 +69,4 @@ class EteArchi extends Component {
     }
 }
 
-export default EteArchi;
+export default EteArchiList;
