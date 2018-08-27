@@ -32,7 +32,7 @@ class EteArchi extends Component {
                         <p>
                             Durant l’été, <a href="">David Abittan</a> nous emmène chaque semaine sur <a href="">France Inter</a> à la découverte de toutes les époques de l’architecture de France.
                         </p>
-                    <PaginatedCardList items={this.state.records}></PaginatedCardList>
+                        <PaginatedCardList items={this.state.records}></PaginatedCardList>
                     </div>
                     <Footer />
                 </div>

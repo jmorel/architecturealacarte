@@ -1,3 +1,13 @@
+.EteArchi {
+  display: flex;
+  min-height: 100vh;
+}
+
+.EteArchi .Sidebar {
+  height: 100vh;
+  overflow-y: scroll;
+}
+
 .EteArchi .PaginatedCardList {
     margin: var(--spacing-normal) 0;
 }
