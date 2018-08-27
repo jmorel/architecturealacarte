@@ -1,0 +1,22 @@
+{
+  "name": "architecturealacarte-react",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "axios": "^0.18.0",
+    "leaflet": "^1.3.4",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
+    "react-leaflet": "^2.0.1",
+    "react-router-dom": "^4.3.1"
+  },
+  "devDependencies": {
+    "react-scripts": "1.1.5"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}

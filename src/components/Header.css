@@ -1,0 +1,23 @@
+.Header {
+    padding: var(--spacing-normal);
+    border-bottom: 15px solid var(--color-white);
+    font-style: italic;
+}
+
+.Header h1 {
+    color: var(--color-white);
+    font-family: var(--font-family-headings);
+    font-size: var(--font-size-headings);
+    font-weight: normal;
+    line-height: 70px;
+    margin: 0;
+}
+
+.Header div {
+    margin-bottom: var(--spacing-small);
+}
+
+.Header a {
+    color: var(--color-darkestgreen);
+    font-size: var(--font-size-homelink)
+}

@@ -1,0 +1,8 @@
+.Footer {
+  padding: var(--spacing-normal);
+  background-color: var(--color-darkgreen);
+  color: var(--color-darkestgreen);
+  font-style: italic;
+  font-size: var(--font-size-small);
+  line-height: 16px;
+}

@@ -1,0 +1,31 @@
+.Pagination {
+    margin-top: var(--spacing-small);
+    display: flex;
+    justify-content: center;
+    list-style: none;
+}
+
+
+.Pagination button {
+    color: var(--color-white);
+    background-color: var(--color-darkgreen);
+    border: none;
+    font-size: var(--font-size-small);
+    font-family: inherit;
+    padding: var(--spacing-tiny);
+}
+
+.Pagination button:hover {
+    background-color: var(--color-white);
+    color: var(--color-darkgreen);
+}
+.Pagination button:first-child {
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+    padding-left: calc(2* var(--spacing-tiny));
+}
+.Pagination button:last-child {
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+    padding-right: calc(2* var(--spacing-tiny));
+}
