@@ -8,8 +8,6 @@ import './Header.css';
 
 library.add(faArrowAltCircleLeft);
 
-
-
 class Header extends Component {
     render() {
         return (

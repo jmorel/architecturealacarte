@@ -1,0 +1,19 @@
+.EteArchi .Header {
+    position: relative;
+}
+
+.CloseButton {
+    position: absolute;
+    top: var(--spacing-normal);
+    right: var(--spacing-normal);
+    font-size: 40px;
+    border: none;
+    padding: 0;
+    color: var(--color-green);
+    background: none;
+    cursor: pointer;
+}
+
+.CloseButton:hover {
+    color: var(--color-white);
+}

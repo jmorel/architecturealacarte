@@ -7,6 +7,8 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
 import { buildImageIcon, buildSimpleIcon } from '../utils';
 
+import './EteArchiDetails.css';
+
 library.add(faTimes);
 
 class EteArchiDetails extends React.Component {
@@ -21,6 +23,7 @@ class EteArchiDetails extends React.Component {
             .then(res => {
                 const records = res.data.map(record => ({
                     ...record,
+                    imageUrl: `https://jmorel.opendatasoft.com/explore/dataset/ete-archi/files/${record.image.id}/300`,
                     imageIcon: buildImageIcon(record),
                     simpleIcon: buildSimpleIcon(record),
                 }))
@@ -46,7 +49,7 @@ class EteArchiDetails extends React.Component {
                             onClick={this.navigateToList()}>
                             <FontAwesomeIcon icon={faTimes}/>
                         </button>
-                        <img src={this.state.currentRecord.image} />
+                        <img src={this.state.currentRecord.imageUrl} />
                         <h2>{this.state.currentRecord.titre}</h2>
                         <p>Episode du {this.state.currentRecord.date}</p>
                     </div>
