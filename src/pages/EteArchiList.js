@@ -56,7 +56,7 @@ class EteArchiList extends Component {
                         {this.state.locations.filter(location => location.getLatLon()).map(location =>
                             <Marker key={location.getId()}
                                 position={location.getLatLon()}
-                                icon={location.imageMarkerIcon}
+                                icon={location.markerIcon}
                                 onClick={navigateToDetails(location)} />
                         )}
                     </Map>

@@ -10,7 +10,6 @@ import './EteArchiDetails.css';
 class EteArchiDetails extends React.Component {
     state = {
         locations: [],
-        currentLocation: new EteArchiLocation({image: {url: ''}}),
     }
 
     componentDidMount() {
@@ -20,30 +19,41 @@ class EteArchiDetails extends React.Component {
                 const locations = res.data.map(locationData => new EteArchiLocation(locationData));
                 this.setState({
                     locations: locations,
-                    currentLocation: locations.filter(location => location.getId() === this.props.match.params.id)[0] || {},
                 });
             })
     }
 
     render() {
-        const navigateToList = () => {
-            this.props.history.push('/ete-archi');
+        const history = this.props.history;
+        const currentLocation = this.state.locations.filter(location => location.getId() === this.props.match.params.id)[0];
+        if (!currentLocation) {
+            return <div></div>;
+        }
+        function navigateToList() {
+            history.push('/ete-archi');
+        }
+
+        function navigateToDetails(location) {
+            return () => {
+                console.log(location.getDetailsUrl());
+                history.push(location.getDetailsUrl());
+            }
         }
 
         return (
             <div className="EteArchi">
                 <div className="Sidebar">
-                    <DetailsHeader location={this.state.currentLocation}
+                    <DetailsHeader location={currentLocation}
                                     navigateToList={navigateToList}/>
                     <div className="Sidebar-content">
                         <p>
-                            {this.state.currentLocation.data.description}
+                            {currentLocation.data.description}
                         </p>
                         <p>
-                            <a href={this.state.currentLocation.data.podcast}>Ecouter l'épisode</a>
+                            <a href={currentLocation.data.podcast}>Ecouter l'épisode</a>
                         </p>
                         <p>
-                            Crédits photos: {this.state.currentLocation.getImageCredits()}
+                            Crédits photos: {currentLocation.getImageCredits()}
                         </p>
                     </div>
                 </div>
@@ -56,8 +66,8 @@ class EteArchiDetails extends React.Component {
                         {this.state.locations.filter(location => location.getLatLon()).map(location =>
                             <Marker key={location.getId()}
                                     position={location.getLatLon()}
-                                    icon={location.getId() === this.state.currentLocation.getId() ? location.imageMarkerIcon : location.simpleMarkerIcon}
-                                    onClick={navigateToList}/>
+                                    icon={location.getId() === currentLocation.getId() ? location.markerIcon : location.collapsedMarkerIcon}
+                                    onClick={navigateToDetails(location)}/>
                         )}
                     </Map>
                 </main>
