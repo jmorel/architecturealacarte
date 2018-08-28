@@ -33,3 +33,7 @@
     border-bottom-right-radius: 50%;
     padding-right: calc(2* var(--spacing-tiny));
 }
+
+.PaginatedCardList .LocationCard {
+    cursor: pointer;
+}

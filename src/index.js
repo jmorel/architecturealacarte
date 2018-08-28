@@ -13,7 +13,7 @@ ReactDOM.render(
         <div>
             <Route exact component={Home} path="/"></Route>
             <Route exact component={EteArchiList} path="/ete-archi"></Route>
-            <Route component={EteArchiDetails} path="/ete-archi/:date"></Route>
+            <Route component={EteArchiDetails} path="/ete-archi/:id"></Route>
         </div>
     </BrowserRouter>
     , document.getElementById('root'));

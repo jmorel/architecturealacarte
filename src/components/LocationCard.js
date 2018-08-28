@@ -1,14 +1,12 @@
 import React from 'react';
-import './LocationCard.css';
-class LocationCard extends React.Component {
-    render() {
-        return (
-            <div className="LocationCard">
-                <img src={this.props.imgSrc} alt={this.props.title} />
-                <div className="LocationCard-title">{this.props.title}</div>
-            </div>
-        )
-    }
-}
 
-export default LocationCard;
+import './LocationCard.css';
+
+export default function LocationCard(props) {
+    return (
+        <div className="LocationCard" onClick={props.onClick}>
+            <img src={props.location.getImageUrl()} alt={props.location.getTitle()} />
+            <div className="LocationCard-title">{props.location.getTitle()}</div>
+        </div>
+    )
+}

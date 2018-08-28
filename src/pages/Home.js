@@ -3,7 +3,7 @@ import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 
 import TableOfContents from '../TableOfContents';
 import Footer from '../components/Footer';
-import Header from '../components/Header';
+import {HomeHeader} from '../components/Header';
 
 import './Home.css';
 import 'leaflet/dist/leaflet.css';
@@ -13,7 +13,7 @@ class Home extends Component {
     return (
       <div className="Home">
         <div className="Sidebar">
-          <Header title="Architecture a la carte"/>
+          <HomeHeader title="Architecture a la carte"/>
           <div className="Sidebar-content">
             <p>Architecture à la Carte est un catalogue interactif, un outil de découverte du patrimoine architectural français. Convivial et ludique, ce n'est pas une alternative aux listes exhaustives des Monuments Nationaux et Monuments historiques mais plutôt un compagnon à ces bases de données austères.</p>
             <p>Ce site est compatible avec tous les appareils mobiles, n'hésitez pas à l'utiliser pendant vos balades !</p>

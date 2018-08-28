@@ -13,26 +13,20 @@ class PaginatedCardList extends React.Component {
         }
     }
 
-    imgSrc(imageId) {
-        return `https://jmorel.opendatasoft.com/explore/dataset/ete-archi/files/${imageId}/300`;
-    }
-
-
-    currentPageItems() {
+    currentPageLocations() {
         const start = this.state.currentPageIndex * this.state.pageSize;
         const end = start + this.state.pageSize;
-        return this.props.items.slice(start, end);
+        return this.props.locations.slice(start, end);
     }
 
     lastPageIndex() {
-        return Math.floor(this.props.items.length / this.state.pageSize);
+        return Math.floor(this.props.locations.length / this.state.pageSize);
     }
 
     setPageIndex(index) {
         this.setState({
             currentPageIndex: Math.max(0, Math.min(this.lastPageIndex(), index)),
         })
-        console.log(this.state.currentPageIndex, this.lastPageIndex())
     }
 
     pageIndices() {
@@ -42,10 +36,10 @@ class PaginatedCardList extends React.Component {
     render() {
         return (
             <div className="PaginatedCardList">
-                {this.currentPageItems().map(item => (
-                    <LocationCard key={item.date}
-                        title={item.titre}
-                        imgSrc={this.imgSrc(item.image.id)} />
+                {this.currentPageLocations().map(location => (
+                    <LocationCard key={location.getId()}
+                        location={location}
+                        onClick={this.props.onCardClick(location)} />
                 ))}
                 <div className="Pagination">
                     {this.pageIndices().map(index =>

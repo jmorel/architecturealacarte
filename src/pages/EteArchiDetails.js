@@ -1,68 +1,49 @@
 import React from 'react';
 import { Map, TileLayer, Marker } from 'react-leaflet';
 import axios from 'axios';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
-import { buildImageIcon, buildSimpleIcon } from '../utils';
+import { DetailsHeader } from '../components/Header';
+import { EteArchiLocation } from '../models/Location';
 
 import './EteArchiDetails.css';
 
-library.add(faTimes);
-
 class EteArchiDetails extends React.Component {
     state = {
-        records: [],
-        currentRecord: {},
+        locations: [],
+        currentLocation: new EteArchiLocation({image: {url: ''}}),
     }
 
     componentDidMount() {
         axios
             .get('https://jmorel.opendatasoft.com/api/v2/catalog/datasets/ete-archi/exports/json')
             .then(res => {
-                const records = res.data.map(record => ({
-                    ...record,
-                    imageUrl: `https://jmorel.opendatasoft.com/explore/dataset/ete-archi/files/${record.image.id}/300`,
-                    imageIcon: buildImageIcon(record),
-                    simpleIcon: buildSimpleIcon(record),
-                }))
+                const locations = res.data.map(locationData => new EteArchiLocation(locationData));
                 this.setState({
-                    records: records,
-                    currentRecord: records.filter(record => record.date === this.props.match.params.date)[0] || {},
+                    locations: locations,
+                    currentLocation: locations.filter(location => location.getId() === this.props.match.params.id)[0] || {},
                 });
             })
     }
 
-    navigateToList() {
-        return () => {
-            this.props.history.push(`/ete-archi`)
-        };
-    }
-
     render() {
+        const navigateToList = () => {
+            this.props.history.push('/ete-archi');
+        }
+
         return (
             <div className="EteArchi">
                 <div className="Sidebar">
-                    <div className="Header">
-                        <button className="CloseButton"
-                            onClick={this.navigateToList()}>
-                            <FontAwesomeIcon icon={faTimes}/>
-                        </button>
-                        <img src={this.state.currentRecord.imageUrl} />
-                        <h2>{this.state.currentRecord.titre}</h2>
-                        <p>Episode du {this.state.currentRecord.date}</p>
-                    </div>
-
+                    <DetailsHeader location={this.state.currentLocation}
+                                    navigateToList={navigateToList}/>
                     <div className="Sidebar-content">
                         <p>
-                            {this.state.currentRecord.description}
+                            {this.state.currentLocation.data.description}
                         </p>
                         <p>
-                            <a href={this.state.currentRecord.podcast}>Ecouter l'épisode</a>
+                            <a href={this.state.currentLocation.data.podcast}>Ecouter l'épisode</a>
                         </p>
                         <p>
-                            Crédits photos: {this.state.currentRecord.credits_image}
+                            Crédits photos: {this.state.currentLocation.getImageCredits()}
                         </p>
                     </div>
                 </div>
@@ -72,11 +53,11 @@ class EteArchiDetails extends React.Component {
                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                             attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
                         />
-                        {this.state.records.filter(record => record.coordonnees).map(record =>
-                            <Marker key={record.date}
-                                    position={record.coordonnees}
-                                    icon={record.date === this.state.currentRecord.date ? record.imageIcon : record.simpleIcon}
-                                    onClick={this.navigateToList(record)}/>
+                        {this.state.locations.filter(location => location.getLatLon()).map(location =>
+                            <Marker key={location.getId()}
+                                    position={location.getLatLon()}
+                                    icon={location.getId() === this.state.currentLocation.getId() ? location.imageMarkerIcon : location.simpleMarkerIcon}
+                                    onClick={navigateToList}/>
                         )}
                     </Map>
                 </main>
