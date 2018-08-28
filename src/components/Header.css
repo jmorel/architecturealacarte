@@ -21,3 +21,7 @@
     color: var(--color-darkestgreen);
     font-size: var(--font-size-homelink)
 }
+
+.Header .fa-arrow-alt-circle-left {
+    margin-right: var(--spacing-tiny);
+}

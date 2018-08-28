@@ -1,8 +1,13 @@
 import React from 'react';
 import { Map, TileLayer, Marker } from 'react-leaflet';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
 import { buildImageIcon, buildSimpleIcon } from '../utils';
+
+library.add(faTimes);
 
 class EteArchiDetails extends React.Component {
     state = {
@@ -39,7 +44,7 @@ class EteArchiDetails extends React.Component {
                     <div className="Header">
                         <button className="CloseButton"
                             onClick={this.navigateToList()}>
-                            close
+                            <FontAwesomeIcon icon={faTimes}/>
                         </button>
                         <img src={this.state.currentRecord.image} />
                         <h2>{this.state.currentRecord.titre}</h2>
