@@ -27,7 +27,9 @@ class EteArchiDetails extends React.Component {
     }
 
     navigateToList() {
-        return () => this.props.history.push(`/ete-archi`);
+        return () => {
+            this.props.history.push(`/ete-archi`)
+        };
     }
 
     render() {
