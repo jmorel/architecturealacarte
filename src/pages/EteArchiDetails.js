@@ -7,7 +7,7 @@ import { EteArchiLocation } from '../models/Location';
 
 import './EteArchiDetails.css';
 
-class EteArchiDetails extends React.Component {
+export class EteArchiDetailsContainer extends React.Component {
     state = {
         locations: [],
     }
@@ -24,56 +24,58 @@ class EteArchiDetails extends React.Component {
     }
 
     render() {
-        const history = this.props.history;
         const currentLocation = this.state.locations.filter(location => location.getId() === this.props.match.params.id)[0];
-        if (!currentLocation) {
-            return <div></div>;
-        }
-        function navigateToList() {
-            history.push('/ete-archi');
-        }
-
-        function navigateToDetails(location) {
-            return () => {
-                console.log(location.getDetailsUrl());
-                history.push(location.getDetailsUrl());
-            }
-        }
-
         return (
-            <div className="EteArchi">
-                <div className="Sidebar">
-                    <DetailsHeader location={currentLocation}
-                                    navigateToList={navigateToList}/>
-                    <div className="Sidebar-content">
-                        <p>
-                            {currentLocation.data.description}
-                        </p>
-                        <p>
-                            <a href={currentLocation.data.podcast}>Ecouter l'épisode</a>
-                        </p>
-                        <p>
-                            Crédits photos: {currentLocation.getImageCredits()}
-                        </p>
-                    </div>
-                </div>
-                <main>
-                    <Map center={[51.505, -0.09]} zoom={7}>
-                        <TileLayer
-                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                            attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-                        />
-                        {this.state.locations.filter(location => location.getLatLon()).map(location =>
-                            <Marker key={location.getId()}
-                                    position={location.getLatLon()}
-                                    icon={location.getId() === currentLocation.getId() ? location.markerIcon : location.collapsedMarkerIcon}
-                                    onClick={navigateToDetails(location)}/>
-                        )}
-                    </Map>
-                </main>
-            </div>
+            <EteArchiDetails locations={this.state.locations}
+                currentLocation={currentLocation}
+                history={this.props.history} />
+
         )
     }
 }
 
-export default EteArchiDetails;
+export function EteArchiDetails({ locations, currentLocation, history }) {
+    function navigateToList() {
+        history.push('/ete-archi');
+    }
+
+    function navigateToDetails(location) {
+        return () => {
+            history.push(location.getDetailsUrl());
+        }
+    }
+
+    return (
+        <div className="EteArchi">
+            <div className="Sidebar">
+                <DetailsHeader location={currentLocation}
+                    navigateToList={navigateToList} />
+                <div className="Sidebar-content">
+                    <p>
+                        {currentLocation.data.description}
+                    </p>
+                    <p>
+                        <a href={currentLocation.data.podcast}>Ecouter l'épisode</a>
+                    </p>
+                    <p>
+                        Crédits photos: {currentLocation.getImageCredits()}
+                    </p>
+                </div>
+            </div>
+            <main>
+                <Map center={[51.505, -0.09]} zoom={7}>
+                    <TileLayer
+                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                        attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+                    />
+                    {locations.filter(location => location.getLatLon()).map(location =>
+                        <Marker key={location.getId()}
+                            position={location.getLatLon()}
+                            icon={location.getId() === currentLocation.getId() ? location.markerIcon : location.collapsedMarkerIcon}
+                            onClick={navigateToDetails(location)} />
+                    )}
+                </Map>
+            </main>
+        </div>
+    )
+}
