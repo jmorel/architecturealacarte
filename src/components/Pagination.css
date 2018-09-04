@@ -6,6 +6,10 @@
 }
 
 
+.Pagination {
+    margin: var(--spacing-small) 0 var(--spacing-normal) 0;
+}
+
 .Pagination button {
     color: var(--color-white);
     background-color: var(--color-darkgreen);
@@ -32,8 +36,4 @@
     border-top-right-radius: 50%;
     border-bottom-right-radius: 50%;
     padding-right: calc(2* var(--spacing-tiny));
-}
-
-.PaginatedCardList .LocationCard {
-    cursor: pointer;
 }

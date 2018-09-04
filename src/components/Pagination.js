@@ -1,13 +1,16 @@
 import React from 'react';
 
-export default function Pagination({pageIndices, setPageIndex, currentPageIndex}) {
+import './Pagination.css';
+
+export function Pagination({ lastIndex, currentIndex, setCurrentIndex }) {
+    const indices = Array.from(Array(lastIndex).keys())
     return (
         <div className="Pagination">
-            {pageIndices.map(index =>
-                <button className={index === currentPageIndex ? 'active' : ''}
+            {indices.map(index =>
+                <button className={index === currentIndex ? 'active' : ''}
                     key={index}
-                    onClick={() => setPageIndex(index)}>
-                    {index}
+                    onClick={() => setCurrentIndex(index)}>
+                    {index + 1}
                 </button>
             )}
         </div>

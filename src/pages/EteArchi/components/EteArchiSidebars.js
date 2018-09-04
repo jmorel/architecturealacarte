@@ -3,6 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { INITIAL_PAGE_STATE } from '../../../reducers';
 import { PAGE_NAME } from '../EteArchi';
+import { setCurrentLocation, resetCurrentLocation, setCurrentPageIndex } from '../../../actions';
 
 import { Link, Redirect } from 'react-router-dom';
 
@@ -12,7 +13,7 @@ import { Sidebar } from '../../../components/Sidebar';
 import { Spinner } from '../../../components/Spinner';
 import { LocationCard } from '../../../components/LocationCard';
 import { getImageUrl, getImageRatio } from '../eteArchiUtils';
-import { setCurrentLocation, resetCurrentLocation } from '../../../actions';
+import { PaginatedList } from '../../../components/PaginatedList';
 
 function EteArchiSidebar({ children }) {
     return (
@@ -34,20 +35,36 @@ export function EteArchiSpinnerSidebar() {
 }
 
 export class EteArchiListSidebar extends React.Component {
+    constructor(props) {
+        super(props);
+        this.setCurrentPageIndex = this.setCurrentPageIndex.bind(this);
+    }
+
     componentDidMount() {
         const { dispatch } = this.props;
         dispatch(resetCurrentLocation(PAGE_NAME));
     }
 
+    setCurrentPageIndex(index) {
+        const { dispatch } = this.props;
+        dispatch(setCurrentPageIndex(PAGE_NAME, index));
+    }
+
     render() {
-        const { locations } = this.props;
+        const { locations, pagination } = this.props;
         return (
             <EteArchiSidebar>
-                {locations.filter(location => location.coordonnees).map(location => (
-                    <Link to={`/ete-archi/${location.date}`} key={location.date}>
-                        <LocationCard title={location.titre} imageUrl={getImageUrl(location)} imageRatio={getImageRatio(location)} />
-                    </Link>
-                ))}
+                <PaginatedList lastIndex={pagination.lastIndex}
+                    currentIndex={pagination.currentIndex}
+                    setCurrentIndex={this.setCurrentPageIndex}>
+                    {locations.currentPageIds
+                        .map(id => locations.byId[id])
+                        .map(location => (
+                            <Link to={`/ete-archi/${location.date}`} key={location.date}>
+                                <LocationCard title={location.titre} imageUrl={getImageUrl(location)} imageRatio={getImageRatio(location)} />
+                            </Link>
+                        ))}
+                </PaginatedList>
             </EteArchiSidebar>
         )
     }
@@ -63,7 +80,7 @@ export const EteArchiListSidebarContainer = connect(mapStateToProps)(EteArchiLis
 export class EteArchiDetailsSidebar extends React.Component {
     getCurrentLocation() {
         const { locations, match } = this.props;
-        return locations.find(location => location.date === match.params.id);
+        return locations.byId[match.params.id];
     }
 
     _dispatchCurrentLocation() {

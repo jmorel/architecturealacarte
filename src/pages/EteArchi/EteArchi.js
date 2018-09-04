@@ -1,8 +1,6 @@
 import React from 'react';
 
 // components
-import PaginatedCardList from '../../components/PaginatedCardList';
-import {LocationCard} from '../../components/LocationCard';
 import {PageLayout} from '../../components/PageLayout';
 
 // page components
@@ -21,9 +19,9 @@ import { INITIAL_PAGE_STATE } from '../../reducers';
 import L from 'leaflet';
 import { Route } from 'react-router-dom';
 
-import './EteArchi.css';
-
 export const PAGE_NAME = 'EteArchi';
+export const ID_PROP_NAME = 'date';
+export const COORDINATES_PROP_NAME = 'coordonnees';
 
 
 function buildMarkerIcon(location, collapsed) {
@@ -48,7 +46,7 @@ export class EteArchi extends React.Component {
 
     componentDidMount() {
         const { dispatch } = this.props;
-        dispatch(fetchLocationsIfNeeded(PAGE_NAME, 'https://jmorel.opendatasoft.com/api/v2/catalog/datasets/ete-archi/exports/json'));
+        dispatch(fetchLocationsIfNeeded(PAGE_NAME, ID_PROP_NAME, COORDINATES_PROP_NAME, 'https://jmorel.opendatasoft.com/api/v2/catalog/datasets/ete-archi/exports/json'));
     }
 
     navigateToDetails(date) {
@@ -67,8 +65,8 @@ export class EteArchi extends React.Component {
             </div>
         )
 
-        const markers = locations
-            .filter(location => location.coordonnees)
+        const markers = locations.withCoordinatesIds
+            .map(id => locations.byId[id])
             .map(location =>
                 <Marker key={location.date}
                     position={location.coordonnees}

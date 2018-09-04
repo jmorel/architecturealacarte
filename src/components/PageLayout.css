@@ -8,10 +8,6 @@
     overflow-y: auto;
   }
 
-  .PageLayout .PaginatedCardList {
-    margin: var(--spacing-normal) 0;
-  }
-
   .PageLayout-mapContainer {
     flex-grow: 1;
     position: relative;

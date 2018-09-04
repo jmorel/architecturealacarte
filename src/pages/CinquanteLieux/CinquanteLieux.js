@@ -20,14 +20,12 @@ import { INITIAL_PAGE_STATE } from '../../reducers';
 
 // other libs
 import L from 'leaflet';
-import PaginatedCardList from '../../components/PaginatedCardList';
-import { withRouter } from 'react-router-dom';
 import { CinquanteLieuxLocationCard } from './components/CinquanteLieuxLocationCard';
 
 const PAGE_NAME = 'CinquanteLieux';
 
 function PaginatedLocationCardsWithFilters({ locations, history }) {
-    return <PaginatedCardList locations={locations} renderLocationCard={renderLocationCard} />;
+    return <div>Paginated card list</div>
 }
 
 
