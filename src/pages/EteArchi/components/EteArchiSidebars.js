@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { INITIAL_PAGE_STATE } from '../../../reducers';
 import { PAGE_NAME } from '../EteArchi';
 
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 import { ListHeader, DetailsHeader } from '../../../components/Header';
 import { Footer } from '../../../components/Footer';
@@ -12,6 +12,7 @@ import { Sidebar } from '../../../components/Sidebar';
 import { Spinner } from '../../../components/Spinner';
 import { LocationCard } from '../../../components/LocationCard';
 import { getImageUrl, getImageRatio } from '../eteArchiUtils';
+import { setCurrentLocation, resetCurrentLocation } from '../../../actions';
 
 function EteArchiSidebar({ children }) {
     return (
@@ -29,46 +30,86 @@ function EteArchiSidebar({ children }) {
 }
 
 export function EteArchiSpinnerSidebar() {
-    return <EteArchiSidebar><Spinner/></EteArchiSidebar>;
+    return <EteArchiSidebar><Spinner /></EteArchiSidebar>;
 }
 
-export function EteArchiListSidebar({ locations }) {
-    return (
-        <EteArchiSidebar>
-            {locations.filter(location => location.coordonnees).map(location => (
-                <Link to={`/ete-archi/${location.date}`} key={location.date}>
-                    <LocationCard title={location.titre} imageUrl={getImageUrl(location)} imageRatio={getImageRatio(location)}/>
-                </Link>
-            ))}
-        </EteArchiSidebar>
-    )
+export class EteArchiListSidebar extends React.Component {
+    componentDidMount() {
+        const { dispatch } = this.props;
+        dispatch(resetCurrentLocation(PAGE_NAME));
+    }
+
+    render() {
+        const { locations } = this.props;
+        return (
+            <EteArchiSidebar>
+                {locations.filter(location => location.coordonnees).map(location => (
+                    <Link to={`/ete-archi/${location.date}`} key={location.date}>
+                        <LocationCard title={location.titre} imageUrl={getImageUrl(location)} imageRatio={getImageRatio(location)} />
+                    </Link>
+                ))}
+            </EteArchiSidebar>
+        )
+    }
 }
 
 const mapStateToProps = (state, ownProps) => ({
     ...(state[PAGE_NAME] || INITIAL_PAGE_STATE),
+    ...ownProps,
 });
 
 export const EteArchiListSidebarContainer = connect(mapStateToProps)(EteArchiListSidebar);
 
-export function EteArchiDetailsSidebar({ currentLocation }) {
-    return (
-        <Sidebar>
-            <DetailsHeader
-                title={currentLocation.titre}
-                imageUrl={getImageUrl(currentLocation)}
-                date={currentLocation.date}
-                listUrl="/ete-archi" />
-            <div className="Sidebar-content">
-                <p>
-                    {currentLocation.description}
-                </p>
-                <p>
-                    <a href={currentLocation.podcast}>Ecouter l'épisode</a>
-                </p>
-                <p>
-                    Crédits photos: {currentLocation.credits_image}
-                </p>
-            </div>
-        </Sidebar>
-    )
+export class EteArchiDetailsSidebar extends React.Component {
+    getCurrentLocation() {
+        const { locations, match } = this.props;
+        return locations.find(location => location.date === match.params.id);
+    }
+
+    _dispatchCurrentLocation() {
+        const { dispatch } = this.props;
+        const currentLocation = this.getCurrentLocation();
+        if (currentLocation) {
+            dispatch(setCurrentLocation(PAGE_NAME, currentLocation));
+        }
+    }
+
+    componentDidMount() {
+        this._dispatchCurrentLocation();
+    }
+
+    componentDidUpdate() {
+        this._dispatchCurrentLocation();
+    }
+
+    render() {
+        const currentLocation = this.getCurrentLocation();
+
+        if (!currentLocation) {
+            return <Redirect to='/ete-archi' />
+        }
+
+        return (
+            <Sidebar>
+                <DetailsHeader
+                    title={currentLocation.titre}
+                    imageUrl={getImageUrl(currentLocation)}
+                    date={currentLocation.date}
+                    listUrl="/ete-archi" />
+                <div className="Sidebar-content">
+                    <p>
+                        {currentLocation.description}
+                    </p>
+                    <p>
+                        <a href={currentLocation.podcast}>Ecouter l'épisode</a>
+                    </p>
+                    <p>
+                        Crédits photos: {currentLocation.credits_image}
+                    </p>
+                </div>
+            </Sidebar>
+        )
+    }
 }
+
+export const EteArchiDetailsSidebarContainer = connect(mapStateToProps)(EteArchiDetailsSidebar);

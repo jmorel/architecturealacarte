@@ -9,7 +9,7 @@ import registerServiceWorker from './registerServiceWorker';
 
 import './index.css';
 import Home from './pages/Home';
-import { EteArchiListContainer  } from './pages/EteArchi/EteArchi';
+import { EteArchiContainer  } from './pages/EteArchi/EteArchi';
 import { CinquanteLieuxContainer } from './pages/CinquanteLieux/CinquanteLieux';
 
 import {handleActions} from './reducers'
@@ -27,8 +27,7 @@ ReactDOM.render(
             <div>
                 <Route exact component={Home} path="/"></Route>
 
-                <Route exact component={EteArchiListContainer} path="/ete-archi"></Route>
-                <Route component={EteArchiListContainer} path="/ete-archi/:id"></Route>
+                <Route component={EteArchiContainer} path="/ete-archi"></Route>
 
                 <Route exact component={CinquanteLieuxContainer} path="/50-lieux-en-france-a-voir-au-moins-une-fois-dans-sa-vie"></Route>
                 <Route component={CinquanteLieuxContainer} path="/50-lieux-en-france-a-voir-au-moins-une-fois-dans-sa-vie/:id"></Route>

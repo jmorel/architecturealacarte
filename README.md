@@ -6,11 +6,12 @@
 * [ ] Put map credits in the footer instead of on the map itself
 * [ ] Fix pagination for long lists
 * [ ] Add filters
-* [ ] Add hover style for LocationCard
-* [ ] Move state to redux
+* [x] Add hover style for LocationCard
+* [x] Move state to redux
 * [ ] Add page title and favicon
 * [ ] Add proper content for links in sidebar/footer
 * [ ] Add prop-types
+* [ ] Make location accessible via URL (currently redirects)
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).

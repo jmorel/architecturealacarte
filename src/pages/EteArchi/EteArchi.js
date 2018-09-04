@@ -6,7 +6,7 @@ import {LocationCard} from '../../components/LocationCard';
 import {PageLayout} from '../../components/PageLayout';
 
 // page components
-import { EteArchiSpinnerSidebar, EteArchiListSidebarContainer, EteArchiDetailsSidebar } from './components/EteArchiSidebars';
+import { EteArchiSpinnerSidebar, EteArchiListSidebarContainer, EteArchiDetailsSidebarContainer } from './components/EteArchiSidebars';
 import {getImageUrl} from './eteArchiUtils';
 
 // 3rd part components
@@ -19,6 +19,7 @@ import { INITIAL_PAGE_STATE } from '../../reducers';
 
 // other libs
 import L from 'leaflet';
+import { Route } from 'react-router-dom';
 
 import './EteArchi.css';
 
@@ -39,15 +40,15 @@ function buildMarkerIcon(location, collapsed) {
     })
 };
 
-export class EteArchiList extends React.Component {
+export class EteArchi extends React.Component {
     constructor(props) {
         super(props);
         this.navigateToDetails = this.navigateToDetails.bind(this);
     }
+
     componentDidMount() {
         const { dispatch } = this.props;
         dispatch(fetchLocationsIfNeeded(PAGE_NAME, 'https://jmorel.opendatasoft.com/api/v2/catalog/datasets/ete-archi/exports/json'));
-
     }
 
     navigateToDetails(date) {
@@ -57,17 +58,14 @@ export class EteArchiList extends React.Component {
     }
 
     render() {
-        const { locations, isFetching, match } = this.props;
-        const currentLocation = !isFetching && match.params.id && locations.find(location => location.date = match.params.id);
+        const { locations, currentLocation, isFetching } = this.props;
 
-        let sidebar;
-        if (isFetching) {
-            sidebar = <EteArchiSpinnerSidebar/>
-        } else if (currentLocation) {
-            sidebar = <EteArchiDetailsSidebar currentLocation={currentLocation}/>;
-        } else {
-            sidebar = <EteArchiListSidebarContainer/>;
-        }
+        const sidebar = isFetching ? <EteArchiSpinnerSidebar/> : (
+            <div>
+                <Route path="/ete-archi" exact component={EteArchiListSidebarContainer}></Route>
+                <Route path="/ete-archi/:id" component={EteArchiDetailsSidebarContainer}></Route>
+            </div>
+        )
 
         const markers = locations
             .filter(location => location.coordonnees)
@@ -80,8 +78,8 @@ export class EteArchiList extends React.Component {
         return <PageLayout
             sidebar={sidebar}
             markers={markers}
-            defaultPosition={[51.505, -0.09]}
-            defaultZoom={7} />
+            defaultPosition={[46.596170, 2.387703]}
+            defaultZoom={6} />
     }
 }
 
@@ -90,4 +88,4 @@ const mapStateToProps = (state, ownProps) => ({
     history: ownProps.history,
 });
 
-export const EteArchiListContainer = connect(mapStateToProps)(EteArchiList);
+export const EteArchiContainer = connect(mapStateToProps)(EteArchi);

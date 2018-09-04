@@ -3,6 +3,8 @@ import axios from 'axios';
 export const LOCATIONS_REQUEST = 'LOCATIONS_REQUEST';
 export const LOCATIONS_SUCCESS = 'LOCATIONS_SUCCESS';
 export const LOCATIONS_FAILURE = 'LOCATIONS_FAILURE';
+export const SET_CURRENT_LOCATION = 'SET_CURRENT_LOCATION';
+export const RESET_CURRENT_LOCATION = 'RESET_CURRENT_LOCATION';
 
 export const locationsRequest = (pageName, url) => ({
     type: LOCATIONS_REQUEST,
@@ -42,3 +44,14 @@ export function fetchLocationsIfNeeded(pageName, url) {
         }
     }
 }
+
+export const setCurrentLocation = (pageName, currentLocation) => ({
+    type: SET_CURRENT_LOCATION,
+    pageName,
+    currentLocation,
+})
+
+export const resetCurrentLocation = (pageName) => ({
+    type: RESET_CURRENT_LOCATION,
+    pageName,
+})
