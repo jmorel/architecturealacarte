@@ -25,6 +25,10 @@
     margin-bottom: var(--spacing-large);
 }
 
+.TableOfContents-section:last-child {
+    margin-bottom: 0;
+}
+
 .TableOfContents-section::before {
     content: '';
     display: block;

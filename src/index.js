@@ -8,7 +8,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import registerServiceWorker from './registerServiceWorker';
 
 import './index.css';
-import Home from './pages/Home';
+import Home from './pages/Home/Home';
 import { EteArchiContainer  } from './pages/EteArchi/EteArchi';
 import { CinquanteLieuxContainer } from './pages/CinquanteLieux/CinquanteLieux';
 

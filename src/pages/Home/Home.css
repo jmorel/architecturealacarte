@@ -1,0 +1,30 @@
+.HomeLayout {
+  display: flex;
+  align-items: stretch;
+}
+
+.HomeLayout-sidebar {
+  width: var(--sidebar-width);
+  background-color: var(--color-green);
+}
+
+.HomeLayout-main {
+  flex-grow: 1;
+  position: relative;
+  display: flex;
+  align-items: stretch;
+}
+
+.HomeLayout-mapContainer {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+}
+
+.HomeLayout-main .leaflet-control-container .leaflet-top.leaflet-left {
+  display: none;
+}
