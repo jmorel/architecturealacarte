@@ -7,60 +7,60 @@ export const SET_CURRENT_LOCATION = 'SET_CURRENT_LOCATION';
 export const RESET_CURRENT_LOCATION = 'RESET_CURRENT_LOCATION';
 export const SET_CURRENT_PAGE_INDEX = 'SET_CURRENT_PAGE_INDEX';
 
-export const locationsRequest = (pageName, url) => ({
+export const locationsRequest = (sectionName, url) => ({
     type: LOCATIONS_REQUEST,
-    pageName,
+    sectionName,
     url,
 })
-export const locationsSuccess = (pageName, idPropName, coordinatesPropName, locations) => ({
+export const locationsSuccess = (sectionName, idPropName, coordinatesPropName, locations) => ({
     type: LOCATIONS_SUCCESS,
-    pageName,
+    sectionName,
     idPropName,
     coordinatesPropName,
     locations,
 })
 
-export const locationsFailure = (pageName, error) => ({
+export const locationsFailure = (sectionName, error) => ({
     type: LOCATIONS_FAILURE,
-    pageName,
+    sectionName,
     error,
 })
 
-const fetchLocations = (pageName, idPropName, coordinatesPropName, url) => {
+const fetchLocations = (sectionName, idPropName, coordinatesPropName, url) => {
     return (dispatch) => {
-        dispatch(locationsRequest(pageName, url));
+        dispatch(locationsRequest(sectionName, url));
         return axios.get(url)
             .then(response => response.data)
-            .then(locations => dispatch(locationsSuccess(pageName, idPropName, coordinatesPropName, locations)))
-            .catch(error => dispatch(locationsFailure(pageName, error)));
+            .then(locations => dispatch(locationsSuccess(sectionName, idPropName, coordinatesPropName, locations)))
+            .catch(error => dispatch(locationsFailure(sectionName, error)));
     }
 }
 
-function shouldFetchLocations(state, pageName) {
-    return !state[pageName] || (!state[pageName].locations.allIds.length && !state[pageName].isFetching);
+function shouldFetchLocations(state, sectionName) {
+    return !state[sectionName] || (!state[sectionName].locations.allIds.length && !state[sectionName].isFetching);
 }
 
-export function fetchLocationsIfNeeded(pageName, idPropName, coordinatesPropName, url) {
+export function fetchLocationsIfNeeded(sectionName, idPropName, coordinatesPropName, url) {
     return (dispatch, getState) => {
-        if (shouldFetchLocations(getState(), pageName)) {
-            return dispatch(fetchLocations(pageName, idPropName, coordinatesPropName, url));
+        if (shouldFetchLocations(getState(), sectionName)) {
+            return dispatch(fetchLocations(sectionName, idPropName, coordinatesPropName, url));
         }
     }
 }
 
-export const setCurrentLocation = (pageName, currentLocation) => ({
+export const setCurrentLocation = (sectionName, currentLocation) => ({
     type: SET_CURRENT_LOCATION,
-    pageName,
+    sectionName,
     currentLocation,
 })
 
-export const resetCurrentLocation = (pageName) => ({
+export const resetCurrentLocation = (sectionName) => ({
     type: RESET_CURRENT_LOCATION,
-    pageName,
+    sectionName,
 })
 
-export const setCurrentPageIndex = (pageName, currentIndex) => ({
+export const setCurrentPageIndex = (sectionName, currentIndex) => ({
     type: SET_CURRENT_PAGE_INDEX,
-    pageName,
+    sectionName,
     currentIndex,
 })

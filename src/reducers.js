@@ -18,12 +18,12 @@ export const INITIAL_PAGE_STATE = {
 };
 
 export function handleActions(state = {}, action) {
-    const { pageName } = action;
-    const pageState = state[pageName] || INITIAL_PAGE_STATE;
+    const { sectionName } = action;
+    const pageState = state[sectionName] || INITIAL_PAGE_STATE;
     switch (action.type) {
         case LOCATIONS_REQUEST:
             return Object.assign({}, state, {
-                [pageName]: {
+                [sectionName]: {
                     ...pageState,
                     isFetching: true,
                 }
@@ -39,7 +39,7 @@ export function handleActions(state = {}, action) {
                 .filter(location => !!location[coordinatesPropName])
                 .map(location => location[idPropName]);
             return Object.assign({}, state, {
-                [pageName]: {
+                [sectionName]: {
                     ...pageState,
                     isFetching: false,
                     locations: Object.assign({}, pageState.locations, {
@@ -56,7 +56,7 @@ export function handleActions(state = {}, action) {
             })
         case LOCATIONS_FAILURE:
             return Object.assign({}, state, {
-                [pageName]: {
+                [sectionName]: {
                     ...pageState,
                     isFetching: false,
                     error: action.error,
@@ -64,14 +64,14 @@ export function handleActions(state = {}, action) {
             })
         case SET_CURRENT_LOCATION:
             return Object.assign({}, state, {
-                [pageName]: {
+                [sectionName]: {
                     ...pageState,
                     currentLocation: action.currentLocation,
                 }
             })
         case RESET_CURRENT_LOCATION:
             return Object.assign({}, state, {
-                [pageName]: {
+                [sectionName]: {
                     ...pageState,
                     currentLocation: null,
                 }
@@ -80,7 +80,7 @@ export function handleActions(state = {}, action) {
             const start = action.currentIndex * pageState.pagination.pageSize;
             const end = start + pageState.pagination.pageSize;
             return Object.assign({}, state, {
-                [pageName]: {
+                [sectionName]: {
                     pagination: Object.assign({}, pageState.pagination, {
                         currentIndex: action.currentIndex,
                     }),

@@ -1,28 +1,14 @@
-import React from 'react';
-
-// components
-import {PageLayout} from '../../components/PageLayout';
-
-// page components
-import { EteArchiSpinnerSidebar, EteArchiListSidebarContainer, EteArchiDetailsSidebarContainer } from './components/EteArchiSidebars';
-import {getImageUrl} from './eteArchiUtils';
-
-// 3rd part components
-import { Marker } from 'react-leaflet';
-
-// redux
-import { connect } from 'react-redux';
-import { fetchLocationsIfNeeded } from '../../actions';
-import { INITIAL_PAGE_STATE } from '../../reducers';
-
-// other libs
 import L from 'leaflet';
+import React from 'react';
+import { Marker } from 'react-leaflet';
+import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
-
-export const PAGE_NAME = 'EteArchi';
-export const ID_PROP_NAME = 'date';
-export const COORDINATES_PROP_NAME = 'coordonnees';
-
+import { fetchLocationsIfNeeded } from '../../actions';
+import { PageLayout } from '../../components/PageLayout';
+import { EteArchiDetailsSidebarContainer } from './components/EteArchiDetailsSidebar';
+import { EteArchiListSidebarContainer } from './components/EteArchiListSidebar';
+import { EteArchiSpinnerSidebar } from './components/EteArchiSpinnerSidebar';
+import { COORDINATES_PROP_NAME, DATASET_URL, getImageUrl, ID_PROP_NAME, mapStateToProps, SECTION_NAME } from './eteArchiUtils';
 
 function buildMarkerIcon(location, collapsed) {
     const image = location.image;
@@ -46,7 +32,7 @@ export class EteArchi extends React.Component {
 
     componentDidMount() {
         const { dispatch } = this.props;
-        dispatch(fetchLocationsIfNeeded(PAGE_NAME, ID_PROP_NAME, COORDINATES_PROP_NAME, 'https://jmorel.opendatasoft.com/api/v2/catalog/datasets/ete-archi/exports/json'));
+        dispatch(fetchLocationsIfNeeded(SECTION_NAME, ID_PROP_NAME, COORDINATES_PROP_NAME, DATASET_URL));
     }
 
     navigateToDetails(date) {
@@ -80,10 +66,5 @@ export class EteArchi extends React.Component {
             defaultZoom={6} />
     }
 }
-
-const mapStateToProps = (state, ownProps) => ({
-    ...(state[PAGE_NAME] || INITIAL_PAGE_STATE),
-    history: ownProps.history,
-});
 
 export const EteArchiContainer = connect(mapStateToProps)(EteArchi);
