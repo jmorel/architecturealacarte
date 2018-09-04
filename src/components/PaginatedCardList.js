@@ -1,6 +1,6 @@
 import React from 'react';
 
-import LocationCard from './LocationCard';
+import Pagination from './Pagination';
 
 import './PaginatedCardList.css';
 
@@ -37,17 +37,11 @@ class PaginatedCardList extends React.Component {
         return (
             <div className="PaginatedCardList">
                 {this.currentPageLocations().map(location => (
-                    <LocationCard key={location.getId()}
-                        location={location}
-                        onClick={this.props.onCardClick(location)} />
+                    this.props.renderLocationCard(location)
                 ))}
-                <div className="Pagination">
-                    {this.pageIndices().map(index =>
-                        <button className={index === this.state.currentPageIndex ? 'active' : ''}
-                            key={index}
-                            onClick={() => this.setPageIndex(index)}>{index}</button>
-                    )}
-                </div>
+                <Pagination currentPageIndex={this.state.currentPageIndex}
+                    setPageIndex={this.setPageIndex}
+                    pageIndices={this.pageIndices()} />
             </div>
         )
     }

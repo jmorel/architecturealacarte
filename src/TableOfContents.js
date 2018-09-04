@@ -15,7 +15,7 @@ class TableOfContents extends Component {
                     { label: "Les journées du patrimoine 2015", url: "test" },
                 ],
                 [{ label: "Architecture remarquable des XXème et XXIème siècles en Île de France", url: "test" }],
-                [{ label: "Les 50 lieux en France à voir au moins une fois dans sa vie", url: "test" }],
+                [{ label: "Les 50 lieux en France à voir au moins une fois dans sa vie", url: "/50-lieux-en-france-a-voir-au-moins-une-fois-dans-sa-vie" }],
             ]
         }
     }

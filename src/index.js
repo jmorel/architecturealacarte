@@ -9,13 +9,13 @@ import registerServiceWorker from './registerServiceWorker';
 
 import './index.css';
 import Home from './pages/Home';
-import { EteArchiListContainer  } from './pages/EteArchiList';
-import { EteArchiDetailsContainer } from './pages/EteArchiDetails';
+import { EteArchiListContainer  } from './pages/EteArchi/EteArchi';
+import { CinquanteLieuxContainer } from './pages/CinquanteLieux/CinquanteLieux';
 
-import eteArchiApp from './reducers'
+import {handleActions} from './reducers'
 
 const store = createStore(
-    eteArchiApp,
+    handleActions,
     composeWithDevTools(
         applyMiddleware(thunkMiddleware)
     ),
@@ -26,8 +26,12 @@ ReactDOM.render(
         <BrowserRouter>
             <div>
                 <Route exact component={Home} path="/"></Route>
+
                 <Route exact component={EteArchiListContainer} path="/ete-archi"></Route>
-                <Route component={EteArchiDetailsContainer} path="/ete-archi/:id"></Route>
+                <Route component={EteArchiListContainer} path="/ete-archi/:id"></Route>
+
+                <Route exact component={CinquanteLieuxContainer} path="/50-lieux-en-france-a-voir-au-moins-une-fois-dans-sa-vie"></Route>
+                <Route component={CinquanteLieuxContainer} path="/50-lieux-en-france-a-voir-au-moins-une-fois-dans-sa-vie/:id"></Route>
             </div>
         </BrowserRouter>
     </Provider>

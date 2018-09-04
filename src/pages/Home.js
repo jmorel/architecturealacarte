@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 
 import TableOfContents from '../TableOfContents';
-import Footer from '../components/Footer';
+import { Footer } from '../components/Footer';
 import {HomeHeader} from '../components/Header';
 
 import './Home.css';

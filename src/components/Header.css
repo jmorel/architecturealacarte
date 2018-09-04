@@ -1,6 +1,7 @@
 .Header {
     border-bottom: 15px solid var(--color-white);
     font-style: italic;
+    position: relative;
 }
 
 .Header.--padding-top {

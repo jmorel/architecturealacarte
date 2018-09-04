@@ -1,30 +1,39 @@
 import { LOCATIONS_REQUEST, LOCATIONS_SUCCESS, LOCATIONS_FAILURE } from './actions';
 
-const initialStep = {
+export const INITIAL_PAGE_STATE = {
     isFetching: false,
-    error: null,
     locations: [],
+    errors: null,
 };
 
-const eteArchiApp = (state = initialStep, action) => {
+export function handleActions(state = {}, action) {
+    const { pageName } = action;
+    const pageState = state[pageName] || INITIAL_PAGE_STATE;
     switch (action.type) {
         case LOCATIONS_REQUEST:
             return Object.assign({}, state, {
-                isFetching: true,
+                [pageName]: {
+                    ...pageState,
+                    isFetching: true,
+                }
             })
         case LOCATIONS_SUCCESS:
             return Object.assign({}, state, {
-                isFetching: false,
-                locations: action.locations,
+                [pageName]: {
+                    ...pageState,
+                    isFetching: false,
+                    locations: action.locations,
+                }
             })
         case LOCATIONS_FAILURE:
             return Object.assign({}, state, {
-                isFetching: false,
-                error: action.error,
+                [pageName]: {
+                    ...pageState,
+                    isFetching: false,
+                    error: action.error,
+                }
             })
         default:
             return state;
     }
 };
-
-export default eteArchiApp;

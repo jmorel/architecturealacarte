@@ -17,7 +17,7 @@ export function HomeHeader(props) {
     )
 }
 
-export function ListHeader(props) {
+export function ListHeader({title}) {
     return (
         <header className="Header --padding-top --padding-bottom">
             <p>
@@ -26,22 +26,21 @@ export function ListHeader(props) {
                     Architecture à la carte
                 </Link>
             </p>
-            <h2>{props.title}</h2>
+            <h2>{title}</h2>
         </header>
     )
 
 }
 
-export function DetailsHeader(props) {
+export function DetailsHeader({listUrl, title, date, imageUrl}) {
     return (
         <header className="Header --padding-bottom">
-            <button className="CloseButton"
-                onClick={props.navigateToList}>
+            <Link className="CloseButton" to={listUrl}>
                 <FontAwesomeIcon icon={faTimes} />
-            </button>
-            <img src={props.location.getImageUrl()} alt={props.location.getTitle()}/>
-            <h3>{props.location.getTitle()}</h3>
-            <p>Episode du {props.location.getDate()}</p>
+            </Link>
+            <img src={imageUrl} alt={title}/>
+            <h3>{title}</h3>
+            <p>Episode du {date}</p>
         </header>
     )
 }
