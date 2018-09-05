@@ -32,7 +32,7 @@ export function ListHeader({title}) {
 
 }
 
-export function DetailsHeader({listUrl, title, date, imageUrl}) {
+export function DetailsHeader({listUrl, title, imageUrl, children}) {
     return (
         <header className="Header --padding-bottom">
             <Link className="CloseButton" to={listUrl}>
@@ -40,7 +40,7 @@ export function DetailsHeader({listUrl, title, date, imageUrl}) {
             </Link>
             <img src={imageUrl} alt={title}/>
             <h3>{title}</h3>
-            <p>Episode du {date}</p>
+            {children}
         </header>
     )
 }

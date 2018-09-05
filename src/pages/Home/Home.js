@@ -1,13 +1,13 @@
+import 'leaflet/dist/leaflet.css';
 import React, { Component } from 'react';
-import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
-
-import TableOfContents from './components/TableOfContents';
+import { Map, TileLayer } from 'react-leaflet';
+import { Link } from 'react-router-dom';
 import { Footer } from '../../components/Footer';
 import { HomeHeader } from '../../components/Header';
-import { Link } from 'react-router-dom';
-
+import TableOfContents from './components/TableOfContents';
 import './Home.css';
-import 'leaflet/dist/leaflet.css';
+
+
 
 class Home extends Component {
   render() {

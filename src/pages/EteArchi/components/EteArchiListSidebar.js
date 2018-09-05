@@ -2,7 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { resetCurrentLocation, setCurrentPageIndex } from '../../../actions';
+import { resetCurrentLocationId, setCurrentPageIndex } from '../../../actions';
 import { Footer } from '../../../components/Footer';
 import { ListHeader } from '../../../components/Header';
 import { LocationCard } from '../../../components/LocationCard';
@@ -18,7 +18,7 @@ export class EteArchiListSidebar extends React.Component {
 
     componentDidMount() {
         const { dispatch } = this.props;
-        dispatch(resetCurrentLocation(SECTION_NAME));
+        dispatch(resetCurrentLocationId(SECTION_NAME));
     }
 
     setCurrentPageIndex(index) {

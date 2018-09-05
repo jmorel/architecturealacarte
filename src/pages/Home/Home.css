@@ -28,3 +28,7 @@
 .HomeLayout-main .leaflet-control-container .leaflet-top.leaflet-left {
   display: none;
 }
+
+.HomeLayout .TableOfContents {
+  flex-grow: 1;
+}

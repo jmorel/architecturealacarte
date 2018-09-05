@@ -1,0 +1,15 @@
+.Header .CinquanteLieuxCloseButton {
+    position: absolute;
+    top: var(--spacing-small);
+    right: var(--spacing-small);
+    font-size: 40px;
+    border: none;
+    padding: 0;
+    color: var(--color-darkestgreen);
+    background: none;
+    cursor: pointer;
+}
+
+.Header .CinquanteLieuxCloseButton:hover {
+    color: var(--color-white);
+}

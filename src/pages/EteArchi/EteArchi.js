@@ -42,7 +42,7 @@ export class EteArchi extends React.Component {
     }
 
     render() {
-        const { locations, currentLocation, isFetching } = this.props;
+        const { locations, isFetching } = this.props;
 
         const sidebar = isFetching ? <EteArchiSpinnerSidebar/> : (
             <div>
@@ -56,7 +56,7 @@ export class EteArchi extends React.Component {
             .map(location =>
                 <Marker key={location.date}
                     position={location.coordonnees}
-                    icon={buildMarkerIcon(location, currentLocation && currentLocation.date !== location.date)}
+                    icon={buildMarkerIcon(location, locations.currentId && location.date !== locations.currentId)}
                     onClick={this.navigateToDetails(location.date)} />
             );
         return <PageLayout

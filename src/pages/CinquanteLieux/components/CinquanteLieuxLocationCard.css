@@ -1,3 +1,6 @@
+.CinquanteLieuxLocationCard-link:hover {
+    text-decoration: none;
+}
 .CinquanteLieuxLocationCard {
     padding: var(--spacing-small) var(--spacing-normal);
     border-bottom: 1px solid var(--color-darkgreen);
@@ -15,23 +18,14 @@
 }
 
 .CinquanteLieuxLocationCard-title {
+    margin-right: var(--spacing-tiny);
 }
 
 .CinquanteLieuxLocationCard-subtitle {
     font-size: var(--font-size-small)
 }
 
-.CinquanteLieuxLocationCard-category {
-    display: inline-block;
-    margin-left: var(--spacing-tiny);
-    font-size: var(--font-size-small);
-    background-color: var(--color-darkgreen);
-    color: var(--color-white);
-    padding: 0 var(--spacing-tiny);
-    border-radius: 10px;
-    vertical-align: top;
-}
-.CinquanteLieuxLocationCard:hover .CinquanteLieuxLocationCard-category {
+.CinquanteLieuxLocationCard:hover .CinquanteLieuxCategoryTag {
     background-color: var(--color-darkestgreen);
     transition: background-color 100ms ease-out;
 }

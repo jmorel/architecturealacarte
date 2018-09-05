@@ -1,4 +1,4 @@
-import { LOCATIONS_REQUEST, LOCATIONS_SUCCESS, LOCATIONS_FAILURE, SET_CURRENT_LOCATION, RESET_CURRENT_LOCATION, SET_CURRENT_PAGE_INDEX } from './actions';
+import { LOCATIONS_REQUEST, LOCATIONS_SUCCESS, LOCATIONS_FAILURE, SET_CURRENT_PAGE_INDEX, SET_CURRENT_LOCATION_ID, RESET_CURRENT_LOCATION_ID } from './actions';
 
 export const INITIAL_PAGE_STATE = {
     isFetching: false,
@@ -62,18 +62,22 @@ export function handleActions(state = {}, action) {
                     error: action.error,
                 }
             })
-        case SET_CURRENT_LOCATION:
+        case SET_CURRENT_LOCATION_ID:
             return Object.assign({}, state, {
                 [sectionName]: {
                     ...pageState,
-                    currentLocation: action.currentLocation,
+                    locations: Object.assign({}, pageState.locations, {
+                        currentId: action.currentLocationId,
+                    })
                 }
             })
-        case RESET_CURRENT_LOCATION:
+        case RESET_CURRENT_LOCATION_ID:
             return Object.assign({}, state, {
                 [sectionName]: {
                     ...pageState,
-                    currentLocation: null,
+                    locations: Object.assign({}, pageState.locations, {
+                        currentId: null,
+                    })
                 }
             })
         case SET_CURRENT_PAGE_INDEX:

@@ -1,0 +1,14 @@
+.CinquanteLieuxCategoryTag {
+    display: inline-block;
+    margin-right: var(--spacing-tiny);
+    font-size: var(--font-size-small);
+    background-color: var(--color-darkgreen);
+    color: var(--color-white);
+    padding: 0 var(--spacing-tiny);
+    border-radius: 10px;
+    vertical-align: top;
+}
+
+.CinquanteLieuxCategoryTag:last-child {
+    margin-right: 0;
+}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { setCurrentLocation } from '../../../actions';
+import { setCurrentLocationId } from '../../../actions';
 import { DetailsHeader } from '../../../components/Header';
 import { Sidebar } from '../../../components/Sidebar';
 import { getImageUrl, mapStateToProps, SECTION_NAME } from '../eteArchiUtils';
@@ -13,10 +13,10 @@ export class EteArchiDetailsSidebar extends React.Component {
     }
 
     _dispatchCurrentLocation()  {
-        const { dispatch } = this.props;
+        const { dispatch, locations } = this.props;
         const currentLocation = this.getCurrentLocation();
-        if (currentLocation) {
-            dispatch(setCurrentLocation(SECTION_NAME, currentLocation));
+        if (currentLocation && (!locations.currentId || locations.currentId !== currentLocation.date)) {
+            dispatch(setCurrentLocationId(SECTION_NAME, currentLocation.date));
         }
     }
 
@@ -40,8 +40,9 @@ export class EteArchiDetailsSidebar extends React.Component {
                 <DetailsHeader
                     title={currentLocation.titre}
                     imageUrl={getImageUrl(currentLocation)}
-                    date={currentLocation.date}
-                    listUrl="/ete-archi" />
+                    listUrl="/ete-archi" >
+                    <p>Episode du {currentLocation.date}</p>
+                </DetailsHeader>
                 <div className="Sidebar-content">
                     <p>
                         {currentLocation.description}
