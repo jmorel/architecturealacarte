@@ -28,6 +28,7 @@ export class CinquanteLieux extends React.Component {
     componentDidMount() {
         const { dispatch } = this.props;
         dispatch(fetchLocationsIfNeeded(SECTION_NAME, ID_PROP_NAME, COORDINATES_PROP_NAME, DATASET_URL));
+        document.title = 'Les 50 lieux en France à voir au moins une fois dans sa vie | Architecture à la carte';
     }
 
     navigateToDetails(id) {

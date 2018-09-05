@@ -6,6 +6,11 @@
 .HomeLayout-sidebar {
   width: var(--sidebar-width);
   background-color: var(--color-green);
+  display: flex;
+  flex-direction: column;
+}
+.HomeLayout-sidebar .Footer {
+  margin-top: auto;
 }
 
 .HomeLayout-main {

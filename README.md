@@ -3,13 +3,13 @@
 ## Todo
 
 * [x] Remove map controls on home
-* [ ] Put map credits in the footer instead of on the map itself
+* [-] Put map credits in the footer instead of on the map itself
 * [x] Fix pagination for long lists
 * [ ] Add filters
 * [x] Add hover style for LocationCard
 * [x] Move state to redux
-* [ ] Add page title and favicon
-* [ ] Add proper content for links in sidebar/footer
+* [x] Add page title and favicon
+* [x] Add proper content for links in sidebar/footer
 * [ ] Add prop-types
 * [ ] Make location accessible via URL (currently redirects)
 * [ ] Highlighted / hovered map markers are sometimes below other markers

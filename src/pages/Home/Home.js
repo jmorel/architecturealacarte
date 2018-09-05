@@ -7,9 +7,11 @@ import { HomeHeader } from '../../components/Header';
 import TableOfContents from './components/TableOfContents';
 import './Home.css';
 
-
-
 class Home extends Component {
+  componentDidMount() {
+    document.title = 'Architecture à la carte';
+  }
+
   render() {
     return (
       <div className="HomeLayout">
@@ -24,14 +26,14 @@ class Home extends Component {
           <Footer />
         </div>
         <div className="HomeLayout-main">
-            <div className="HomeLayout-mapContainer">
-                <Map center={[46.596170, 2.387703]} zoom={6}>
-                    <TileLayer
-                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                        attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-                    />
-                </Map>
-            </div>
+          <div className="HomeLayout-mapContainer">
+            <Map center={[46.596170, 2.387703]} zoom={6}>
+              <TileLayer
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+              />
+            </Map>
+          </div>
           <TableOfContents></TableOfContents>
         </div>
       </div>

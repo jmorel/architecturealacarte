@@ -33,7 +33,7 @@ export class EteArchiListSidebar extends React.Component {
                 <ListHeader title="L'ete archi de David Abittan" />
                 <div className="Sidebar-content">
                     <p>
-                        Durant l’été, <a href="">David Abittan</a> nous emmène chaque semaine sur <a href="">France Inter</a> à la découverte de toutes les époques de l’architecture de France.
+                        Durant l’été, <a href="https://twitter.com/david_abittan">David Abittan</a> nous emmène chaque semaine sur <a href="https://www.franceinter.fr/emissions/l-ete-archi">France Inter</a> à la découverte de toutes les époques de l’architecture de France.
                 </p>
                     <PaginatedList lastIndex={pagination.lastIndex}
                         currentIndex={pagination.currentIndex}

@@ -33,6 +33,7 @@ export class EteArchi extends React.Component {
     componentDidMount() {
         const { dispatch } = this.props;
         dispatch(fetchLocationsIfNeeded(SECTION_NAME, ID_PROP_NAME, COORDINATES_PROP_NAME, DATASET_URL));
+        document.title = 'L\'été Archi | Architecture à la carte';
     }
 
     navigateToDetails(date) {
