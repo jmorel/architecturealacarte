@@ -69,6 +69,7 @@ export function handleActions(state, action) {
                 ...state,
                 appState: {
                     ...appState,
+                    pagination: updateObject(appState.pagination, { currentIndex: 0 }),
                     search: {
                         ...appState.search,
                         filters: updateObject(appState.search.filters, {
