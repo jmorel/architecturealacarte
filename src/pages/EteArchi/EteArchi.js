@@ -82,7 +82,16 @@ const EteArchiWithRouterContainer = connect(mapStateToProps)(EteArchiWithRouter)
 export class EteArchiApp extends React.Component {
     constructor(props) {
         super(props);
-        this.store = createSubStore('date', 'coordonnees', ['titre', 'description'] , 'https://jmorel.opendatasoft.com/api/v2/catalog/datasets/ete-archi/exports/json');
+        this.store = createSubStore(
+            'date',
+            'coordonnees',
+            ['titre', 'description'],
+            [{
+                title: 'Saison',
+                prop: 'saison',
+                sort: '-value',
+            }],
+            'https://jmorel.opendatasoft.com/api/v2/catalog/datasets/ete-archi/exports/json');
     }
 
     render() {

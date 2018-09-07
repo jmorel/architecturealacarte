@@ -1,0 +1,35 @@
+.CategoryFilter {
+    margin: var(--spacing-small) 0;
+}
+
+.CategoryFilter-title {
+    margin-bottom: var(--spacing-tiny);
+}
+
+.CategoryFilter-categories {
+}
+
+.CategoryFilter-category {
+    display: inline-block;
+    background-color: var(--color-darkgreen);
+    color: var(--color-white);
+    border: none;
+    padding: var(--spacing-tiny) var(--spacing-small);
+    font-size: var(--font-size-small);
+    font-family: var(--font-family-body);
+    border-radius: var(--spacing-small);
+    margin-right: var(--spacing-tiny);
+    margin-bottom: var(--spacing-tiny);
+    cursor: pointer;
+}
+
+.CategoryFilter-category:hover,
+.CategoryFilter-category.--active {
+    background-color: var(--color-white);
+    color: var(--color-darkgreen);
+}
+
+.CategoryFilter-count {
+    color: var(--color-darkestgreen);
+    margin-left: var(--spacing-tiny);
+}

@@ -2,7 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { resetCurrentId, setCurrentPageIndex, setTextSearch } from '../../../actions';
+import { resetCurrentId, setCurrentPageIndex, setTextSearch, toggleFilter } from '../../../actions';
 import { Footer } from '../../../components/Footer';
 import { ListHeader } from '../../../components/Header';
 import { LocationCard } from '../../../components/LocationCard';
@@ -10,13 +10,15 @@ import { PaginatedList } from '../../../components/PaginatedList';
 import { Sidebar } from '../../../components/Sidebar';
 import { getImageRatio, getImageUrl } from '../eteArchiUtils';
 import { TextSearch } from '../../../components/TextSearch';
-import {lastIndexSelector, currentIndexSelector, textSearchSelector, filteredLocationsSelector, filteredCurrentPageLocationsSelector } from '../../../selectors';
+import { CategoryFilter } from '../../../components/CategoryFilter';
+import {lastIndexSelector, currentIndexSelector, textSearchSelector, filteredCurrentPageLocationsSelector, filtersSelector, filtersValuesSelector, activeFiltersValuesSelector } from '../../../selectors';
 
 export class EteArchiListSidebar extends React.Component {
     constructor(props) {
         super(props);
         this.setCurrentPageIndex = this.setCurrentPageIndex.bind(this);
         this.setTextSearch = this.setTextSearch.bind(this);
+        this.toggleFilter = this.toggleFilter.bind(this);
     }
 
     componentDidMount() {
@@ -34,8 +36,13 @@ export class EteArchiListSidebar extends React.Component {
         dispatch(setTextSearch(value));
     }
 
+    toggleFilter(filterProp, value) {
+        const { dispatch } = this.props;
+        dispatch(toggleFilter(filterProp, value));
+    }
+
     render() {
-        const { currentPageLocations, lastIndex, currentIndex, textSearch } = this.props;
+        const { currentPageLocations, lastIndex, currentIndex, textSearch, filters, filtersValues, activeFiltersValues } = this.props;
         return (
             <Sidebar>
                 <ListHeader title="L'ete archi de David Abittan" />
@@ -45,6 +52,14 @@ export class EteArchiListSidebar extends React.Component {
                     </p>
                     <div className="Sidebar-filters">
                         <TextSearch value={textSearch} onChange={this.setTextSearch} />
+                        {filters.map(filter => (
+                            <CategoryFilter key={filter.prop}
+                                            title={filter.title}
+                                            filterProp={filter.prop}
+                                            values={filtersValues[filter.prop]}
+                                            activeValues={activeFiltersValues[filter.prop]}
+                                            toggleFilter={this.toggleFilter}/>
+                        ))}
                     </div>
                     <PaginatedList lastIndex={lastIndex}
                         currentIndex={currentIndex}
@@ -67,6 +82,9 @@ const mapStateToProps = (state) => ({
     lastIndex: lastIndexSelector(state),
     currentIndex: currentIndexSelector(state),
     textSearch: textSearchSelector(state),
+    filters: filtersSelector(state),
+    filtersValues: filtersValuesSelector(state),
+    activeFiltersValues: activeFiltersValuesSelector(state),
 })
 
 export const EteArchiListSidebarContainer = connect(mapStateToProps)(EteArchiListSidebar);

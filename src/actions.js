@@ -39,6 +39,7 @@ export const RESET_CURRENT_ID = 'RESET_CURRENT_ID';
 export const SET_CURRENT_PAGE_INDEX = 'SET_CURRENT_PAGE_INDEX';
 export const SET_TEXT_SEARCH = 'SET_TEXT_SEARCH';
 export const SET_CATEGORY_FILTER = 'SET_CATEGORY_FILTER';
+export const TOGGLE_FILTER = 'TOGGLE_FILTER';
 
 
 
@@ -71,4 +72,10 @@ export const setCurrentPageIndex = (currentIndex) => ({
 export const setTextSearch = (textSearch) => ({
     type: SET_TEXT_SEARCH,
     textSearch,
+})
+
+export const toggleFilter = (filterProp, value) => ({
+    type: TOGGLE_FILTER,
+    filterProp,
+    value,
 })

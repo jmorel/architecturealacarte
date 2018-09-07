@@ -1,4 +1,4 @@
-import { LOCATIONS_REQUEST, LOCATIONS_SUCCESS, LOCATIONS_FAILURE, SET_CURRENT_PAGE_INDEX, SET_CURRENT_ID, RESET_CURRENT_ID, SET_TEXT_SEARCH } from './actions';
+import { LOCATIONS_REQUEST, LOCATIONS_SUCCESS, LOCATIONS_FAILURE, SET_CURRENT_PAGE_INDEX, SET_CURRENT_ID, RESET_CURRENT_ID, SET_TEXT_SEARCH, TOGGLE_FILTER } from './actions';
 
 const updateObject = (oldObject, newValues) => Object.assign({}, oldObject, newValues);
 
@@ -55,9 +55,30 @@ export function handleActions(state, action) {
                     search: updateObject(appState.search, { textSearch: action.textSearch, })
                 }
             }
+        case TOGGLE_FILTER: {
+            const { filterProp, value } = action;
+            const activeValues = appState.search.filters[filterProp];
+            const index = activeValues.indexOf(value);
+            let newActiveValues = [...activeValues];
+            if (index === -1) {
+                newActiveValues.push(value);
+            } else {
+                newActiveValues.splice(index, 1)
+            }
+            return {
+                ...state,
+                appState: {
+                    ...appState,
+                    search: {
+                        ...appState.search,
+                        filters: updateObject(appState.search.filters, {
+                            [filterProp]: newActiveValues,
+                        })
+                    }
+                }
+            }
+        }
         default:
             return state;
     }
-
 }
-

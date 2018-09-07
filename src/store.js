@@ -3,13 +3,14 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunkMiddleware from 'redux-thunk';
 import { handleActions } from './reducers';
 
-export function createSubStore(ID_PROP, COORDINATES_PROP, SEARCH_PROPS, DATASET_URL) {
+export function createSubStore(ID_PROP, COORDINATES_PROP, SEARCH_PROPS, FILTERS, DATASET_URL) {
     const initialState = {
         conf: {
             ID_PROP,
             COORDINATES_PROP,
             DATASET_URL,
             SEARCH_PROPS,
+            FILTERS,
         },
         domainData: {
             locationsById: {}
@@ -25,6 +26,7 @@ export function createSubStore(ID_PROP, COORDINATES_PROP, SEARCH_PROPS, DATASET_
             },
             search: {
                 textSearch: '',
+                filters: FILTERS.reduce((filters, filter) => ({...filters, [filter.prop]: []}), {}),
             }
         },
     };
