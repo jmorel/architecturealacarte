@@ -1,5 +1,3 @@
-import { INITIAL_PAGE_STATE } from '../../reducers';
-
 export const SECTION_NAME = 'CinquanteLieux';
 export const ID_PROP_NAME = 'nom';
 export const COORDINATES_PROP_NAME = 'coordonnees';
@@ -14,7 +12,7 @@ export function getImageRatio(location) {
 }
 
 export const mapStateToProps = (state, ownProps) => ({
-    ...(state[SECTION_NAME] || INITIAL_PAGE_STATE),
+    ...(state[SECTION_NAME]),
     ...ownProps,
 });
 

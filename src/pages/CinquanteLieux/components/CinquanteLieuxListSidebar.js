@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { setCurrentPageIndex , resetCurrentLocationId} from '../../../actions';
+import { setCurrentPageIndex , resetCurrentId} from '../../../actions';
 import { Footer } from '../../../components/Footer';
 import { ListHeader } from '../../../components/Header';
 import { PaginatedList } from '../../../components/PaginatedList';
@@ -17,7 +17,7 @@ export class CinquanteLieuxListSidebar extends React.Component {
 
     componentDidMount() {
         const { dispatch } = this.props;
-        dispatch(resetCurrentLocationId(SECTION_NAME));
+        dispatch(resetCurrentId(SECTION_NAME));
     }
 
     setCurrentIndex(index) {

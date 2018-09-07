@@ -2,13 +2,16 @@ import L from 'leaflet';
 import React from 'react';
 import { Marker } from 'react-leaflet';
 import { connect } from 'react-redux';
-import { Route } from 'react-router-dom';
-import { fetchLocationsIfNeeded } from '../../actions';
+import { Route, withRouter } from 'react-router-dom';
+import { fetchLocations } from '../../actions';
 import { PageLayout } from '../../components/PageLayout';
 import { EteArchiDetailsSidebarContainer } from './components/EteArchiDetailsSidebar';
 import { EteArchiListSidebarContainer } from './components/EteArchiListSidebar';
 import { EteArchiSpinnerSidebar } from './components/EteArchiSpinnerSidebar';
-import { COORDINATES_PROP_NAME, DATASET_URL, getImageUrl, ID_PROP_NAME, mapStateToProps, SECTION_NAME } from './eteArchiUtils';
+import { getImageUrl } from './eteArchiUtils';
+import { createSubStore } from '../../store';
+import { Provider } from 'react-redux';
+import { currentLocationSelector, isFetchingSelector, filteredLocationsWithCoordinatesSelector } from '../../selectors';
 
 function buildMarkerIcon(location, collapsed) {
     const image = location.image;
@@ -31,9 +34,8 @@ export class EteArchi extends React.Component {
     }
 
     componentDidMount() {
-        const { dispatch } = this.props;
-        dispatch(fetchLocationsIfNeeded(SECTION_NAME, ID_PROP_NAME, COORDINATES_PROP_NAME, DATASET_URL));
         document.title = 'L\'été Archi | Architecture à la carte';
+        this.props.dispatch(fetchLocations());
     }
 
     navigateToDetails(date) {
@@ -43,29 +45,51 @@ export class EteArchi extends React.Component {
     }
 
     render() {
-        const { locations, isFetching } = this.props;
+        const { locationsWithCoordinates, currentLocation, isFetching } = this.props;
 
-        const sidebar = isFetching ? <EteArchiSpinnerSidebar/> : (
+        const sidebar = isFetching ? <EteArchiSpinnerSidebar /> : (
             <div>
                 <Route path="/ete-archi" exact component={EteArchiListSidebarContainer}></Route>
                 <Route path="/ete-archi/:id" component={EteArchiDetailsSidebarContainer}></Route>
             </div>
         )
 
-        const markers = locations.withCoordinatesIds
-            .map(id => locations.byId[id])
-            .map(location =>
+        const markers = locationsWithCoordinates.map(location =>
                 <Marker key={location.date}
                     position={location.coordonnees}
-                    icon={buildMarkerIcon(location, locations.currentId && location.date !== locations.currentId)}
+                    icon={buildMarkerIcon(location, currentLocation && currentLocation === location)}
                     onClick={this.navigateToDetails(location.date)} />
             );
         return <PageLayout
-            sidebar={sidebar}
-            markers={markers}
-            defaultPosition={[46.596170, 2.387703]}
-            defaultZoom={6} />
+                    sidebar={sidebar}
+                    markers={markers}
+                    defaultPosition={[46.596170, 2.387703]}
+                    defaultZoom={6} />
     }
 }
 
-export const EteArchiContainer = connect(mapStateToProps)(EteArchi);
+const EteArchiWithRouter = withRouter(EteArchi);
+
+const mapStateToProps = (state, ownProps) => ({
+    history: ownProps.history,
+    locationsWithCoordinates: filteredLocationsWithCoordinatesSelector(state),
+    currentLocation: currentLocationSelector(state),
+    isFetching: isFetchingSelector(state),
+});
+
+const EteArchiWithRouterContainer = connect(mapStateToProps)(EteArchiWithRouter);
+
+export class EteArchiApp extends React.Component {
+    constructor(props) {
+        super(props);
+        this.store = createSubStore('date', 'coordonnees', ['titre', 'description'] , 'https://jmorel.opendatasoft.com/api/v2/catalog/datasets/ete-archi/exports/json');
+    }
+
+    render() {
+        return (
+            <Provider store={this.store}>
+                <EteArchiWithRouterContainer />
+            </Provider>
+        )
+    }
+}

@@ -2,49 +2,58 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { resetCurrentLocationId, setCurrentPageIndex } from '../../../actions';
+import { resetCurrentId, setCurrentPageIndex, setTextSearch } from '../../../actions';
 import { Footer } from '../../../components/Footer';
 import { ListHeader } from '../../../components/Header';
 import { LocationCard } from '../../../components/LocationCard';
 import { PaginatedList } from '../../../components/PaginatedList';
 import { Sidebar } from '../../../components/Sidebar';
-import { getImageRatio, getImageUrl, mapStateToProps, SECTION_NAME } from '../eteArchiUtils';
+import { getImageRatio, getImageUrl } from '../eteArchiUtils';
+import { TextSearch } from '../../../components/TextSearch';
+import {lastIndexSelector, currentIndexSelector, textSearchSelector, filteredLocationsSelector, filteredCurrentPageLocationsSelector } from '../../../selectors';
 
 export class EteArchiListSidebar extends React.Component {
     constructor(props) {
         super(props);
         this.setCurrentPageIndex = this.setCurrentPageIndex.bind(this);
+        this.setTextSearch = this.setTextSearch.bind(this);
     }
 
     componentDidMount() {
         const { dispatch } = this.props;
-        dispatch(resetCurrentLocationId(SECTION_NAME));
+        dispatch(resetCurrentId());
     }
 
     setCurrentPageIndex(index) {
         const { dispatch } = this.props;
-        dispatch(setCurrentPageIndex(SECTION_NAME, index));
+        dispatch(setCurrentPageIndex(index));
+    }
+
+    setTextSearch(value) {
+        const { dispatch } = this.props;
+        dispatch(setTextSearch(value));
     }
 
     render() {
-        const { locations, pagination } = this.props;
+        const { currentPageLocations, lastIndex, currentIndex, textSearch } = this.props;
         return (
             <Sidebar>
                 <ListHeader title="L'ete archi de David Abittan" />
                 <div className="Sidebar-content">
                     <p>
                         Durant l’été, <a href="https://twitter.com/david_abittan">David Abittan</a> nous emmène chaque semaine sur <a href="https://www.franceinter.fr/emissions/l-ete-archi">France Inter</a> à la découverte de toutes les époques de l’architecture de France.
-                </p>
-                    <PaginatedList lastIndex={pagination.lastIndex}
-                        currentIndex={pagination.currentIndex}
+                    </p>
+                    <div className="Sidebar-filters">
+                        <TextSearch value={textSearch} onChange={this.setTextSearch} />
+                    </div>
+                    <PaginatedList lastIndex={lastIndex}
+                        currentIndex={currentIndex}
                         setCurrentIndex={this.setCurrentPageIndex}>
-                        {locations.currentPageIds
-                            .map(id => locations.byId[id])
-                            .map(location => (
-                                <Link to={`/ete-archi/${location.date}`} key={location.date}>
-                                    <LocationCard title={location.titre} imageUrl={getImageUrl(location)} imageRatio={getImageRatio(location)} />
-                                </Link>
-                            ))}
+                        {currentPageLocations.map(location => (
+                            <Link to={`/ete-archi/${location.date}`} key={location.date}>
+                                <LocationCard title={location.titre} imageUrl={getImageUrl(location)} imageRatio={getImageRatio(location)} />
+                            </Link>
+                        ))}
                     </PaginatedList>
                 </div>
                 <Footer />
@@ -52,5 +61,12 @@ export class EteArchiListSidebar extends React.Component {
         )
     }
 }
+
+const mapStateToProps = (state) => ({
+    currentPageLocations: filteredCurrentPageLocationsSelector(state),
+    lastIndex: lastIndexSelector(state),
+    currentIndex: currentIndexSelector(state),
+    textSearch: textSearchSelector(state),
+})
 
 export const EteArchiListSidebarContainer = connect(mapStateToProps)(EteArchiListSidebar);

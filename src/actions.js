@@ -1,66 +1,74 @@
 import axios from 'axios';
 
+// DOMAIN
+
 export const LOCATIONS_REQUEST = 'LOCATIONS_REQUEST';
 export const LOCATIONS_SUCCESS = 'LOCATIONS_SUCCESS';
 export const LOCATIONS_FAILURE = 'LOCATIONS_FAILURE';
-export const SET_CURRENT_LOCATION_ID = 'SET_CURRENT_LOCATION_ID';
-export const RESET_CURRENT_LOCATION_ID = 'RESET_CURRENT_LOCATION_ID';
-export const SET_CURRENT_PAGE_INDEX = 'SET_CURRENT_PAGE_INDEX';
 
-export const locationsRequest = (sectionName, url) => ({
+export const locationsRequest = (url) => ({
     type: LOCATIONS_REQUEST,
-    sectionName,
     url,
 })
-export const locationsSuccess = (sectionName, idPropName, coordinatesPropName, locations) => ({
+export const locationsSuccess = (locations) => ({
     type: LOCATIONS_SUCCESS,
-    sectionName,
-    idPropName,
-    coordinatesPropName,
     locations,
 })
 
-export const locationsFailure = (sectionName, error) => ({
+export const locationsFailure = (error) => ({
     type: LOCATIONS_FAILURE,
-    sectionName,
     error,
 })
 
-const fetchLocations = (sectionName, idPropName, coordinatesPropName, url) => {
-    return (dispatch) => {
-        dispatch(locationsRequest(sectionName, url));
-        return axios.get(url)
-            .then(response => response.data)
-            .then(locations => dispatch(locationsSuccess(sectionName, idPropName, coordinatesPropName, locations)))
-            .catch(error => dispatch(locationsFailure(sectionName, error)));
-    }
-}
-
-function shouldFetchLocations(state, sectionName) {
-    return !state[sectionName] || (!state[sectionName].locations.allIds.length && !state[sectionName].isFetching);
-}
-
-export function fetchLocationsIfNeeded(sectionName, idPropName, coordinatesPropName, url) {
+export const fetchLocations = () => {
     return (dispatch, getState) => {
-        if (shouldFetchLocations(getState(), sectionName)) {
-            return dispatch(fetchLocations(sectionName, idPropName, coordinatesPropName, url));
-        }
+        const state = getState();
+        dispatch(locationsRequest(state.conf.DATASET_URL));
+        return axios.get(state.conf.DATASET_URL)
+            .then(response => response.data)
+            .then(locations => dispatch(locationsSuccess(locations)))
+            .catch(error => dispatch(locationsFailure(error)));
     }
 }
 
-export const setCurrentLocationId = (sectionName, currentLocationId) => ({
-    type: SET_CURRENT_LOCATION_ID,
-    sectionName,
-    currentLocationId,
+// APP
+
+
+export const SET_CURRENT_ID = 'SET_CURRENT_ID';
+export const RESET_CURRENT_ID = 'RESET_CURRENT_ID';
+export const SET_CURRENT_PAGE_INDEX = 'SET_CURRENT_PAGE_INDEX';
+export const SET_TEXT_SEARCH = 'SET_TEXT_SEARCH';
+export const SET_CATEGORY_FILTER = 'SET_CATEGORY_FILTER';
+
+
+
+// function shouldFetchLocations(state, sectionName) {
+//     return !state[sectionName] || (!state[sectionName].locations.allIds.length && !state[sectionName].isFetching);
+// }
+
+export function fetchLocationsIfNeeded(sectionName, idPropName, coordinatesPropName, searchProps, url) {
+//     return (dispatch, getState) => {
+//         if (shouldFetchLocations(getState(), sectionName)) {
+//             return dispatch(fetchLocations(sectionName, idPropName, coordinatesPropName, searchProps, url));
+//         }
+//     }
+}
+
+export const setCurrentId = (currentId) => ({
+    type: SET_CURRENT_ID,
+    currentId,
 })
 
-export const resetCurrentLocationId = (sectionName) => ({
-    type: RESET_CURRENT_LOCATION_ID,
-    sectionName,
+export const resetCurrentId = () => ({
+    type: RESET_CURRENT_ID,
 })
 
-export const setCurrentPageIndex = (sectionName, currentIndex) => ({
+export const setCurrentPageIndex = (currentIndex) => ({
     type: SET_CURRENT_PAGE_INDEX,
-    sectionName,
     currentIndex,
+})
+
+export const setTextSearch = (textSearch) => ({
+    type: SET_TEXT_SEARCH,
+    textSearch,
 })

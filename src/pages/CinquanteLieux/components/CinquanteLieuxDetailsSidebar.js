@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
-import { setCurrentLocationId } from '../../../actions';
+import { setCurrentId } from '../../../actions';
 import { Sidebar } from '../../../components/Sidebar';
 import { mapStateToProps, SECTION_NAME } from '../cinquanteLieuxUtils';
 import { CinquanteLieuxCategoryTag } from './CinquanteLieuxCategoryTag';
@@ -23,7 +23,7 @@ export class CinquanteLieuxDetailsSidebar extends React.Component {
         const { dispatch, locations } = this.props;
         const currentLocation = this.getCurrentLocation();
         if (currentLocation && (!locations.currentId || locations.currentId !== currentLocation.nom)) {
-            dispatch(setCurrentLocationId(SECTION_NAME, currentLocation.nom));
+            dispatch(setCurrentId(SECTION_NAME, currentLocation.nom));
         }
     }
 

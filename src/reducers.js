@@ -1,99 +1,63 @@
-import { LOCATIONS_REQUEST, LOCATIONS_SUCCESS, LOCATIONS_FAILURE, SET_CURRENT_PAGE_INDEX, SET_CURRENT_LOCATION_ID, RESET_CURRENT_LOCATION_ID } from './actions';
+import { LOCATIONS_REQUEST, LOCATIONS_SUCCESS, LOCATIONS_FAILURE, SET_CURRENT_PAGE_INDEX, SET_CURRENT_ID, RESET_CURRENT_ID, SET_TEXT_SEARCH } from './actions';
 
-export const INITIAL_PAGE_STATE = {
-    isFetching: false,
-    errors: null,
-    locations: {
-        byId: {},
-        allIds: [],
-        currentId: null,
-        currentPageIds: [],
-        withCoordinatesIds: [],
-    },
-    pagination: {
-        currentIndex: 0,
-        lastIndex: 0,
-        pageSize: 10,
-    },
-};
+const updateObject = (oldObject, newValues) => Object.assign({}, oldObject, newValues);
 
-export function handleActions(state = {}, action) {
-    const { sectionName } = action;
-    const pageState = state[sectionName] || INITIAL_PAGE_STATE;
+export function handleActions(state, action) {
+    const { ID_PROP } = state.conf;
+    const { domainData, appState } = state;
     switch (action.type) {
         case LOCATIONS_REQUEST:
-            return Object.assign({}, state, {
-                [sectionName]: {
-                    ...pageState,
-                    isFetching: true,
-                }
-            })
-        case LOCATIONS_SUCCESS:
-            const { idPropName, coordinatesPropName, locations } = action;
-            const locationsById = locations.reduce((byId, location) => {
-                byId[location[idPropName]] = location;
-                return byId;
-            }, {});
-            const allLocationIDs = Object.keys(locationsById);
-            const withCoordinatesIds = locations
-                .filter(location => !!location[coordinatesPropName])
-                .map(location => location[idPropName]);
-            return Object.assign({}, state, {
-                [sectionName]: {
-                    ...pageState,
-                    isFetching: false,
-                    locations: Object.assign({}, pageState.locations, {
-                        byId: locationsById,
-                        allIds: allLocationIDs,
-                        withCoordinatesIds,
-                        currentPageIds: allLocationIDs.slice(0, pageState.pagination.pageSize),
-                    }),
-                    pagination: Object.assign({}, pageState.pagination, {
-                        currentIndex: 0,
-                        lastIndex: Math.ceil(allLocationIDs.length / pageState.pagination.pageSize) - 1,
-                    }),
-                }
-            })
+            return {
+                ...state,
+                appState: updateObject(appState, { isFetching: true }),
+            }
         case LOCATIONS_FAILURE:
-            return Object.assign({}, state, {
-                [sectionName]: {
-                    ...pageState,
+            return {
+                ...state,
+                appState: updateObject(appState, {
                     isFetching: false,
                     error: action.error,
-                }
-            })
-        case SET_CURRENT_LOCATION_ID:
-            return Object.assign({}, state, {
-                [sectionName]: {
-                    ...pageState,
-                    locations: Object.assign({}, pageState.locations, {
-                        currentId: action.currentLocationId,
-                    })
-                }
-            })
-        case RESET_CURRENT_LOCATION_ID:
-            return Object.assign({}, state, {
-                [sectionName]: {
-                    ...pageState,
-                    locations: Object.assign({}, pageState.locations, {
-                        currentId: null,
-                    })
-                }
-            })
+                })
+            }
+        case LOCATIONS_SUCCESS:
+            const locationsById = action.locations.reduce((index, location) => {
+                index[location[ID_PROP]] = location;
+                return index;
+            }, {});
+            return {
+                ...state,
+                appState: updateObject(appState, { isFetching: false, }),
+                domainData: updateObject(domainData, { locationsById })
+            }
         case SET_CURRENT_PAGE_INDEX:
-            const start = action.currentIndex * pageState.pagination.pageSize;
-            const end = start + pageState.pagination.pageSize;
-            return Object.assign({}, state, {
-                [sectionName]: {
-                    pagination: Object.assign({}, pageState.pagination, {
-                        currentIndex: action.currentIndex,
-                    }),
-                    locations: Object.assign({}, pageState.locations, {
-                        currentPageIds: pageState.locations.allIds.slice(start, end),
-                    })
+            return {
+                ...state,
+                appState: updateObject(appState, {
+                    pagination: updateObject(appState.pagination, { currentIndex: action.currentIndex })
+                })
+            }
+        case SET_CURRENT_ID:
+            return {
+                ...state,
+                appState: updateObject(appState, { currentId: action.currentId, })
+            }
+        case RESET_CURRENT_ID:
+            return {
+                ...state,
+                appState: updateObject(appState, { currentId: null })
+            }
+        case SET_TEXT_SEARCH:
+            return {
+                ...state,
+                appState: {
+                    ...appState,
+                    pagination: updateObject(appState.pagination, { currentIndex: 0 }),
+                    search: updateObject(appState.search, { textSearch: action.textSearch, })
                 }
-            })
+            }
         default:
             return state;
     }
-};
+
+}
+

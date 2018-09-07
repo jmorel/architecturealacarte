@@ -1,22 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { setCurrentLocationId } from '../../../actions';
+import { setCurrentId } from '../../../actions';
 import { DetailsHeader } from '../../../components/Header';
 import { Sidebar } from '../../../components/Sidebar';
-import { getImageUrl, mapStateToProps, SECTION_NAME } from '../eteArchiUtils';
+import { getImageUrl } from '../eteArchiUtils';
+import {EteArchiSpinnerSidebar} from './EteArchiSpinnerSidebar';
+import { currentLocationSelector, currentIdSelector } from '../../../selectors';
 
 export class EteArchiDetailsSidebar extends React.Component {
-    getCurrentLocation() {
-        const { locations, match } = this.props;
-        return locations.byId[match.params.id];
-    }
-
-    _dispatchCurrentLocation()  {
-        const { dispatch, locations } = this.props;
-        const currentLocation = this.getCurrentLocation();
-        if (currentLocation && (!locations.currentId || locations.currentId !== currentLocation.date)) {
-            dispatch(setCurrentLocationId(SECTION_NAME, currentLocation.date));
+    _dispatchCurrentLocation() {
+        const { dispatch, currentId, match } = this.props;
+        if (!currentId || currentId !== match.params.id) {
+            dispatch(setCurrentId(match.params.id));
         }
     }
 
@@ -29,10 +25,14 @@ export class EteArchiDetailsSidebar extends React.Component {
     }
 
     render() {
-        const currentLocation = this.getCurrentLocation();
+        let { currentLocation, currentId } = this.props;
+
+        if (!currentLocation && currentId) {
+            return <Redirect to='/ete-archi' />
+        }
 
         if (!currentLocation) {
-            return <Redirect to='/ete-archi' />
+            return <EteArchiSpinnerSidebar/>
         }
 
         return (
@@ -58,5 +58,10 @@ export class EteArchiDetailsSidebar extends React.Component {
         )
     }
 }
+const mapStateToProps = (state, ownProps) => ({
+    currentLocation: currentLocationSelector(state),
+    currentId: currentIdSelector(state),
+    match: ownProps.match,
+});
 
 export const EteArchiDetailsSidebarContainer = connect(mapStateToProps)(EteArchiDetailsSidebar);
