@@ -57,7 +57,7 @@ export class EteArchi extends React.Component {
         const markers = locationsWithCoordinates.map(location =>
                 <Marker key={location.date}
                     position={location.coordonnees}
-                    icon={buildMarkerIcon(location, currentLocation && currentLocation === location)}
+                    icon={buildMarkerIcon(location, currentLocation && currentLocation !== location)}
                     onClick={this.navigateToDetails(location.date)} />
             );
         return <PageLayout
@@ -68,16 +68,16 @@ export class EteArchi extends React.Component {
     }
 }
 
-const EteArchiWithRouter = withRouter(EteArchi);
 
-const mapStateToProps = (state, ownProps) => ({
-    history: ownProps.history,
+const mapStateToProps = (state) => ({
     locationsWithCoordinates: filteredLocationsWithCoordinatesSelector(state),
     currentLocation: currentLocationSelector(state),
     isFetching: isFetchingSelector(state),
 });
 
-const EteArchiWithRouterContainer = connect(mapStateToProps)(EteArchiWithRouter);
+const EteArchiContainer = connect(mapStateToProps)(EteArchi);
+
+const EteArchiContainerWithRouter = withRouter(EteArchiContainer);
 
 export class EteArchiApp extends React.Component {
     constructor(props) {
@@ -97,7 +97,7 @@ export class EteArchiApp extends React.Component {
     render() {
         return (
             <Provider store={this.store}>
-                <EteArchiWithRouterContainer />
+                <EteArchiContainerWithRouter />
             </Provider>
         )
     }
