@@ -8,13 +8,8 @@ class TableOfContents extends Component {
         this.state = {
             sections: [
                 [{ label: "L'été archi de David Abittan", url: "/ete-archi" }],
-                [{ label: "Le génie des lieux", url: "test" }],
-                [
-                    { label: "Les journées du patrimoine 2017", url: "test" },
-                    { label: "Les journées du patrimoine 2016", url: "test" },
-                    { label: "Les journées du patrimoine 2015", url: "test" },
-                ],
-                [{ label: "Architecture remarquable des XXème et XXIème siècles en Île de France", url: "test" }],
+                [{ label: "Le génie des lieux", url: "/genie-des-lieux" }],
+                [{ label: "Architecture remarquable des XXème et XXIème siècles en Île de France", url: "/ile-de-france" }],
                 [{ label: "Les 50 lieux en France à voir au moins une fois dans sa vie", url: "/50-lieux-en-france-a-voir-au-moins-une-fois-dans-sa-vie" }],
             ]
         }

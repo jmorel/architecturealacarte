@@ -2,18 +2,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { resetCurrentId, setCurrentPageIndex, setTextSearch, toggleFilter } from '../../../actions';
-import { Footer } from '../../../components/Footer';
-import { ListHeader } from '../../../components/Header';
-import { LocationCard } from '../../../components/LocationCard';
-import { PaginatedList } from '../../../components/PaginatedList';
-import { Sidebar } from '../../../components/Sidebar';
-import { getImageRatio, getImageUrl } from '../eteArchiUtils';
-import { TextSearch } from '../../../components/TextSearch';
-import { CategoryFilter } from '../../../components/CategoryFilter';
-import {lastIndexSelector, currentIndexSelector, textSearchSelector, filteredCurrentPageLocationsSelector, filtersSelector, filtersValuesSelector, activeFiltersValuesSelector } from '../../../selectors';
+import { resetCurrentId, setCurrentPageIndex, setTextSearch, toggleFilter } from '../actions';
+import { Footer } from './Footer';
+import { ListHeader } from './Header';
+import { LocationCard } from './LocationCard';
+import { PaginatedList } from './PaginatedList';
+import { Sidebar } from './Sidebar';
+import { getImageRatio, getImageUrl } from '../utils';
+import { TextSearch } from './TextSearch';
+import { CategoryFilter } from './CategoryFilter';
+import {lastIndexSelector, currentIndexSelector, textSearchSelector, filteredCurrentPageLocationsSelector, filtersSelector, filtersValuesSelector, activeFiltersValuesSelector, datasetIdSelector, idPropSelector, imagePropSelector, listUrlSelector, titlePropSelector, pageTitleSelector } from '../selectors';
 
-export class EteArchiListSidebar extends React.Component {
+
+export class ListSidebar extends React.Component {
     constructor(props) {
         super(props);
         this.setCurrentPageIndex = this.setCurrentPageIndex.bind(this);
@@ -42,14 +43,27 @@ export class EteArchiListSidebar extends React.Component {
     }
 
     render() {
-        const { currentPageLocations, lastIndex, currentIndex, textSearch, filters, filtersValues, activeFiltersValues } = this.props;
+        const {
+            currentPageLocations,
+            lastIndex,
+            currentIndex,
+            textSearch,
+            filters,
+            filtersValues,
+            activeFiltersValues,
+            DATASET_ID,
+            LIST_URL,
+            ID_PROP,
+            IMAGE_PROP,
+            TITLE_PROP,
+            PAGE_TITLE,
+            children,
+        } = this.props;
         return (
             <Sidebar>
-                <ListHeader title="L'ete archi de David Abittan" />
+                <ListHeader title={PAGE_TITLE} />
                 <div className="Sidebar-content">
-                    <p>
-                        Durant l’été, <a href="https://twitter.com/david_abittan">David Abittan</a> nous emmène chaque semaine sur <a href="https://www.franceinter.fr/emissions/l-ete-archi">France Inter</a> à la découverte de toutes les époques de l’architecture de France.
-                    </p>
+                    {children}
                     <div className="Sidebar-filters">
                         <TextSearch value={textSearch} onChange={this.setTextSearch} />
                         {filters.map(filter => (
@@ -61,12 +75,16 @@ export class EteArchiListSidebar extends React.Component {
                                             toggleFilter={this.toggleFilter}/>
                         ))}
                     </div>
-                    <PaginatedList lastIndex={lastIndex}
+                    <PaginatedList
+                        lastIndex={lastIndex}
                         currentIndex={currentIndex}
                         setCurrentIndex={this.setCurrentPageIndex}>
                         {currentPageLocations.map(location => (
-                            <Link to={`/ete-archi/${location.date}`} key={location.date}>
-                                <LocationCard title={location.titre} imageUrl={getImageUrl(location)} imageRatio={getImageRatio(location)} />
+                            <Link to={`${LIST_URL}/${location[ID_PROP]}`} key={location[ID_PROP]}>
+                                <LocationCard
+                                    title={location[TITLE_PROP]}
+                                    imageUrl={getImageUrl(DATASET_ID, location[IMAGE_PROP])}
+                                    imageRatio={getImageRatio(location[IMAGE_PROP])} />
                             </Link>
                         ))}
                     </PaginatedList>
@@ -77,7 +95,7 @@ export class EteArchiListSidebar extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state, ownProps) => ({
     currentPageLocations: filteredCurrentPageLocationsSelector(state),
     lastIndex: lastIndexSelector(state),
     currentIndex: currentIndexSelector(state),
@@ -85,6 +103,13 @@ const mapStateToProps = (state) => ({
     filters: filtersSelector(state),
     filtersValues: filtersValuesSelector(state),
     activeFiltersValues: activeFiltersValuesSelector(state),
+    DATASET_ID: datasetIdSelector(state),
+    ID_PROP: idPropSelector(state),
+    IMAGE_PROP: imagePropSelector(state),
+    LIST_URL: listUrlSelector(state),
+    TITLE_PROP: titlePropSelector(state),
+    PAGE_TITLE: pageTitleSelector(state),
+    ...ownProps,
 })
 
-export const EteArchiListSidebarContainer = connect(mapStateToProps)(EteArchiListSidebar);
+export const ListSidebarContainer = connect(mapStateToProps)(ListSidebar);

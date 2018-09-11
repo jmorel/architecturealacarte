@@ -45,6 +45,9 @@
     font-style: italic;
 }
 
+.Header h1:last-child,
+.Header h2:last-child,
+.Header h3:last-child,
 .Header p:last-child {
     margin-bottom: 0;
 }

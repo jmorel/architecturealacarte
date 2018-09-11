@@ -2,9 +2,9 @@ import 'leaflet/dist/leaflet.css';
 import React, { Component } from 'react';
 import { Map, TileLayer } from 'react-leaflet';
 import { Link } from 'react-router-dom';
-import { Footer } from '../../components/Footer';
-import { HomeHeader } from '../../components/Header';
-import TableOfContents from './components/TableOfContents';
+import { Footer } from '../components/Footer';
+import { HomeHeader } from '../components/Header';
+import TableOfContents from '../components/TableOfContents';
 import './Home.css';
 
 class Home extends Component {

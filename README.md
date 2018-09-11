@@ -5,15 +5,17 @@
 * [x] Remove map controls on home
 * [-] Put map credits in the footer instead of on the map itself
 * [x] Fix pagination for long lists
-* [ ] Add filters
+* [x] Add filters
 * [x] Add hover style for LocationCard
 * [x] Move state to redux
 * [x] Add page title and favicon
 * [x] Add proper content for links in sidebar/footer
 * [ ] Add prop-types
-* [ ] Make location accessible via URL (currently redirects)
+* [x] Make location accessible via URL (currently redirects)
 * [ ] Highlighted / hovered map markers are sometimes below other markers
 * [ ] Responsive
+* [ ] Bug where all map markers shifted to a new location
+* [ ] Better pagination (breaking when there are more than 15 pages)
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).

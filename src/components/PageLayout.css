@@ -6,9 +6,11 @@
   .PageLayout .Sidebar {
     height: 100vh;
     overflow-y: auto;
+    width: var(--sidebar-width);
   }
 
   .PageLayout-mapContainer {
-    flex-grow: 1;
+    width: calc(100vw - var(--sidebar-width));
+    height: 100vh;
     position: relative;
   }

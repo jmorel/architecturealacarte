@@ -3,14 +3,21 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunkMiddleware from 'redux-thunk';
 import { handleActions } from './reducers';
 
-export function createSubStore(ID_PROP, COORDINATES_PROP, SEARCH_PROPS, FILTERS, DATASET_URL) {
+export function createSubStore({ID_PROP, COORDINATES_PROP, SEARCH_PROPS, IMAGE_PROP, TITLE_PROP, FILTERS, DATASET_URL, LIST_URL, DEFAULT_ZOOM, DEFAULT_POSITION, DATASET_ID, PAGE_TITLE}) {
     const initialState = {
         conf: {
             ID_PROP,
             COORDINATES_PROP,
-            DATASET_URL,
             SEARCH_PROPS,
+            IMAGE_PROP,
+            TITLE_PROP,
+            DATASET_URL,
             FILTERS,
+            LIST_URL,
+            DEFAULT_POSITION,
+            DEFAULT_ZOOM,
+            DATASET_ID,
+            PAGE_TITLE,
         },
         domainData: {
             locationsById: {}

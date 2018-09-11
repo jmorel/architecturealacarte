@@ -5,6 +5,13 @@ export const coordinatesPropSelector = state => state.conf.COORDINATES_PROP;
 export const idPropSelector = state => state.conf.ID_PROP;
 export const searchPropsSelector = state => state.conf.SEARCH_PROPS;
 export const filtersSelector = state => state.conf.FILTERS;
+export const listUrlSelector = state => state.conf.LIST_URL;
+export const defaultZoomSelector = state => state.conf.DEFAULT_ZOOM;
+export const defaultPositionSelector = state => state.conf.DEFAULT_POSITION;
+export const imagePropSelector = state => state.conf.IMAGE_PROP;
+export const datasetIdSelector = state => state.conf.DATASET_ID;
+export const titlePropSelector = state => state.conf.TITLE_PROP;
+export const pageTitleSelector = state => state.conf.PAGE_TITLE;
 
 export const pageSizeSelector = state => state.appState.pagination.pageSize;
 export const currentIndexSelector = state => state.appState.pagination.currentIndex;
