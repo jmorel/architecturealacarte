@@ -28,7 +28,8 @@ export const categoryFilteredLocationsSelector = createSelector(
         return Object.keys(activeFiltersValues)
             .filter(filterProp => activeFiltersValues[filterProp].length)
             .reduce((matchesAllFilters, filterProp) => {
-                return matchesAllFilters && activeFiltersValues[filterProp].includes(location[filterProp]);
+                const locationValues = Array.isArray(location[filterProp]) ? location[filterProp] : [location[filterProp]];
+                return matchesAllFilters && locationValues.some(value => activeFiltersValues[filterProp].includes(value));
             }, true)
     })
 
@@ -83,11 +84,14 @@ const SORT_METHODS = {
 const getFilterValues = (locations, filterProp, filterSort) => {
     const values = {};
     for (let location of locations) {
-        const value = location[filterProp];
-        if (!values[value]) {
-            values[value] = {value: value, count: 1}
-        } else {
-            values[value].count++;
+        let locationValues = location[filterProp];
+        locationValues = Array.isArray(locationValues) ? locationValues : [locationValues];
+        for (let locationValue of locationValues) {
+            if (!values[locationValue]) {
+                values[locationValue] = {value: locationValue, count: 1}
+            } else {
+                values[locationValue].count++;
+            }
         }
     }
     const valuesList = Object.values(values);

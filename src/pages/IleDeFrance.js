@@ -2,14 +2,28 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { withCurrentLocation } from '../components/DetailsSidebar';
 import { DetailsHeader } from '../components/Header';
+import { ListSidebarContainer } from '../components/ListSidebar';
 import { PageContainerWithRouter } from '../components/Page';
 import { Sidebar } from '../components/Sidebar';
+import { SpinnerSidebarContainer } from '../components/SpinnerSidebar';
 import { createSubStore } from '../store';
 import { getImageUrl } from '../utils';
 
 const PAGE_TITLE = 'Ile de France';
 const DATASET_ID = 'architecture-remarquable-ile-de-france';
 const LIST_URL = '/ile-de-france';
+
+const Intro = () => (
+    <p>Architecture remarquable des XX<sup>ème</sup> et XXI<sup>ème</sup> siècles en Île de France</p>
+)
+
+const IleDeFranceSpinnerSidebar = () => (
+    <SpinnerSidebarContainer IntroComponent={Intro}/>
+)
+
+const IleDeFranceListSidebar = () => (
+    <ListSidebarContainer><Intro/></ListSidebarContainer>
+)
 
 const IleDeFranceDetailsSidebar = ({ currentLocation }) => {
     const names = currentLocation.architectes;
@@ -71,11 +85,16 @@ export class IleDeFranceApp extends React.Component {
             IMAGE_PROP: 'image',
             TITLE_PROP: 'nom',
             FILTERS: [
-                // {
-                //     title: 'Architectes',
-                //     prop: 'architectes',
-                //     sort: '-count',
-                // }
+                {
+                    title: 'Visitable',
+                    prop: 'visitable',
+                    sort: '-value',
+                },
+                {
+                    title: 'Architectes',
+                    prop: 'architectes',
+                    sort: '-count',
+                }
             ],
             DATASET_URL: 'https://jmorel.opendatasoft.com/api/v2/catalog/datasets/architecture-remarquable-ile-de-france/exports/json',
             DEFAULT_POSITION: [48.853414, 2.348789],
@@ -87,6 +106,8 @@ export class IleDeFranceApp extends React.Component {
         return (
             <Provider store={this.store}>
                 <PageContainerWithRouter
+                    SpinnerSidebarComponent={IleDeFranceSpinnerSidebar}
+                    ListSidebarComponent={IleDeFranceListSidebar}
                     DetailsSidebarComponent={IleDeFranceDetailsSidebarContainer}
                 />
             </Provider>
