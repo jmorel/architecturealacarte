@@ -10,7 +10,7 @@ import { PaginatedList } from './PaginatedList';
 import { Sidebar } from './Sidebar';
 import { getImageRatio, getImageUrl } from '../utils';
 import { TextSearch } from './TextSearch';
-import { CategoryFilter } from './CategoryFilter';
+import { Filter } from './Filter';
 import {lastIndexSelector, currentIndexSelector, textSearchSelector, filteredCurrentPageLocationsSelector, filtersSelector, filtersValuesSelector, activeFiltersValuesSelector, datasetIdSelector, idPropSelector, imagePropSelector, listUrlSelector, titlePropSelector, pageTitleSelector } from '../selectors';
 
 
@@ -67,12 +67,13 @@ export class ListSidebar extends React.Component {
                     <div className="Sidebar-filters">
                         <TextSearch value={textSearch} onChange={this.setTextSearch} />
                         {filters.map(filter => (
-                            <CategoryFilter key={filter.prop}
-                                            title={filter.title}
-                                            filterProp={filter.prop}
-                                            values={filtersValues[filter.prop]}
-                                            activeValues={activeFiltersValues[filter.prop]}
-                                            toggleFilter={this.toggleFilter}/>
+                            <Filter key={filter.prop}
+                                widget={filter.widget}
+                                title={filter.title}
+                                filterProp={filter.prop}
+                                values={filtersValues[filter.prop]}
+                                activeValues={activeFiltersValues[filter.prop]}
+                                toggleFilter={this.toggleFilter} />
                         ))}
                     </div>
                     <PaginatedList

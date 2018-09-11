@@ -93,7 +93,8 @@ export class IleDeFranceApp extends React.Component {
                 {
                     title: 'Architectes',
                     prop: 'architectes',
-                    sort: '-count',
+                    sort: 'value',
+                    widget: 'dropdown',
                 }
             ],
             DATASET_URL: 'https://jmorel.opendatasoft.com/api/v2/catalog/datasets/architecture-remarquable-ile-de-france/exports/json',

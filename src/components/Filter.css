@@ -1,9 +1,23 @@
+.DropdownFilter,
 .CategoryFilter {
     margin: var(--spacing-small) 0;
 }
 
+.DropdownFilter-title,
 .CategoryFilter-title {
     margin-bottom: var(--spacing-tiny);
+}
+
+.DropdownFilter-select {
+    width: 100%;
+    background-color: var(--color-darkgreen);
+    padding: var(--spacing-tiny) var(--spacing-small);
+    border-radius: var(--spacing-small);
+    font-size: var(--font-size-small);
+    font-family: var(--font-family-body);
+    color: var(--color-white);
+    margin-bottom: var(--spacing-tiny);
+    border: none;
 }
 
 .CategoryFilter-categories {
