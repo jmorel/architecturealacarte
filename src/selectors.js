@@ -24,14 +24,12 @@ export const activeFiltersValuesSelector = state => state.appState.search.filter
 
 export const categoryFilteredLocationsSelector = createSelector(
     [locationsSelector, activeFiltersValuesSelector],
-    (locations, activeFiltersValues) => locations.filter(location => {
-        return Object.keys(activeFiltersValues)
-            .filter(filterProp => activeFiltersValues[filterProp].length)
-            .reduce((matchesAllFilters, filterProp) => {
-                const locationValues = Array.isArray(location[filterProp]) ? location[filterProp] : [location[filterProp]];
-                return matchesAllFilters && locationValues.some(value => activeFiltersValues[filterProp].includes(value));
-            }, true)
-    })
+    (locations, activeFiltersValues) => locations.filter(location => Object.keys(activeFiltersValues)
+        .filter(filterProp => activeFiltersValues[filterProp].length)
+        .reduce((matchesAllFilters, filterProp) => {
+            const locationValues = Array.isArray(location[filterProp]) ? location[filterProp] : [location[filterProp]];
+            return matchesAllFilters && locationValues.some(value => activeFiltersValues[filterProp].includes(value));
+        }, true)),
 
 );
 
@@ -45,67 +43,62 @@ export const fuseSelector = createSelector(
         maxPatternLength: 32,
         minMatchCharLength: 1,
         keys: SEARCH_PROPS,
-    })
-)
+    }),
+);
 export const filteredLocationsSelector = createSelector(
     [fuseSelector, textSearchSelector, categoryFilteredLocationsSelector],
-    (fuse, textSearch, categoryFilteredLocations) => textSearch ? fuse.search(textSearch) : categoryFilteredLocations
-)
+    (fuse, textSearch, categoryFilteredLocations) => (textSearch ? fuse.search(textSearch) : categoryFilteredLocations),
+);
 
 export const filteredLocationsWithCoordinatesSelector = createSelector(
     [filteredLocationsSelector, coordinatesPropSelector],
-    (filteredLocations, COORDINATES_PROP) => filteredLocations.filter(location => location[COORDINATES_PROP])
-)
+    (filteredLocations, COORDINATES_PROP) => filteredLocations.filter(location => location[COORDINATES_PROP]),
+);
 
 export const currentLocationSelector = createSelector(
     [locationsByIdSelector, currentIdSelector],
-    (locationsById, currentId) => {
-        return currentId ? locationsById[currentId] : null
-    }
+    (locationsById, currentId) => (currentId ? locationsById[currentId] : null),
 );
 
 export const filteredCurrentPageLocationsSelector = createSelector(
     [currentIndexSelector, pageSizeSelector, filteredLocationsSelector],
-    (currentIndex, pageSize, filteredLocations) => filteredLocations.slice(currentIndex * pageSize, (currentIndex + 1) * pageSize)
+    (currentIndex, pageSize, filteredLocations) => filteredLocations.slice(currentIndex * pageSize, (currentIndex + 1) * pageSize),
 );
 
 export const lastIndexSelector = createSelector(
     [pageSizeSelector, filteredLocationsSelector],
-    (pageSize, filteredLocations) => Math.ceil(filteredLocations.length / pageSize)
+    (pageSize, filteredLocations) => Math.ceil(filteredLocations.length / pageSize),
 );
 
 const SORT_METHODS = {
     '-count': (a, b) => a.count < b.count,
-    'count': (a, b) => a.count > b.count,
+    count: (a, b) => a.count > b.count,
     '-value': (a, b) => a.value < b.value,
-    'value': (a, b) => a.value > b.value,
-}
+    value: (a, b) => a.value > b.value,
+};
 
 const getFilterValues = (locations, filterProp, filterSort) => {
     const values = {};
-    for (let location of locations) {
+    locations.forEach((location) => {
         let locationValues = location[filterProp];
         locationValues = Array.isArray(locationValues) ? locationValues : [locationValues];
-        for (let locationValue of locationValues) {
+        locationValues.forEach((locationValue) => {
             if (!values[locationValue]) {
-                values[locationValue] = {value: locationValue, count: 1}
+                values[locationValue] = { value: locationValue, count: 1 };
             } else {
-                values[locationValue].count++;
+                values[locationValue].count += 1;
             }
-        }
-    }
+        });
+    });
     const valuesList = Object.values(values);
-    valuesList.sort(SORT_METHODS[filterSort])
+    valuesList.sort(SORT_METHODS[filterSort]);
     return valuesList;
-}
+};
 
 export const filtersValuesSelector = createSelector(
     [filteredLocationsSelector, filtersSelector],
-    (filteredLocations, filters) => {
-        const filtersValues = {};
-        for (let filter of filters) {
-            filtersValues[filter.prop] = getFilterValues(filteredLocations, filter.prop, filter.sort)
-        }
-        return filtersValues;
-    }
-)
+    (filteredLocations, filters) => filters.reduce((filtersValues, filter) => ({
+        ...filtersValues,
+        [filter.prop]: getFilterValues(filteredLocations, filter.prop, filter.sort),
+    }), {}),
+);

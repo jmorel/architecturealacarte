@@ -3,7 +3,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunkMiddleware from 'redux-thunk';
 import { handleActions } from './reducers';
 
-export function createSubStore({ID_PROP, COORDINATES_PROP, SEARCH_PROPS, IMAGE_PROP, TITLE_PROP, FILTERS, DATASET_URL, LIST_URL, DEFAULT_ZOOM, DEFAULT_POSITION, DATASET_ID, PAGE_TITLE}) {
+export function createSubStore({ ID_PROP, COORDINATES_PROP, SEARCH_PROPS, IMAGE_PROP, TITLE_PROP, FILTERS, DATASET_URL, LIST_URL, DEFAULT_ZOOM, DEFAULT_POSITION, DATASET_ID, PAGE_TITLE }) {
     const initialState = {
         conf: {
             ID_PROP,
@@ -20,7 +20,7 @@ export function createSubStore({ID_PROP, COORDINATES_PROP, SEARCH_PROPS, IMAGE_P
             PAGE_TITLE,
         },
         domainData: {
-            locationsById: {}
+            locationsById: {},
         },
         appState: {
             isFetching: false,
@@ -33,15 +33,15 @@ export function createSubStore({ID_PROP, COORDINATES_PROP, SEARCH_PROPS, IMAGE_P
             },
             search: {
                 textSearch: '',
-                filters: FILTERS.reduce((filters, filter) => ({...filters, [filter.prop]: []}), {}),
-            }
+                filters: FILTERS.reduce((filters, filter) => ({ ...filters, [filter.prop]: [] }), {}),
+            },
         },
     };
     return createStore(
         handleActions,
         initialState,
         composeWithDevTools(
-            applyMiddleware(thunkMiddleware)
+            applyMiddleware(thunkMiddleware),
         ),
     );
 }

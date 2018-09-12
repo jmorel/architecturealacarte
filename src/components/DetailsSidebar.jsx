@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect, withRouter } from 'react-router-dom';
 import { setCurrentId } from '../actions';
@@ -8,35 +9,49 @@ import { Spinner } from './Spinner';
 
 export const withCurrentLocation = (WrappedComponent, SpinnerComponent) => {
     class DetailsSidebar extends React.Component {
-        _dispatchCurrentLocation() {
+        componentDidMount() {
+            this.dispatchCurrentLocation();
+        }
+
+        componentDidUpdate() {
+            this.dispatchCurrentLocation();
+        }
+
+        dispatchCurrentLocation() {
             const { dispatch, currentId, match } = this.props;
             if (!currentId || currentId !== match.params.id) {
                 dispatch(setCurrentId(match.params.id));
             }
         }
 
-        componentDidMount() {
-            this._dispatchCurrentLocation();
-        }
-
-        componentDidUpdate() {
-            this._dispatchCurrentLocation();
-        }
 
         render() {
-            let { currentLocation, currentId, listUrl } = this.props;
+            const { currentLocation, currentId, LIST_URL } = this.props;
 
             if (!currentLocation && currentId) {
-                return <Redirect to={listUrl} />
+                return <Redirect to={LIST_URL} />;
             }
 
             if (!currentLocation) {
-                return SpinnerComponent ? <SpinnerComponent /> : <Spinner />
+                return SpinnerComponent ? <SpinnerComponent /> : <Spinner />;
             }
 
-            return <WrappedComponent currentLocation={currentLocation} {...this.props} />
+            return <WrappedComponent currentLocation={currentLocation} {...this.props} />;
         }
     }
+
+    DetailsSidebar.propTypes = {
+        currentLocation: PropTypes.object,
+        currentId: PropTypes.string,
+        LIST_URL: PropTypes.string.isRequired,
+        match: PropTypes.object.isRequired,
+        dispatch: PropTypes.func.isRequired,
+    };
+
+    DetailsSidebar.defaultProps = {
+        currentLocation: undefined,
+        currentId: undefined,
+    };
 
     const DetailsSidebarWithRouter = withRouter(DetailsSidebar);
 
@@ -50,7 +65,5 @@ export const withCurrentLocation = (WrappedComponent, SpinnerComponent) => {
     const DetailsSidebarWithRouterContainer = connect(mapStateToProps)(DetailsSidebarWithRouter);
 
     return DetailsSidebarWithRouterContainer;
-}
-
-
+};
 

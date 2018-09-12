@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Map, TileLayer } from 'react-leaflet';
 import './PageLayout.css';
 
@@ -16,5 +17,12 @@ export function PageLayout({ sidebar, markers, defaultPosition, defaultZoom }) {
                 </Map>
             </div>
         </div>
-    )
+    );
 }
+
+PageLayout.propTypes = {
+    sidebar: PropTypes.element.isRequired,
+    markers: PropTypes.element.isRequired,
+    defaultPosition: PropTypes.arrayOf(PropTypes.number).isRequired,
+    defaultZoom: PropTypes.number.isRequired,
+};

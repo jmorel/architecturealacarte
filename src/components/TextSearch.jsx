@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 import './TextSearch.css';
 
@@ -14,7 +15,7 @@ export class TextSearch extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.state = {
             value: this.props.value,
-        }
+        };
     }
 
     handleChange(event) {
@@ -29,14 +30,21 @@ export class TextSearch extends React.Component {
     render() {
         return (
             <form className="TextSearch" onSubmit={this.handleSubmit}>
-                <input type="text"
+                <input
+                    type="text"
                     placeholder="Rechercher..."
                     value={this.state.value}
-                    onChange={this.handleChange} />
+                    onChange={this.handleChange}
+                />
                 <button type="submit">
                     <FontAwesomeIcon icon={faSearch} />
                 </button>
             </form>
-        )
+        );
     }
 }
+
+TextSearch.propTypes = {
+    value: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired,
+};

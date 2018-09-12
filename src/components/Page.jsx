@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Marker } from 'react-leaflet';
 import { connect } from 'react-redux';
 import { Route, withRouter } from 'react-router-dom';
@@ -17,14 +18,14 @@ export class Page extends React.Component {
 
     componentDidMount() {
         const { PAGE_TITLE } = this.props;
-        document.title = `${PAGE_TITLE} | Architecture à la carte`;
+        document.title = `${PAGE_TITLE} | Architecture à la carte`;
         this.props.dispatch(fetchLocations());
     }
 
     navigateToDetails(id) {
         return () => {
             this.props.history.push(`${this.props.LIST_URL}/${id}`);
-        }
+        };
     }
 
     render() {
@@ -47,28 +48,58 @@ export class Page extends React.Component {
             ListSidebarComponent,
             DetailsSidebarComponent,
             SpinnerSidebarComponent,
-         } = this.props;
+        } = this.props;
 
-        const sidebar = isFetching ? (SpinnerSidebarComponent ? <SpinnerSidebarComponent /> : <SpinnerSidebarContainer/>) : (
+
+        const sidebar = isFetching ? <SpinnerSidebarComponent /> : (
             <div>
-                <Route path={LIST_URL} exact component={ListSidebarComponent ? ListSidebarComponent :  ListSidebarContainer}></Route>
-                <Route path={`${LIST_URL}/:id`} component={DetailsSidebarComponent}></Route>
+                <Route path={LIST_URL} exact component={ListSidebarComponent} />
+                <Route path={`${LIST_URL}/:id`} component={DetailsSidebarComponent} />
             </div>
-        )
+        );
 
-        const markers = locationsWithCoordinates.map(location =>
-            <Marker key={location[ID_PROP]}
+        const markers = locationsWithCoordinates.map(location => (
+            <Marker
+                key={location[ID_PROP]}
                 position={location[COORDINATES_PROP]}
                 icon={buildMarkerIcon(DATASET_ID, location[IMAGE_PROP], currentLocation && currentLocation !== location)}
-                onClick={this.navigateToDetails(location[ID_PROP])} />
+                onClick={this.navigateToDetails(location[ID_PROP])}
+            />
+        ));
+        return (
+            <PageLayout
+                sidebar={sidebar}
+                markers={markers}
+                defaultPosition={DEFAULT_POSITION}
+                defaultZoom={DEFAULT_ZOOM}
+            />
         );
-        return <PageLayout
-            sidebar={sidebar}
-            markers={markers}
-            defaultPosition={DEFAULT_POSITION}
-            defaultZoom={DEFAULT_ZOOM} />
     }
 }
+
+Page.propTypes = {
+    PAGE_TITLE: PropTypes.string.isRequired,
+    LIST_URL: PropTypes.string.isRequired,
+    ID_PROP: PropTypes.string.isRequired,
+    IMAGE_PROP: PropTypes.string.isRequired,
+    DATASET_ID: PropTypes.string.isRequired,
+    COORDINATES_PROP: PropTypes.string.isRequired,
+    DEFAULT_ZOOM: PropTypes.number.isRequired,
+    DEFAULT_POSITION: PropTypes.arrayOf(PropTypes.number).isRequired,
+    dispatch: PropTypes.func.isRequired,
+    history: PropTypes.object.isRequired,
+    locationsWithCoordinates: PropTypes.array.isRequired,
+    currentLocation: PropTypes.object.isRequired,
+    isFetching: PropTypes.bool.isRequired,
+    ListSidebarComponent: PropTypes.element,
+    DetailsSidebarComponent: PropTypes.element.isRequired,
+    SpinnerSidebarComponent: PropTypes.element,
+};
+
+Page.defaultProps = {
+    SpinnerSidebarComponent: SpinnerSidebarContainer,
+    ListSidebarComponent: ListSidebarContainer,
+};
 
 const mapStateToProps = (state, ownProps) => ({
     // conf

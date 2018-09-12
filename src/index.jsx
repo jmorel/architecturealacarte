@@ -12,11 +12,11 @@ import registerServiceWorker from './registerServiceWorker';
 ReactDOM.render(
     <BrowserRouter>
         <div>
-            <Route exact component={Home} path="/"></Route>
-            <Route component={EteArchiApp} path="/ete-archi"></Route>
-            <Route component={IleDeFranceApp} path="/ile-de-france"></Route>
-            <Route component={GenieDesLieuxApp} path="/genie-des-lieux"></Route>
-            <Route component={CinquanteLieuxApp} path="/50-lieux-en-france-a-voir-au-moins-une-fois-dans-sa-vie"></Route>
+            <Route exact component={Home} path="/" />
+            <Route component={EteArchiApp} path="/ete-archi" />
+            <Route component={IleDeFranceApp} path="/ile-de-france" />
+            <Route component={GenieDesLieuxApp} path="/genie-des-lieux" />
+            <Route component={CinquanteLieuxApp} path="/50-lieux-en-france-a-voir-au-moins-une-fois-dans-sa-vie" />
         </div>
     </BrowserRouter>
     , document.getElementById('root'));

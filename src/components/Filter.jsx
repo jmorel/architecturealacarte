@@ -1,14 +1,23 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import './Filter.css';
 
-export const Filter = props => {
+export const Filter = (props) => {
     const { widget } = props;
     if (widget === 'dropdown') {
-        return <DropDownFilter {...props} />
+        return <DropDownFilter {...props} />;
     }
-    return <CategoryFilter {...props} />
-}
+    return <CategoryFilter {...props} />;
+};
+
+Filter.propTypes = {
+    widget: PropTypes.string,
+};
+
+Filter.defaultProps = {
+    widget: undefined,
+};
 
 export class DropDownFilter extends React.Component {
     constructor(props) {
@@ -18,14 +27,15 @@ export class DropDownFilter extends React.Component {
     }
 
     handleChange(event) {
-        const {filterProp} = this.props;
+        const { filterProp, toggleFilter } = this.props;
         const value = event.target.value;
-        this.props.toggleFilter(filterProp, value);
+        toggleFilter(filterProp, value);
+        /* eslint-disable no-param-reassign */
         event.target.value = '';
     }
 
     handleClick(event) {
-        const {filterProp} = this.props;
+        const { filterProp } = this.props;
         const value = event.target.dataset.value;
         this.props.toggleFilter(filterProp, value);
     }
@@ -43,19 +53,28 @@ export class DropDownFilter extends React.Component {
                 </select>
                 <div className="CategoryFilter-categories">
                     {activeValues.map(value => (
-                        <button className="CategoryFilter-category --active"
+                        <button
+                            className="CategoryFilter-category --active"
                             key={value}
                             data-value={value}
-                            onClick={this.handleClick}>
+                            onClick={this.handleClick}
+                        >
                             {value}
                         </button>
                     ))}
                 </div>
             </div>
-        )
-
+        );
     }
 }
+
+DropDownFilter.propTypes = {
+    title: PropTypes.string.isRequired,
+    values: PropTypes.array.isRequired,
+    activeValues: PropTypes.array.isRequired,
+    filterProp: PropTypes.string.isRequired,
+    toggleFilter: PropTypes.func.isRequired,
+};
 
 export class CategoryFilter extends React.Component {
     constructor(props) {
@@ -66,7 +85,7 @@ export class CategoryFilter extends React.Component {
     toggleFilter(filterProp, value) {
         return () => {
             this.props.toggleFilter(filterProp, value);
-        }
+        };
     }
 
     render() {
@@ -76,15 +95,25 @@ export class CategoryFilter extends React.Component {
                 <div className="CategoryFilter-title">{title}</div>
                 <div className="CategoryFilter-categories">
                     {values.map(value => (
-                        <button className={`CategoryFilter-category ${activeValues.includes(value.value) ? '--active' : ''}`}
+                        <button
+                            className={`CategoryFilter-category ${activeValues.includes(value.value) ? '--active' : ''}`}
                             key={value.value}
-                            onClick={this.toggleFilter(filterProp, value.value)}>
+                            onClick={this.toggleFilter(filterProp, value.value)}
+                        >
                             {value.value}
                             <span className="CategoryFilter-count">{value.count}</span>
                         </button>
                     ))}
                 </div>
             </div>
-        )
+        );
     }
 }
+
+CategoryFilter.propTypes = {
+    title: PropTypes.string.isRequired,
+    values: PropTypes.array.isRequired,
+    activeValues: PropTypes.array.isRequired,
+    filterProp: PropTypes.string.isRequired,
+    toggleFilter: PropTypes.func.isRequired,
+};

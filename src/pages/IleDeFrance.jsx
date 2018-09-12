@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 import { withCurrentLocation } from '../components/DetailsSidebar';
 import { DetailsHeader } from '../components/Header';
@@ -15,15 +16,15 @@ const LIST_URL = '/ile-de-france';
 
 const Intro = () => (
     <p>Architecture remarquable des XX<sup>ème</sup> et XXI<sup>ème</sup> siècles en Île de France</p>
-)
+);
 
 const IleDeFranceSpinnerSidebar = () => (
-    <SpinnerSidebarContainer IntroComponent={Intro}/>
-)
+    <SpinnerSidebarContainer IntroComponent={Intro} />
+);
 
 const IleDeFranceListSidebar = () => (
-    <ListSidebarContainer><Intro/></ListSidebarContainer>
-)
+    <ListSidebarContainer><Intro /></ListSidebarContainer>
+);
 
 const IleDeFranceDetailsSidebar = ({ currentLocation }) => {
     const names = currentLocation.architectes;
@@ -31,7 +32,7 @@ const IleDeFranceDetailsSidebar = ({ currentLocation }) => {
     if (names.length === 1) {
         architects = names[0];
     } else {
-        architects = `${names.slice(0, names.length-2).join(', ')} et ${names[names.length-1]}`
+        architects = `${names.slice(0, names.length - 2).join(', ')} et ${names[names.length - 1]}`;
     }
 
     const start = currentLocation.debut_construction;
@@ -40,20 +41,21 @@ const IleDeFranceDetailsSidebar = ({ currentLocation }) => {
     if (start && end) {
         construction = `entre ${start} et ${end}`;
     } else {
-        construction = `en ${start || end}`;
+        construction = `en ${start || end}`;
     }
     return (
         <Sidebar>
             <DetailsHeader
                 title={currentLocation.nom}
                 imageUrl={getImageUrl(DATASET_ID, currentLocation.image)}
-                listUrl={LIST_URL} >
+                listUrl={LIST_URL}
+            >
                 <p>{currentLocation.type_de_batiment}</p>
             </DetailsHeader>
             <div className="Sidebar-content">
                 <p>
                     Construit {construction} par {architects}.
-            </p>
+                </p>
                 <p>
                     {currentLocation.visitable === 'Oui' ? 'Visitable' : 'Non visitable'}
                 </p>
@@ -67,7 +69,11 @@ const IleDeFranceDetailsSidebar = ({ currentLocation }) => {
                 </p>
             </div>
         </Sidebar>
-    )
+    );
+};
+
+IleDeFranceDetailsSidebar.propTypes = {
+    currentLocation: PropTypes.object.isRequired,
 };
 
 const IleDeFranceDetailsSidebarContainer = withCurrentLocation(IleDeFranceDetailsSidebar);
@@ -95,7 +101,7 @@ export class IleDeFranceApp extends React.Component {
                     prop: 'architectes',
                     sort: 'value',
                     widget: 'dropdown',
-                }
+                },
             ],
             DATASET_URL: 'https://jmorel.opendatasoft.com/api/v2/catalog/datasets/architecture-remarquable-ile-de-france/exports/json',
             DEFAULT_POSITION: [48.853414, 2.348789],
@@ -112,6 +118,6 @@ export class IleDeFranceApp extends React.Component {
                     DetailsSidebarComponent={IleDeFranceDetailsSidebarContainer}
                 />
             </Provider>
-        )
+        );
     }
 }
