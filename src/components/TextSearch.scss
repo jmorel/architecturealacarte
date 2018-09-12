@@ -1,0 +1,44 @@
+@import '../variables.scss';
+.TextSearch {
+    display: flex;
+    overflow: hidden;
+}
+
+.TextSearch input {
+    flex-grow: 1;
+    flex-shrink: 1;
+    min-width: 0;
+    border: none;
+    color: $color-grey;
+    @media (max-width: $breakpoint-low) {
+        font-size: $fontSize-mobile-body;
+        border-top-left-radius: $spacing-mobile-normal;
+        border-bottom-left-radius: $spacing-mobile-normal;
+        padding-left: $spacing-mobile-small;
+    }
+    @media (min-width: $breakpoint-high) {
+        font-size: $fontSize-body;
+        border-top-left-radius: $spacing-normal;
+        border-bottom-left-radius: $spacing-normal;
+        padding-left: $spacing-small;
+    }
+}
+
+.TextSearch button {
+    background-color: $color-white;
+    border: none;
+    @media (max-width: $breakpoint-low) {
+        font-size: $fontSize-mobile-body;
+        padding: $spacing-mobile-tiny;
+        padding-right: $spacing-mobile-small;
+        border-top-right-radius: $spacing-mobile-normal;
+        border-bottom-right-radius: $spacing-mobile-normal;
+    }
+    @media (min-width: $breakpoint-high) {
+        font-size: $fontSize-body;
+        padding: $spacing-tiny;
+        padding-right: $spacing-small;
+        border-top-right-radius: $spacing-normal;
+        border-bottom-right-radius: $spacing-normal;
+    }
+}

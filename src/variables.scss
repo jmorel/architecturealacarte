@@ -1,0 +1,45 @@
+/* breakpoints */
+$breakpoint-low: 768px;
+$breakpoint-high: 769px;
+
+/* colors */
+$color-white: #ffffff;
+$color-green: #27EABF;
+$color-darkgreen: #20CAA4;
+$color-darkestgreen: #179D7F;
+$color-grey: #333333;
+
+/* spacing */
+$spacing-tiny: 10px;
+$spacing-small: 20px;
+$spacing-normal: 50px;
+$spacing-large: 100px;
+
+$spacing-mobile-tiny: 10px;
+$spacing-mobile-small: 15px;
+$spacing-mobile-normal: 30px;
+$spacing-mobile-large: 70px;
+
+/* font family */
+$font-family-headings: 'Ostrich Sans Inline', sans-serif;
+$font-family-body: 'Droid Serif', Georgia, serif;
+
+/* font sizes */
+$fontSize-headings: 90px;
+$fontSize-subheadings: 30px;
+$fontSize-homelink: 24px;
+$fontSize-body: 20px;
+$fontSize-small: 14px;
+
+$fontSize-mobile-headings: 60px;
+$fontSize-mobile-subheadings: 30px;
+$fontSize-mobile-homelink: 20px;
+$fontSize-mobile-body: 18px;
+$fontSize-mobile-small: 14px;
+
+/* z indices */
+$zIndex-1: 100;
+$zIndex-2: 200;
+/* other */
+
+$sidebar-width: 480px;

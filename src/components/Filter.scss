@@ -1,0 +1,47 @@
+@import '../variables.scss';
+.DropdownFilter,
+.CategoryFilter {
+    margin: $spacing-small 0;
+}
+
+.DropdownFilter-title,
+.CategoryFilter-title {
+    margin-bottom: $spacing-tiny;
+}
+
+.DropdownFilter-select {
+    width: 100%;
+    background-color: $color-darkgreen;
+    padding: $spacing-tiny $spacing-small;
+    border-radius: $spacing-small;
+    font-size: $fontSize-small;
+    font-family: $font-family-body;
+    color: $color-white;
+    margin-bottom: $spacing-tiny;
+    border: none;
+}
+
+.CategoryFilter-category {
+    display: inline-block;
+    background-color: $color-darkgreen;
+    color: $color-white;
+    border: none;
+    padding: $spacing-tiny $spacing-small;
+    font-size: $fontSize-small;
+    font-family: $font-family-body;
+    border-radius: $spacing-small;
+    margin-right: $spacing-tiny;
+    margin-bottom: $spacing-tiny;
+    cursor: pointer;
+}
+
+.CategoryFilter-category:hover,
+.CategoryFilter-category.--active {
+    background-color: $color-white;
+    color: $color-darkgreen;
+}
+
+.CategoryFilter-count {
+    color: $color-darkestgreen;
+    margin-left: $spacing-tiny;
+}

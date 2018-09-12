@@ -1,0 +1,134 @@
+@import '../variables.scss';
+.Header {
+    border-bottom: 15px solid $color-white;
+    font-style: italic;
+    position: relative;
+}
+
+.Header.--padding-top {
+    @media (max-width: $breakpoint-low) {
+        padding-top: $spacing-mobile-normal;
+    }
+    @media (min-width: $breakpoint-high) {
+        padding-top: $spacing-normal;
+    }
+}
+
+.Header.--padding-bottom {
+    @media (max-width: $breakpoint-low) {
+        padding-bottom: $spacing-mobile-normal;
+    }
+    @media (min-width: $breakpoint-high) {
+        padding-bottom: $spacing-normal;
+    }
+}
+
+/* Typography */
+
+.Header h1 {
+    color: $color-white;
+    font-family: $font-family-headings;
+    font-weight: normal;
+    @media (max-width: $breakpoint-low) {
+        font-size: $fontSize-mobile-headings;
+        margin: 0 $spacing-mobile-normal;
+        line-height: 50px;
+    }
+    @media (min-width: $breakpoint-high) {
+        font-size: $fontSize-headings;
+        margin: 0 $spacing-normal;
+        line-height: 70px;
+    }
+}
+
+.Header h2 {
+    color: $color-white;
+    font-family: $font-family-headings;
+    font-weight: normal;
+    @media (max-width: $breakpoint-low) {
+        font-size: $fontSize-mobile-headings;
+        line-height: 50px;
+        margin: 0 $spacing-mobile-normal;
+    }
+    @media (min-width: $breakpoint-high) {
+        font-size: $fontSize-headings;
+        line-height: 70px;
+        margin: 0 $spacing-normal;
+    }
+}
+
+.Header h3 {
+    color: $color-white;
+    font-style: normal;
+    font-weight: normal;
+    @media (max-width: $breakpoint-low) {
+        margin: $spacing-mobile-normal $spacing-mobile-normal;
+        font-size: $fontSize-mobile-homelink;
+    }
+    @media (min-width: $breakpoint-high) {
+        margin: $spacing-normal $spacing-normal;
+        font-size: $fontSize-homelink;
+    }
+}
+
+.Header p {
+    color: $color-darkestgreen;
+    font-style: italic;
+    @media (max-width: $breakpoint-low) {
+        margin: $spacing-mobile-small $spacing-mobile-normal;
+    }
+    @media (min-width: $breakpoint-high) {
+        margin: $spacing-small $spacing-normal;
+    }
+}
+
+.Header h1:last-child,
+.Header h2:last-child,
+.Header h3:last-child,
+.Header p:last-child {
+    margin-bottom: 0;
+}
+
+.Header a {
+    color: $color-darkestgreen;
+    @media (max-width: $breakpoint-low) {
+        font-size: $fontSize-mobile-homelink;
+    }
+    @media (min-width: $breakpoint-high) {
+        font-size: $fontSize-homelink;
+    }
+}
+
+/* Hero */
+
+.Header img {
+    width: 100%;
+}
+
+/* Close button */
+
+.Header .CloseButton {
+    position: absolute;
+    top: $spacing-small;
+    right: $spacing-small;
+    font-size: 40px;
+    border: none;
+    padding: 0;
+    color: $color-green;
+    background: none;
+    cursor: pointer;
+    @media (max-width: $breakpoint-low) {}
+    @media (min-width: $breakpoint-high) {}
+}
+
+.Header .CloseButton:hover {
+    color: $color-white;
+}
+
+/* Other */
+
+.Header .fa-arrow-alt-circle-left {
+    margin-right: $spacing-tiny;
+    @media (max-width: $breakpoint-low) {}
+    @media (min-width: $breakpoint-high) {}
+}

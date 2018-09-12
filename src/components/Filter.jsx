@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './Filter.css';
+import './Filter.scss';
 
 export const Filter = (props) => {
     const { widget } = props;

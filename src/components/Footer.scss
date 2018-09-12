@@ -1,0 +1,16 @@
+@import '../variables.scss';
+.Footer {
+    background-color: $color-darkgreen;
+    color: $color-darkestgreen;
+    font-style: italic;
+    @media (max-width: $breakpoint-low) {
+        padding: $spacing-mobile-normal;
+        font-size: $fontSize-mobile-small;
+        line-height: 16px;
+    }
+    @media (min-width: $breakpoint-high) {
+        padding: $spacing-normal;
+        font-size: $fontSize-small;
+        line-height: 16px;
+    }
+}

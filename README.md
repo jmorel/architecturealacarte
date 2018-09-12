@@ -10,12 +10,13 @@
 * [x] Move state to redux
 * [x] Add page title and favicon
 * [x] Add proper content for links in sidebar/footer
-* [ ] Add prop-types
+* [x] Add prop-types
 * [x] Make location accessible via URL (currently redirects)
 * [ ] Highlighted / hovered map markers are sometimes below other markers
 * [ ] Responsive
 * [ ] Bug where all map markers shifted to a new location
 * [ ] Better pagination (breaking when there are more than 15 pages)
+* [ ] Check eslintrc to keep closer to airbnb style
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).

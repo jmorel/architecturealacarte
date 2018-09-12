@@ -1,0 +1,40 @@
+@import '../variables.scss';
+.LocationCard {
+    position: relative;
+}
+
+.LocationCard:after {
+    content: '';
+    display: block;
+    background-image: linear-gradient(transparent, $color-green);
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    top: 0;
+    z-index: $zIndex-1;
+}
+
+.LocationCard img {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.LocationCard-title {
+    color: $color-white;
+    position: absolute;
+    z-index: $zIndex-2;
+    @media (max-width: $breakpoint-low) {
+    left: $spacing-mobile-normal;
+    right: $spacing-mobile-normal;
+    bottom: $spacing-mobile-small;
+    }
+    @media (min-width: $breakpoint-high) {
+    left: $spacing-normal;
+    right: $spacing-normal;
+    bottom: $spacing-small;
+    }
+}

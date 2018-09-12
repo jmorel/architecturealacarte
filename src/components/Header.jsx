@@ -6,20 +6,26 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faArrowAltCircleLeft } from '@fortawesome/free-regular-svg-icons';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
-import './Header.css';
+import './Header.scss';
 
 library.add(faArrowAltCircleLeft, faTimes);
 
-export function HomeHeader({ title }) {
+export function HomeHeader({ title, children }) {
     return (
         <header className="Header --padding-top --padding-bottom">
             <h1>{title}</h1>
+            {children}
         </header>
     );
 }
 
 HomeHeader.propTypes = {
     title: PropTypes.string.isRequired,
+    children: PropTypes.element,
+};
+
+HomeHeader.defaultProps = {
+    children: undefined,
 };
 
 export function ListHeader({ title }) {

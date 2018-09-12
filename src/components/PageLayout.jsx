@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Map, TileLayer } from 'react-leaflet';
-import './PageLayout.css';
+import './PageLayout.scss';
 
 export function PageLayout({ sidebar, markers, defaultPosition, defaultZoom }) {
     return (

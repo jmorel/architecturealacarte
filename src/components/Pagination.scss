@@ -1,0 +1,58 @@
+@import '../variables.scss';
+.Pagination {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    list-style: none;
+    @media (max-width: $breakpoint-low) {
+        margin: $spacing-mobile-small 0 $spacing-mobile-normal 0;
+    }
+    @media (min-width: $breakpoint-high) {
+        margin: $spacing-small 0 $spacing-normal 0;
+    }
+}
+
+.Pagination button {
+    color: $color-white;
+    background-color: $color-darkgreen;
+    border: none;
+    font-family: inherit;
+    cursor: pointer;
+    @media (max-width: $breakpoint-low) {
+        padding: $spacing-mobile-tiny;
+        font-size: $fontSize-mobile-small;
+    }
+    @media (min-width: $breakpoint-high) {
+        padding: $spacing-tiny;
+        font-size: $fontSize-small;
+    }
+}
+
+.Pagination button.active,
+.Pagination button:hover {
+    background-color: $color-white;
+    color: $color-darkgreen;
+}
+
+.Pagination button:first-child {
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+    @media (max-width: $breakpoint-low) {
+        padding-left: 2* $spacing-mobile-tiny;
+    }
+    @media (min-width: $breakpoint-high) {
+        padding-left: 2* $spacing-tiny;
+    }
+}
+
+.Pagination button:last-child {
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+    padding-right: 2* $spacing-tiny;
+    @media (max-width: $breakpoint-low) {
+        padding-right: 2* $spacing-mobile-tiny;
+    }
+    @media (min-width: $breakpoint-high) {
+        padding-right: 2* $spacing-tiny;
+    }
+}

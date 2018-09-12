@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route } from 'react-router-dom';
-import './index.css';
+import './index.scss';
 import { CinquanteLieuxApp } from './pages/CinquanteLieux';
 import { EteArchiApp } from './pages/EteArchi';
 import { IleDeFranceApp } from './pages/IleDeFrance';

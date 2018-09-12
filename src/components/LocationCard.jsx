@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './LocationCard.css';
+import './LocationCard.scss';
 
 export function LocationCard({ imageUrl, title, imageRatio }) {
     const style = { paddingTop: `${imageRatio}%` };

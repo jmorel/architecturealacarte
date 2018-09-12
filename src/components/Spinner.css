@@ -1,9 +1,0 @@
-.Spinner {
-    text-align: center;
-    margin: var(--spacing-normal);
-}
-
-.Spinner .fa-spinner {
-    font-size: 2em;
-    margin-top: var(--spacing-small);
-}

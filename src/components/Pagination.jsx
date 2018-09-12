@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './Pagination.css';
+import './Pagination.scss';
 
 export function Pagination({ lastIndex, currentIndex, setCurrentIndex }) {
     const indices = Array.from(Array(lastIndex).keys());
