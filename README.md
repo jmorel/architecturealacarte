@@ -13,10 +13,13 @@
 * [x] Add prop-types
 * [x] Make location accessible via URL (currently redirects)
 * [ ] Highlighted / hovered map markers are sometimes below other markers
-* [ ] Responsive
+* [x] Responsive
 * [ ] Bug where all map markers shifted to a new location
 * [ ] Better pagination (breaking when there are more than 15 pages)
-* [ ] Check eslintrc to keep closer to airbnb style
+* [ ] Check eslintrc and remove special rules in order to keep closer to airbnb style
+* [ ] Fix images in all datasets
+* [ ] Generate proper thumbnails for images (map and sidebar)
+* [ ] Prod/deploy
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).

@@ -6,7 +6,7 @@
     flex-direction: column;
     justify-content: flex-start;
     @media (max-width: $breakpoint-low) {
-        width: 100vw;
+        width: 100%;
     }
     @media (min-width: $breakpoint-high) {
         width: $sidebar-width;
@@ -14,10 +14,12 @@
 }
 
 .DetailsSidebar {
-    position: absolute;
-    height: 100vh;
-    overflow-y: auto;
-    z-index: $zIndex-3;
+    @media (max-width: $breakpoint-low) {
+        position: absolute;
+        height: 100vh;
+        overflow-y: auto;
+        z-index: $zIndex-3;
+    }
 }
 
 .Sidebar-content {
