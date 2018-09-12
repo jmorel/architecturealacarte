@@ -18,8 +18,8 @@ class TableOfContents extends React.Component {
     render() {
         return (
             <div className="TableOfContents">
-                {this.state.sections.map(section => (
-                    <ToCSection links={section} key={section.url} />
+                {this.state.sections.map((section, index) => (
+                    <ToCSection links={section} key={/* eslint-disable react/no-array-index-key */index} />
                 ))}
             </div>
         );
@@ -28,11 +28,11 @@ class TableOfContents extends React.Component {
 
 const ToCSection = ({ links }) => (
     <ul className="TableOfContents-section">
-        {links.map(link =>
-            (<li key={link.label}>
+        {links.map(link => (
+            <li key={link.label}>
                 <Link to={link.url}>{link.label}</Link>
-            </li>),
-        )}
+            </li>
+        ))}
     </ul>
 );
 

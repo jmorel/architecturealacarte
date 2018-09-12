@@ -13,7 +13,7 @@ export const DetailsSidebar = ({ children }) => (
 );
 
 DetailsSidebar.propTypes = {
-    children: PropTypes.element.isRequired,
+    children: PropTypes.node.isRequired,
 };
 
 export const withCurrentLocation = (WrappedComponent, SpinnerComponent) => {

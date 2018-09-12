@@ -108,15 +108,15 @@ ListSidebar.propTypes = {
     currentIndex: PropTypes.number.isRequired,
     textSearch: PropTypes.string.isRequired,
     filters: PropTypes.array.isRequired,
-    filtersValues: PropTypes.array.isRequired,
-    activeFiltersValues: PropTypes.array.isRequired,
+    filtersValues: PropTypes.object.isRequired,
+    activeFiltersValues: PropTypes.object.isRequired,
     DATASET_ID: PropTypes.string.isRequired,
     LIST_URL: PropTypes.string.isRequired,
     ID_PROP: PropTypes.string.isRequired,
     IMAGE_PROP: PropTypes.string.isRequired,
     TITLE_PROP: PropTypes.string.isRequired,
     PAGE_TITLE: PropTypes.string.isRequired,
-    children: PropTypes.element.isRequired,
+    children: PropTypes.node.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => ({

@@ -38,7 +38,7 @@ const MapContainer = ({ defaultPosition, defaultZoom, markers }) => (
 );
 
 MapContainer.propTypes = {
-    markers: PropTypes.element.isRequired,
+    markers: PropTypes.array.isRequired,
     defaultPosition: PropTypes.arrayOf(PropTypes.number).isRequired,
     defaultZoom: PropTypes.number.isRequired,
 };
@@ -76,8 +76,8 @@ export class PageLayout extends React.Component {
 }
 
 PageLayout.propTypes = {
-    sidebar: PropTypes.element.isRequired,
-    markers: PropTypes.element.isRequired,
+    sidebar: PropTypes.node.isRequired,
+    markers: PropTypes.array.isRequired,
     defaultPosition: PropTypes.arrayOf(PropTypes.number).isRequired,
     defaultZoom: PropTypes.number.isRequired,
 };

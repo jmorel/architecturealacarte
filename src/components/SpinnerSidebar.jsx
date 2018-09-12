@@ -20,7 +20,7 @@ export const SpinnerSidebar = ({ PAGE_TITLE, IntroComponent }) => (
 
 SpinnerSidebar.propTypes = {
     PAGE_TITLE: PropTypes.string.isRequired,
-    IntroComponent: PropTypes.element,
+    IntroComponent: PropTypes.func,
 };
 
 SpinnerSidebar.defaultProps = {

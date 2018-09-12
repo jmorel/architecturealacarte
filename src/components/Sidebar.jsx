@@ -10,5 +10,5 @@ export const Sidebar = ({ children }) => (
 );
 
 Sidebar.propTypes = {
-    children: PropTypes.element.isRequired,
+    children: PropTypes.node.isRequired,
 };

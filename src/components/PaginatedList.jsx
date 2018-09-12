@@ -31,7 +31,7 @@ export class PaginatedList extends React.Component {
 }
 
 PaginatedList.propTypes = {
-    children: PropTypes.element.isRequired,
+    children: PropTypes.node.isRequired,
     currentIndex: PropTypes.number.isRequired,
     lastIndex: PropTypes.number.isRequired,
     setCurrentIndex: PropTypes.func.isRequired,

@@ -21,7 +21,7 @@ export function HomeHeader({ title, children }) {
 
 HomeHeader.propTypes = {
     title: PropTypes.string.isRequired,
-    children: PropTypes.element,
+    children: PropTypes.node,
 };
 
 HomeHeader.defaultProps = {
@@ -63,7 +63,7 @@ DetailsHeader.propTypes = {
     title: PropTypes.string.isRequired,
     listUrl: PropTypes.string.isRequired,
     imageUrl: PropTypes.string.isRequired,
-    children: PropTypes.element,
+    children: PropTypes.node,
 };
 
 DetailsHeader.defaultProps = {

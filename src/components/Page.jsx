@@ -4,7 +4,7 @@ import { Marker } from 'react-leaflet';
 import { connect } from 'react-redux';
 import { Route, withRouter } from 'react-router-dom';
 import { fetchLocations } from '../actions';
-import { coordinatesPropSelector, currentLocationSelector, datasetIdSelector, defaultPositionSelector, defaultZoomSelector, filteredLocationsWithCoordinatesSelector, idPropSelector, imagePropSelector, isFetchingSelector, listUrlSelector, pageTitleSelector } from '../selectors';
+import { coordinatesPropSelector, currentLocationSelector, datasetIdSelector, defaultPositionSelector, defaultZoomSelector, filteredLocationsWithCoordinatesSelector, idPropSelector, imagePropSelector, isFetchingSelector, listUrlSelector, pageTitleSelector, titlePropSelector } from '../selectors';
 import { buildMarkerIcon } from '../utils';
 import { ListSidebarContainer } from './ListSidebar';
 import { PageLayout } from './PageLayout';
@@ -38,6 +38,7 @@ export class Page extends React.Component {
             COORDINATES_PROP,
             IMAGE_PROP,
             DATASET_ID,
+            TITLE_PROP,
 
             // app data
             locationsWithCoordinates,
@@ -62,7 +63,7 @@ export class Page extends React.Component {
             <Marker
                 key={location[ID_PROP]}
                 position={location[COORDINATES_PROP]}
-                icon={buildMarkerIcon(DATASET_ID, location[IMAGE_PROP], currentLocation && currentLocation !== location)}
+                icon={buildMarkerIcon(DATASET_ID, location[IMAGE_PROP], location[TITLE_PROP], currentLocation && currentLocation !== location)}
                 onClick={this.navigateToDetails(location[ID_PROP])}
             />
         ));
@@ -81,6 +82,7 @@ Page.propTypes = {
     PAGE_TITLE: PropTypes.string.isRequired,
     LIST_URL: PropTypes.string.isRequired,
     ID_PROP: PropTypes.string.isRequired,
+    TITLE_PROP: PropTypes.string.isRequired,
     IMAGE_PROP: PropTypes.string.isRequired,
     DATASET_ID: PropTypes.string.isRequired,
     COORDINATES_PROP: PropTypes.string.isRequired,
@@ -89,16 +91,17 @@ Page.propTypes = {
     dispatch: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired,
     locationsWithCoordinates: PropTypes.array.isRequired,
-    currentLocation: PropTypes.object.isRequired,
+    currentLocation: PropTypes.object,
     isFetching: PropTypes.bool.isRequired,
-    ListSidebarComponent: PropTypes.element,
-    DetailsSidebarComponent: PropTypes.element.isRequired,
-    SpinnerSidebarComponent: PropTypes.element,
+    ListSidebarComponent: PropTypes.func,
+    DetailsSidebarComponent: PropTypes.func.isRequired,
+    SpinnerSidebarComponent: PropTypes.func,
 };
 
 Page.defaultProps = {
     SpinnerSidebarComponent: SpinnerSidebarContainer,
     ListSidebarComponent: ListSidebarContainer,
+    currentLocation: undefined,
 };
 
 const mapStateToProps = (state, ownProps) => ({
@@ -111,6 +114,7 @@ const mapStateToProps = (state, ownProps) => ({
     IMAGE_PROP: imagePropSelector(state),
     DATASET_ID: datasetIdSelector(state),
     PAGE_TITLE: pageTitleSelector(state),
+    TITLE_PROP: titlePropSelector(state),
 
     // app data
     locationsWithCoordinates: filteredLocationsWithCoordinatesSelector(state),
