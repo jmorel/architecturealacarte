@@ -1,0 +1,79 @@
+@import './variables.scss';
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: $font-family-body;
+    padding: 0;
+    margin: 0;
+    @media (max-width: $breakpoint-low) {
+        font-size: $fontSize-mobile-body;
+    }
+    @media (min-width: $breakpoint-high) {
+        font-size: $fontSize-body;
+    }
+}
+
+a {
+    color: $color-white;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+p:first-child {
+    margin-top: 0;
+}
+
+p:last-child {
+    margin-bottom: 0;
+}
+
+/* Map */
+
+.leaflet-container {
+    width: 100%;
+    /* height: 100%; */
+    position: absolute;
+    bottom: 0;
+    top: 0;
+}
+
+.MarkerIcon,
+.CollapsedMarkerIcon {
+    background-color: $color-darkestgreen;
+    border-style: solid;
+    border-color: $color-green;
+    overflow: hidden;
+    border-radius: 50px;
+    transition: all 300ms ease-out;
+}
+
+.CollapsedMarkerIcon:not(:hover) {
+    border-width: 2px;
+    width: 12px !important;
+    height: 12px !important;
+    margin-left: -6px !important;
+    margin-top: -6px !important;
+}
+
+.MarkerIcon,
+.CollapsedMarkerIcon:hover {
+    border-width: 4px;
+}
+
+.MarkerIcon img,
+.CollapsedMarkerIcon img {
+    display: block;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+}
+
+.CollapsedMarkerIcon:not(:hover) img {
+    opacity: 0;
+}

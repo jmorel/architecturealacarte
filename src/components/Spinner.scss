@@ -1,0 +1,10 @@
+@import '../variables.scss';
+.Spinner {
+    text-align: center;
+    margin: $spacing-normal;
+}
+
+.Spinner .fa-spinner {
+    font-size: 2em;
+    margin-top: $spacing-small;
+}

@@ -1,0 +1,48 @@
+@import '../variables.scss';
+.HomeLayout {
+    @media (min-width: $breakpoint-high) {
+        display: flex;
+        align-items: stretch;
+    }
+}
+
+.HomeLayout-sidebar {
+    background-color: $color-green;
+    @media (max-width: $breakpoint-low) {
+        width: 100%;
+    }
+    @media (min-width: $breakpoint-high) {
+        width: $sidebar-width;
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.HomeLayout-sidebar .Footer {
+    margin-top: auto;
+}
+
+.HomeLayout-main {
+    flex-grow: 1;
+    position: relative;
+    display: flex;
+    align-items: stretch;
+}
+
+.HomeLayout-mapContainer {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+}
+
+.HomeLayout-main .leaflet-control-container .leaflet-top.leaflet-left {
+    display: none;
+}
+
+.HomeLayout .TableOfContents {
+    flex-grow: 1;
+}

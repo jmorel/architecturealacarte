@@ -1,0 +1,50 @@
+@import '../variables.scss';
+.Sidebar,
+.DetailsSidebar {
+    background-color: $color-green;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    @media (max-width: $breakpoint-low) {
+        width: 100%;
+    }
+    @media (min-width: $breakpoint-high) {
+        width: $sidebar-width;
+    }
+}
+
+.DetailsSidebar {
+    @media (max-width: $breakpoint-low) {
+        position: absolute;
+        height: 100vh;
+        overflow-y: auto;
+        z-index: $zIndex-3;
+    }
+}
+
+.Sidebar-content {
+    color: $color-darkestgreen;
+}
+
+.Sidebar-content p,
+.Sidebar-filters {
+    @media (max-width: $breakpoint-low) {
+        margin: $spacing-mobile-normal;
+    }
+    @media (min-width: $breakpoint-high) {
+        margin: $spacing-normal;
+    }
+}
+
+.Sidebar-Filter {
+    @media (max-width: $breakpoint-low) {
+        margin-bottom: $spacing-mobile-small
+    }
+    @media (min-width: $breakpoint-high) {
+        margin-bottom: $spacing-small
+    }
+}
+
+.Sidebar .Footer {
+    margin-top: auto;
+}
