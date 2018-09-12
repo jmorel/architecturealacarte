@@ -6,9 +6,18 @@ import { setCurrentId } from '../actions';
 import { currentIdSelector, currentLocationSelector, listUrlSelector } from '../selectors';
 import { Spinner } from './Spinner';
 
+export const DetailsSidebar = ({ children }) => (
+    <div className="DetailsSidebar">
+        {children}
+    </div>
+);
+
+DetailsSidebar.propTypes = {
+    children: PropTypes.element.isRequired,
+};
 
 export const withCurrentLocation = (WrappedComponent, SpinnerComponent) => {
-    class DetailsSidebar extends React.Component {
+    class WithCurrentLocation extends React.Component {
         componentDidMount() {
             this.dispatchCurrentLocation();
         }
@@ -40,7 +49,7 @@ export const withCurrentLocation = (WrappedComponent, SpinnerComponent) => {
         }
     }
 
-    DetailsSidebar.propTypes = {
+    WithCurrentLocation.propTypes = {
         currentLocation: PropTypes.object,
         currentId: PropTypes.string,
         LIST_URL: PropTypes.string.isRequired,
@@ -48,12 +57,12 @@ export const withCurrentLocation = (WrappedComponent, SpinnerComponent) => {
         dispatch: PropTypes.func.isRequired,
     };
 
-    DetailsSidebar.defaultProps = {
+    WithCurrentLocation.defaultProps = {
         currentLocation: undefined,
         currentId: undefined,
     };
 
-    const DetailsSidebarWithRouter = withRouter(DetailsSidebar);
+    const WithCurrentLocationWithRouter = withRouter(WithCurrentLocation);
 
     const mapStateToProps = (state, ownProps) => ({
         currentLocation: currentLocationSelector(state),
@@ -62,8 +71,8 @@ export const withCurrentLocation = (WrappedComponent, SpinnerComponent) => {
         match: ownProps.match,
     });
 
-    const DetailsSidebarWithRouterContainer = connect(mapStateToProps)(DetailsSidebarWithRouter);
+    const WithCurrentLocationWithRouterContainer = connect(mapStateToProps)(WithCurrentLocationWithRouter);
 
-    return DetailsSidebarWithRouterContainer;
+    return WithCurrentLocationWithRouterContainer;
 };
 

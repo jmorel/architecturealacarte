@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
-import { withCurrentLocation } from '../components/DetailsSidebar';
+import { withCurrentLocation, DetailsSidebar } from '../components/DetailsSidebar';
 import { DetailsHeader } from '../components/Header';
 import { ListSidebarContainer } from '../components/ListSidebar';
 import { PageContainerWithRouter } from '../components/Page';
-import { Sidebar } from '../components/Sidebar';
 import { SpinnerSidebarContainer } from '../components/SpinnerSidebar';
 import { createSubStore } from '../store';
 import { getImageUrl } from '../utils';
@@ -29,7 +28,7 @@ const EteArchiListSidebar = () => (
 );
 
 const EteArchiDetailsSidebar = ({ currentLocation }) => (
-    <Sidebar>
+    <DetailsSidebar>
         <DetailsHeader
             title={currentLocation.titre}
             imageUrl={getImageUrl(DATASET_ID, currentLocation.image)}
@@ -46,7 +45,7 @@ const EteArchiDetailsSidebar = ({ currentLocation }) => (
                 Crédits photos: {currentLocation.credits_image}
             </p>
         </div>
-    </Sidebar>
+    </DetailsSidebar>
 );
 
 EteArchiDetailsSidebar.propTypes = {

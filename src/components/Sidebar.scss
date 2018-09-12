@@ -1,5 +1,6 @@
 @import '../variables.scss';
-.Sidebar {
+.Sidebar,
+.DetailsSidebar {
     background-color: $color-green;
     display: flex;
     flex-direction: column;
@@ -10,6 +11,13 @@
     @media (min-width: $breakpoint-high) {
         width: $sidebar-width;
     }
+}
+
+.DetailsSidebar {
+    position: absolute;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: $zIndex-3;
 }
 
 .Sidebar-content {

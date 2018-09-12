@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
-import { withCurrentLocation } from '../components/DetailsSidebar';
+import { withCurrentLocation, DetailsSidebar } from '../components/DetailsSidebar';
 import { DetailsHeader } from '../components/Header';
 import { ListSidebarContainer } from '../components/ListSidebar';
 import { PageContainerWithRouter } from '../components/Page';
-import { Sidebar } from '../components/Sidebar';
 import { SpinnerSidebarContainer } from '../components/SpinnerSidebar';
 import { createSubStore } from '../store';
 import { getImageUrl } from '../utils';
@@ -29,7 +28,7 @@ const CinquanteLieuxListSidebar = () => (
 );
 
 const CinquanteLieuxDetailsSidebar = ({ currentLocation }) => (
-    <Sidebar>
+    <DetailsSidebar>
         <DetailsHeader
             title={currentLocation.nom}
             imageUrl={getImageUrl(DATASET_ID, currentLocation.image)}
@@ -44,7 +43,7 @@ const CinquanteLieuxDetailsSidebar = ({ currentLocation }) => (
                 {currentLocation.code_postal} {currentLocation.ville}
             </p>
         </div>
-    </Sidebar>
+    </DetailsSidebar>
 );
 
 CinquanteLieuxDetailsSidebar.propTypes = {
