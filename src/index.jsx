@@ -12,6 +12,7 @@ import registerServiceWorker from './registerServiceWorker';
 ReactDOM.render(
     <BrowserRouter>
         <Switch>
+            {/* Legacy urls */}
             <Redirect from="/ete-archi.html" to="/ete-archi" />
             <Redirect from="/genie-des-lieux.html" to="/genie-des-lieux" />
             <Redirect from="/50-lieux-en-france-a-voir-au-moins-une-fois-dans-sa-vie.html" to="/50-lieux-en-france-a-voir-au-moins-une-fois-dans-sa-vie" />
@@ -19,12 +20,15 @@ ReactDOM.render(
             <Redirect from="/journees-du-patrimoine-2016.html" to="/" />
             <Redirect from="/journees-du-patrimoine-2017.html" to="/" />
 
+            {/* App urls */}
             <Route exact component={Home} path="/" />
             <Route component={EteArchiApp} path="/ete-archi" />
             <Route component={IleDeFranceApp} path="/ile-de-france" />
             <Route component={GenieDesLieuxApp} path="/genie-des-lieux" />
             <Route component={CinquanteLieuxApp} path="/50-lieux-en-france-a-voir-au-moins-une-fois-dans-sa-vie" />
 
+            {/* Catch all redirect */}
+            <Redirect to="/" />
         </Switch>
     </BrowserRouter>
     , document.getElementById('root'));
