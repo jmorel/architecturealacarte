@@ -19,7 +19,7 @@
 * [ ] Check eslintrc and remove special rules in order to keep closer to airbnb style
 * [ ] Fix images in all datasets
 * [ ] Generate proper thumbnails for images (map and sidebar)
-* [ ] Prod/deploy
+* [x] Prod/deploy
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
