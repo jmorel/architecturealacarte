@@ -6,8 +6,8 @@ import './Pagination.scss';
 const NB_BUTTONS = 7;
 
 export function Pagination({ lastIndex, currentIndex, setCurrentIndex }) {
-    const firstIndex = Math.min(Math.max(0, currentIndex - Math.floor(NB_BUTTONS / 2)), lastIndex - NB_BUTTONS);
-    const indices = (new Array(NB_BUTTONS)).fill(undefined).map((_, index) => index + firstIndex);
+    const firstIndex = Math.min(Math.max(0, currentIndex - Math.floor(NB_BUTTONS / 2)), Math.max(0, lastIndex - NB_BUTTONS));
+    const indices = (new Array(Math.min(NB_BUTTONS, lastIndex))).fill(undefined).map((_, index) => index + firstIndex);
 
     return (
         <div className="Pagination">

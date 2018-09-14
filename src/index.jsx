@@ -7,7 +7,6 @@ import { EteArchiApp } from './pages/EteArchi';
 import { IleDeFranceApp } from './pages/IleDeFrance';
 import { GenieDesLieuxApp } from './pages/GenieDesLieux';
 import Home from './pages/Home';
-import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(
     <BrowserRouter>
@@ -32,4 +31,3 @@ ReactDOM.render(
         </Switch>
     </BrowserRouter>
     , document.getElementById('root'));
-registerServiceWorker();
