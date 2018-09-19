@@ -24,3 +24,5 @@ Les données sources sont disponibles sur https://jmorel.opendatasoft.com.
 * [ ] Fix images in all datasets
 * [ ] Generate proper thumbnails for images (map and sidebar)
 * [x] Prod/deploy
+* [ ] User Immer.js library
+* [ ] Offline use
