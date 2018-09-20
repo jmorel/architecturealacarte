@@ -26,3 +26,4 @@ Les données sources sont disponibles sur https://jmorel.opendatasoft.com.
 * [x] Prod/deploy
 * [ ] User Immer.js library
 * [ ] Offline use
+* [ ] Performance audit
